@@ -1,0 +1,44 @@
+// $colors : rgb(40,40,40),rgb(175, 26, 26), rgb(142, 170, 16);
+
+
+// // $color1 : rgb(40,40,40);
+// // $color2 : rgb(175, 26, 26);
+// // $color3 : rgb(142, 170, 16);
+
+
+// $large : 200px;
+
+// // body{
+// //     background-color: nth($colors, 3 );
+// //     color: nth($colors, 1 );
+// //     font-size: $large;
+
+// // }
+
+
+
+// // nasting 
+// @import "_colors";
+
+// .product_card{
+//     max-width:auto;
+//     background-color: $red;
+//     > h1{
+//       color: $blue;
+//      }
+//     > a {
+//     color: $yellow;
+//      }
+// }
+
+
+///////////// start from here
+
+body{
+  margin:  0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.router{
+  overflow: hidden;
+}

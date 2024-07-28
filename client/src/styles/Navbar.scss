@@ -1,0 +1,49 @@
+.navbar_main{
+
+    // border-bottom: 0.2rem solid rgb(230, 230, 230);
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+    // height: 4rem;
+
+    .navbar_wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 90rem;
+    margin: 0 auto;
+
+}
+}
+
+.navbar_left{
+    display: flex;
+    align-items:end;
+    gap:  1rem;
+    color: white;
+    span{
+        font-size: 2rem;
+        font-weight: bolder;
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+}
+.navbar_right{
+    font-weight: bolder;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    ul{
+        display: flex;
+        gap: 4rem;
+    }
+    li{
+        cursor: pointer;
+        list-style: none;
+        
+    }
+}
+.nav_link{
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
