@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -12,8 +12,14 @@ import Otp from "./components/Otp";
 import Navbar from "./components/Navbar";
 import Analysis from "./components/Analysis";
 import NotFound from "./components/NotFound";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function App() {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <Router>

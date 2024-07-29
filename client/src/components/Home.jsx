@@ -14,7 +14,7 @@ function Home() {
     <div className="home_main">
       <div className="overlay">
         <div className="home_wrapper">
-          <h1>
+          <h1 data-aos="fade-up" data-aos-duration="1000">
             <Typewriter
               options={{
                 strings: ["Analyze Your Valuable Vote Through Single Site."],
@@ -23,9 +23,16 @@ function Home() {
               }}
             />
           </h1>
-          <h3>{"( Please read before vote to your candidate. )"}</h3>
+          <h3 data-aos="fade-up" data-aos-duration="1500">
+            {"( Please read before vote to your candidate. )"}
+          </h3>
 
-          <button className="home-btn" onClick={handlebtn}>
+          <button
+            className="home-btn"
+            data-aos="fade-up"
+            data-aos-duration="2000"
+            onClick={handlebtn}
+          >
             Vote Now
           </button>
         </div>

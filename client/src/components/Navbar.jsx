@@ -33,7 +33,7 @@ function Navbar() {
             <li>
               {" "}
               <Link to="/fyq" className="nav_link">
-                FYQ
+                FAQs
               </Link>
             </li>
           </ul>
