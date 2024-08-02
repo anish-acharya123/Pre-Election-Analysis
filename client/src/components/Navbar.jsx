@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { navState } from "../recoil/atoms";
+import { useRecoilValue } from "recoil";
 import Logo from "../assets/logo/logo.svg";
 import "../styles/Navbar.scss";
 
 function Navbar() {
+  const navColor = useRecoilValue(navState);
   return (
-    <nav className="navbar_main">
+    <nav className={`navbar_main ${navColor ? "nav_color" : ""}`}>
       <div className="navbar_wrapper">
         <div className="navbar_left">
           <img src={Logo} alt="img not found" />

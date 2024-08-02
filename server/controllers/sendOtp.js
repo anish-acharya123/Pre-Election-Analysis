@@ -34,7 +34,7 @@ const sendOtp = async (req, res) => {
     console.log(Info.response);
 
     res
-      .status(200)
+      .status(201)
       .json({ success: true, message: "OTP sent successfully", Info });
   } catch (error) {
     console.error("Error sending email: ", error);

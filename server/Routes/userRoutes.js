@@ -3,13 +3,10 @@ const router = express.Router();
 const registerUser = require("../controllers/registerController");
 const { sendOtp } = require("../controllers/sendOtp");
 const verifyOtp = require("../middleware/verifyOtp");
+const validateUser = require("../middleware/validateUser");
 
-router.post("/signup", sendOtp);
-router.post("/verify-otp", verifyOtp, registerUser);
-
-router.post("/signin", (req, res) => {
-  res.send("signin");
-});
+router.post("/signin", validateUser, sendOtp);
+router.post("/verifyotp", verifyOtp, registerUser);
 
 router.get("/profile", (req, res) => {
   res.send("user profile");

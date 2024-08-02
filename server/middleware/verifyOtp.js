@@ -3,15 +3,17 @@ require("dotenv").config();
 const { otpStorage } = require("../controllers/sendOtp");
 
 const verifyOtp = async (req, res, next) => {
-  const { email, enterOtp } = req.body;
+  const { email, otp, voterId } = req.body;
   const hashedOtp = otpStorage[email];
   console.log(hashedOtp);
-  const isMatch = await bcrypt.compare(enterOtp, hashedOtp);
 
   try {
-    if (isMatch) {
-      delete otpStorage[email];
-      next();
+    if (hashedOtp) {
+      const isMatch = await bcrypt.compare(otp, hashedOtp);
+      if (isMatch) {
+        delete otpStorage[email];
+        next();
+      }
     } else {
       res.status(400).json({ success: false, msg: "Invalid OTP" });
     }

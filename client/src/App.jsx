@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { RecoilRoot } from "recoil";
 import {
   BrowserRouter as Router,
   Route,
@@ -12,35 +13,33 @@ import Otp from "./components/Otp";
 import Navbar from "./components/Navbar";
 import Analysis from "./components/Analysis";
 import NotFound from "./components/NotFound";
+import Admin from "./components/Admin";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Votingpage from "./components/Votingpage";
 
 function App() {
   useEffect(() => {
     AOS.init();
   }, []);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <Router>
-      <div className="router">
-        <Navbar />
-        <Routes>
-          <Route exact path="/" Component={Home} />
-          <Route
-            exact
-            path="/login"
-            element={<Login isLoggedIn={isLoggedIn} />}
-          />
-          <Route
-            path="/otp"
-            element={isLoggedIn ? <Otp /> : <Navigate to="/login" />}
-          />
-          <Route path="/analysis" Component={Analysis} />
-          <Route path="/*" Component={NotFound} />
-        </Routes>
-      </div>
-    </Router>
+    <RecoilRoot>
+      <Router>
+        <div className="router">
+          <Navbar />
+          <Routes>
+            <Route exact path="/" Component={Home} />
+            <Route exact path="/login" Component={Login} />
+            <Route path="/otp" Component={Otp} />
+            <Route path="/analysis" Component={Analysis} />
+            <Route path="/admin" Component={Admin} />
+            <Route path="/votingpage" Component={Votingpage} />
+            <Route path="/*" Component={NotFound} />
+          </Routes>
+        </div>
+      </Router>
+    </RecoilRoot>
   );
 }
 
