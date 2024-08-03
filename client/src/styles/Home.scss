@@ -1,52 +1,22 @@
 
 
-@import "_colors";
 
 .home_main{
     height: 100vh;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    background-image: url("../assets/votingImage/image3.png");
- }
-
-
-.home_main::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: $background_color;
-    opacity: 0.9;
-}
-
-.overlay {
-    position: relative;
-    color: white;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    align-content: center;
-    max-width: 80rem;
-    margin: 0 auto;
-    // background-color: green;
+    overflow: hidden;
 }
 
 .home_wrapper{
-    padding: 0rem 0.2rem 2rem 0.2rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    color:  #fff;
+    height: 100%;
+    align-content: center;
+    padding: 0rem 0.2rem 2rem 0rem;
     font-size: 1.2rem;
-    // z-index: 2;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     h1{
     font-size: 6vh;
-    // width: 10rem;
-    }
-    h3{
-        // color: rgb(29, 255, 48);
     }
 
 }
@@ -54,7 +24,7 @@
 .home-btn{
     padding: 1rem 2rem;
     border-radius: 0.2rem;
-    color: #fff;    
+    color: #fff;;    
     font-size: 1rem;
     // background: none;
     cursor: pointer;

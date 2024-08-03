@@ -8,7 +8,7 @@ import "../styles/Navbar.scss";
 function Navbar() {
   const navColor = useRecoilValue(navState);
   return (
-    <nav className={`navbar_main ${navColor ? "nav_color" : ""}`}>
+    <nav className={`navbar_main ${"nav_color"}`}>
       <div className="navbar_wrapper">
         <div className="navbar_left">
           <img src={Logo} alt="img not found" />

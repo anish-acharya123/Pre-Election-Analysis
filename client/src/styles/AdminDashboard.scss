@@ -1,0 +1,36 @@
+.admin-dashboard{
+    width: 100%;
+   text-align: center;
+//    background-color: red;
+//    
+}
+
+.admin-dashobard-wrapper{
+    background-color: rgb(255, 153, 70);
+    padding: 6.5rem 0 0 0;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+.admin-overlay{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 4rem;
+    margin: 0 auto;
+    max-width: 80rem;
+    padding: 0 3rem;
+}
+
+.admin-control{
+    position: relative;
+    // background-color: red;
+    height: 100vh;
+}
+.dashboard-btn{
+    padding: 1rem 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #fff;
+}

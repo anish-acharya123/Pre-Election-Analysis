@@ -18,5 +18,5 @@ export const emailState = atom({
 });
 export const navState = atom({
   key: "navState",
-  default: true,
+  default: false,
 });

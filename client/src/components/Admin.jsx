@@ -1,9 +1,10 @@
 import React from "react";
+import "../styles/Admin.scss";
 
 function Admin() {
   return (
-    <div>
-      <div>your admin page</div>
+    <div className="admin_main">
+      <form>{/* admin login page */}</form>
     </div>
   );
 }
