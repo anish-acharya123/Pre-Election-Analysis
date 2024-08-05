@@ -42,7 +42,8 @@ function Votingpage() {
                 <br />
                 {/* <strong>Candidate ID:</strong> {candidate.candidateId} */}
                 <div className="candidate-card-description">
-                  <strong>Description:</strong> {candidate.description}
+                  <strong>Description:</strong>{" "}
+                  {candidate.description.slice(0, 25) + " .............."}
                 </div>
               </div>
             </div>

@@ -8,11 +8,12 @@ import Otp from "./components/Otp";
 import Navbar from "./components/Navbar";
 import Analysis from "./components/Analysis";
 import NotFound from "./components/NotFound";
-import Admin from "./components/Admin";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Votingpage from "./components/Votingpage";
 import AdminDashboard from "./components/AdminDashboard";
+import EachCandidate from "./components/EachCandidate";
+import AdminLogin from "./components/AdminLogin";
 
 function App() {
   useEffect(() => {
@@ -29,9 +30,10 @@ function App() {
             <Route exact path="/login" Component={Login} />
             <Route path="/otp" Component={Otp} />
             <Route path="/analysis" Component={Analysis} />
-            <Route path="/adminlogin" Component={Admin} />
+            <Route path="/adminlogin" Component={AdminLogin} />
             <Route path="/votingpage" Component={Votingpage} />
             <Route path="/admin-dashboard" Component={AdminDashboard} />
+            <Route path="/candidate/:id" Component={EachCandidate} />
             <Route path="/*" Component={NotFound} />
           </Routes>
         </div>

@@ -20,3 +20,8 @@ export const navState = atom({
   key: "navState",
   default: false,
 });
+
+export const isAdminLogState = atom({
+  key: "adminState",
+  default: false,
+});
