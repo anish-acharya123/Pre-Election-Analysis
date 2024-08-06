@@ -1,6 +1,7 @@
 // const bcrypt = require("bcrypt");
 const ValidateUsers = require("../models/userModel");
 
+///sign up
 const registerUser = async (req, res) => {
   const { email, voterId, citizenshipNumber } = req.body;
 
@@ -21,4 +22,15 @@ const registerUser = async (req, res) => {
   }
 };
 
-module.exports = registerUser;
+//get user data
+const userData = async (req, res) => {
+  const { voterId, email } = req.query;
+  try {
+    const user = await ValidateUsers.findOne({ voterId, email });
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+};
+
+module.exports = { registerUser, userData };

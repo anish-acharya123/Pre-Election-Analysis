@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "../styles/UploadCandidate.scss";
@@ -18,8 +18,16 @@ function EditForm({
   const [image, setImage] = useState(Cphoto);
   const [message, setMessage] = useState("");
   const params = useParams();
+  const initialDataRef = useRef({});
 
   useEffect(() => {
+    initialDataRef.current = {
+      name: Cname,
+      description: Cdescription,
+      party: Cparty,
+      image: Cphoto,
+      candidateId: CcandidateId,
+    };
     setName(Cname);
     setDescription(Cdescription);
     setParty(Cparty);
@@ -27,22 +35,27 @@ function EditForm({
     setImage(Cphoto);
   }, [Cname, Cdescription, Cparty, CcandidateId, Cphoto]);
 
-  //   console.log(Cname, Cparty, CcandidateId, Cdescription, Cphoto);
-
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
   };
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    // console.log(name, party, candidateId, description, image);
 
     const formData = new FormData();
-    formData.append("name", name);
-    formData.append("description", description);
-    formData.append("party", party);
-    formData.append("candidateId", candidateId);
-    if (image) {
+    if (name !== initialDataRef.current.name) {
+      formData.append("name", name);
+    }
+    if (description !== initialDataRef.current.description) {
+      formData.append("description", description);
+    }
+    if (party !== initialDataRef.current.party) {
+      formData.append("party", party);
+    }
+    if (candidateId !== initialDataRef.current.candidateId) {
+      formData.append("candidateId", candidateId);
+    }
+    if (image !== initialDataRef.current.image && image !== null) {
       formData.append("image", image);
     }
 
@@ -73,7 +86,7 @@ function EditForm({
     e.preventDefault();
     setForm(false);
     setMessage("");
-    console.log(image);
+    setImage(Cphoto);
   };
 
   return (

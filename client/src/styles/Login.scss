@@ -6,16 +6,31 @@
     display: flex;
     justify-content: center;    
     align-items: center;
+    // background-color: red;
 }
-
-.login_form{
-    background-color: white;
-    padding: 1.5rem   ;
+.loginsection{
+    display: flex;
     margin: 0 auto;
     max-width: 90rem;
+    padding: 0 3rem;
+    height: 25rem;
+    border-radius: 1rem;
+    
+}
+.loginImg{
+    overflow: hidden;
+    img{
+        height: 25rem;
+        // width: auto;
+    }
+}
+.login_form{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    // background-color: red;
+    padding: 1.5rem   ;
     z-index: 1;
     border-radius: 0.5rem;
-    border: 1px solid black;
+    // border: 1px solid black;
     // position: relative;
 }
 .form_input{
@@ -42,9 +57,16 @@
 // }
 
 #submit_btn >input{
-    background-color: rgb(0, 139, 209);
-    border: none;
+background-color: rgb(0, 129, 133);    
+border: none;
     color: #fff;
+    border: none;
     cursor: pointer;
     
+    
+}
+
+
+#submit_btn >input:hover{
+    background-color: rgb(2, 104, 108);
 }

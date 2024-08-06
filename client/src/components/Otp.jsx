@@ -14,7 +14,6 @@ function Otp() {
   const voterId = useRecoilValue(voterIdState);
   const citizenshipNumber = useRecoilValue(citizenshipNumberState);
   const email = useRecoilValue(emailState);
-  // const isLoggedIn = useRecoilValue(isLoggedInState);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
@@ -36,8 +35,8 @@ function Otp() {
       console.log(response);
 
       if (response.status === 200) {
-        setIsLoggedIn(false);
-        navigate("/votingpage");
+        setIsLoggedIn(true);
+        navigate("/votingpage", { replace: true });
       } else if (response.status === 401) {
         setIsLoggedIn(false);
         navigate("/login");
@@ -57,7 +56,7 @@ function Otp() {
     if (!isLoggedIn) {
       navigate("/login");
     }
-  }, []);
+  }, [isLoggedIn, navigate]);
 
   //  isLoggedIn &&
   return (
@@ -77,7 +76,7 @@ function Otp() {
               />
             </div>
             <br />
-            {error && <div>{error}</div>}
+            {error && <div style={{ color: "red" }}>{error}</div>}
             <br />
             <div className="otp_submit">
               <input type="submit" value="verifyOtp" />

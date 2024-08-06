@@ -17,7 +17,8 @@
     gap: 2rem;
 }
 .candidate_card{
-    // border: 1px solid black;
+    // border: 3px solid gray  ;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;  
     display: grid;
     grid-template-columns: auto auto;
     // grid-template-columns: repeat(2,1fr);
@@ -41,7 +42,7 @@
 
 .candidate-card-description{
     // grid-column: 2 / -1;
-    width: 8rem;
+    width: 12rem;
 }
 
 .candidate_btn{

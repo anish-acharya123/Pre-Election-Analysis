@@ -3,28 +3,28 @@
 
 .otp_main {
     height: 100vh;
-    background-size: cover;
-    background-position: center;
+    // background-size: cover;
+    // background-position: center;
     align-content: center;
     text-align: center;
-    background-image: url("../assets/votingImage/image3.png");
+    // background-image: url("../assets/votingImage/image3.png");
 }
 
 
-.otp_main::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: $background_color;
-    opacity: 0.9;
-}
+// .otp_main::before {
+//     content: "";
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100vh;
+//     background: $background_color;
+//     opacity: 0.9;
+// }
 
 .otp_wrapper{
     position: relative;
-    color: white;
+    // color: white;
      width: 100%;
      height: 100%;
     text-align: center;
