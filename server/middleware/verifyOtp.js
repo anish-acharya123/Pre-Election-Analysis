@@ -10,9 +10,12 @@ const verifyOtp = async (req, res, next) => {
   try {
     if (hashedOtp) {
       const isMatch = await bcrypt.compare(otp, hashedOtp);
+      console.log(isMatch);
       if (isMatch) {
         delete otpStorage[email];
         next();
+      } else {
+        res.status(400).json({ msg: "Invalid Otp" });
       }
     } else {
       res.status(400).json({ success: false, msg: "Invalid OTP" });

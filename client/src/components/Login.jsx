@@ -6,10 +6,17 @@ import {
   voterIdState,
   citizenshipNumberState,
   emailState,
+  isLoadingState,
+  isSuccessState,
+  errorState,
 } from "../recoil/atoms";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import AOS from "aos";
 import img from "../assets/votingImage/image.png";
 import "../styles/Login.scss";
+import Loader from "./Loader";
 
 function Login() {
   const [voterId, setVoterId] = useRecoilState(voterIdState);
@@ -17,18 +24,25 @@ function Login() {
     citizenshipNumberState
   );
   const [email, setEmail] = useRecoilState(emailState);
-  const [sendOtp, setSendOtp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
-  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
+  const [isSuccess, setIsSuccess] = useRecoilState(isSuccessState);
+  const [error, setError] = useRecoilState(errorState);
+  const [sendOtp, setSendOtp] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoggedIn(false);
     setSendOtp(false);
+    setIsLoading(false);
+    setIsSuccess(false);
+    setError("");
   }, []);
 
   const handleForm = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError("");
 
     try {
       const response = await axios.post("http://localhost:3000/user/signin", {
@@ -40,12 +54,18 @@ function Login() {
       if (response.status === 201) {
         setSendOtp(true);
         setIsLoggedIn(true);
+        setIsSuccess(true);
+        setIsLoading(false);
         navigate("/otp", { replace: true });
       }
     } catch (error) {
+      setIsLoading(false);
+      setIsSuccess(false);
+
       if (error.response) {
         if (error.response.status === 401) {
           setError(error.response.data.msg || "Unauthorized access");
+          // toast.error(error.response.data.msg);
         } else if (error.response.status === 403) {
           setError(error.response.data.msg || "Forbidden: Invalid input");
         }
@@ -55,17 +75,24 @@ function Login() {
       setError("");
     }, 6000);
   };
+
+  useEffect(() => {
+    if (!sendOtp && !isLoading && !isLoggedIn) {
+      AOS.refresh();
+    }
+  }, [sendOtp, isLoading, isLoggedIn]);
+
   return (
-    !sendOtp &&
-    !isLoggedIn && (
-      <div className="login_main">
+    <div className="login_main">
+      {!sendOtp && !isLoading && !isLoggedIn ? (
         <div
           className="loginsection"
           data-aos="fade-up"
           data-aos-duration="1500"
+          data-aos-once="true"
         >
           <div className="loginImg">
-            <img src={img} alt="" />
+            <img src={img} alt="vote img" />
           </div>
           <div className="login_form">
             <form onSubmit={handleForm}>
@@ -78,6 +105,7 @@ function Login() {
                   value={voterId}
                   onChange={(e) => setVoterId(e.target.value)}
                   autoComplete="off"
+                  required
                 />
               </div>
               <br />
@@ -105,7 +133,9 @@ function Login() {
                 />
               </div>
               <br />
+
               {error && <div style={{ color: "red" }}>{error}</div>}
+
               <br />
               <div className="form_input" id="submit_btn">
                 <input type="submit" value="Send Otp" />
@@ -113,8 +143,12 @@ function Login() {
             </form>
           </div>
         </div>
-      </div>
-    )
+      ) : (
+        <div>
+          <Loader />
+        </div>
+      )}
+    </div>
   );
 }
 

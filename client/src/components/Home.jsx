@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import img from "../assets/votingImage/hi.png";
 import Typewriter from "typewriter-effect";
 import "../styles/Home.scss";
 
@@ -12,27 +13,42 @@ function Home() {
   return (
     <div className="home_main">
       <div className="home_wrapper">
-        <h1 data-aos="fade-up" data-aos-duration="1000">
-          <Typewriter
-            options={{
-              strings: ["Analyze Your Valuable Vote Through Single Site."],
-              autoStart: true,
-              loop: true,
-            }}
-          />
-        </h1>
-        <h3 data-aos="fade-up" data-aos-duration="1500">
-          {"( Read the description carefully before vote your candidate)"}
-        </h3>
+        <div className="homeleft-section">
+          <h1 data-aos="fade-up" data-aos-duration="1000">
+            <span>Analyze Your Valuable Vote Through Single Site. </span>
+            {/* <Typewriter
+              options={{
+                strings: [" Through Single Site."],
+                autoStart: true,
+                loop: true,
+              }}
+            /> */}
+          </h1>
+          <p data-aos="fade-up" data-aos-duration="1500">
+            Welcome to Online voting platform.
+          </p>
 
-        <button
-          className="home-btn"
+          <button
+            className="home-btn"
+            data-aos="fade-up"
+            data-aos-duration="2000"
+            onClick={handlebtn}
+          >
+            Vote Now
+          </button>
+        </div>
+        <div
+          className="homeright-section"
           data-aos="fade-up"
-          data-aos-duration="2000"
-          onClick={handlebtn}
+          data-aos-duration="1000"
         >
-          Vote Now
-        </button>
+          <div className="homehi-user">
+            Hi
+            <span style={{ color: "rgb(0, 106, 110)" }}> User</span>, what are
+            you doing? Please Vote Carefully.
+          </div>
+          <img src={img} alt="" />
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 
- @import "_colors";
+//  @import "_colors";
 
 .login_main{
     height: 100vh;
@@ -7,6 +7,9 @@
     justify-content: center;    
     align-items: center;
     // background-color: red;
+}
+.lpginContainer{
+    padding-top: 6rem;
 }
 .loginsection{
     display: flex;

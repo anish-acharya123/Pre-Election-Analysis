@@ -25,3 +25,16 @@ export const isAdminLogState = atom({
   key: "adminState",
   default: false,
 });
+
+export const isLoadingState = atom({
+  key: "isLoadingState",
+  default: false,
+});
+export const isSuccessState = atom({
+  key: "isSuccessState",
+  default: false,
+});
+export const errorState = atom({
+  key: "errorState",
+  default: "",
+});
