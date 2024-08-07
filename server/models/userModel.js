@@ -23,6 +23,6 @@ const validUserSchema = new mongoose.Schema({
   },
 });
 
-const ValidateUsers = new mongoose.model("validUser", validUserSchema);
+const ValidateUsers = mongoose.model("validUser", validUserSchema);
 
 module.exports = ValidateUsers;

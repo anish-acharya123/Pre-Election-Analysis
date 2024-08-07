@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isLoggedInState, voterIdState, emailState } from "../recoil/atoms";
 import { useRecoilValue } from "recoil";
-import hi from "../assets/votingImage/hi.png";
 import "../styles/Votingpage.scss";
 import axios from "axios";
 
 function Votingpage() {
   const [data, setData] = useState([]);
   const [user, setUser] = useState({});
+  const [isSelected, setIsSelected] = useState({});
+  const [popUp, setPopUp] = useState(false);
   const isLoggedIn = useRecoilValue(isLoggedInState);
   const voterId = useRecoilValue(voterIdState);
   const email = useRecoilValue(emailState);
   const navigate = useNavigate();
 
   useEffect(() => {
+    // setIsSelected({});
     if (!isLoggedIn) {
       navigate("/login");
       return;
@@ -47,54 +49,133 @@ function Votingpage() {
     fetchData();
   }, [isLoggedIn, navigate, voterId, email]);
 
+  const handleInput = (candidate) => {
+    setIsSelected(candidate);
+  };
+
+  const verifyVote = () => {
+    if (!user) {
+      setPopUp(false);
+    }
+    setPopUp(!popUp);
+  };
+  // console.log(isSelected);
   return (
     isLoggedIn && (
       <div className="votingpage_main">
-        <div className="votingpage_wrapper">
+        <div
+          className={`${
+            popUp
+              ? "votingpage_wrapper votingpagewrapper-blur"
+              : " votingpage_wrapper"
+          }`}
+        >
           <div
             className="votingpage_title"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
             {" "}
+            Hi <span style={{ color: "rgb(0, 129, 133)" }}>{user.name}</span> ,
             Please Choose Your Candidate Carefully:{" "}
           </div>
           <div className="votingSection">
             <div
-              className="votingImage"
+              className="votingCandidate-description item"
               data-aos="fade-right"
               data-aos-duration="1500"
             >
-              <div className="votingpage-hi">
-                Hi {user.name}, what are you doing? Please Vote Carefully.
+              <h1>Candidate Profile</h1>
+              <div>
+                <p>
+                  Get to know the candidates running for office. Each profile
+                  provides detailed information about their background,
+                  platforms, and qualifications. Take the time to review your
+                  options and make an informed decision.{" "}
+                </p>
+                <br />
+                <p>
+                  Your vote is your voice. Make it count by carefully
+                  considering each candidate's vision and how it aligns with
+                  your values and the needs of our community.
+                </p>
               </div>
-              <img src={hi} alt="hi image" />
+
+              <br />
+              <p>Vote valid for:</p>
             </div>
             <div
-              className="votingpage_candidatesection"
+              className="votingpage_candidatesection item"
               data-aos="fade-left"
               data-aos-duration="1500"
             >
+              {/* <div>scroll down for More candidate</div> */}
               {data.map((candidate) => (
-                <div key={candidate._id} className="votingpage-candidatecard">
+                <div
+                  key={candidate._id}
+                  className={`${
+                    isSelected == candidate
+                      ? "candidate-selected votingpage-candidatecard"
+                      : "votingpage-candidatecard"
+                  }`}
+                >
                   <img
                     src={candidate.photo}
                     alt={candidate.name}
                     className="votingpage-candidateimage"
                   />
-                  <div>
+                  <div className="votingpage-candidatedetail">
                     <strong>{candidate.name}</strong> <br />
                     <strong>Party:</strong> {candidate.party}
-                    <br />
-                    {/* <strong>Candidate ID:</strong> {candidate.candidateId} */}
-                    <div className="votinpage-description">
-                      <strong>Description:</strong>{" "}
-                      {candidate.description.slice(0, 25) + " .............."}
-                    </div>
+                  </div>
+
+                  <div className="radio">
+                    <input
+                      type="radio"
+                      className="candidateselect"
+                      value={candidate.candidateId}
+                      checked={isSelected == candidate}
+                      onChange={() => handleInput(candidate)}
+                    />
                   </div>
                 </div>
               ))}
             </div>
+          </div>
+          <div className="votingpage-btndiv">
+            <button className="votingpage-btn" onClick={() => verifyVote()}>
+              Verify vote
+            </button>
+          </div>
+        </div>
+
+        <div className={`${popUp ? "votingpage-popup" : "popup"}`}>
+          {Object.keys(isSelected).length > 0 ? (
+            <div className="popup-content">
+              <h1>Are you sure? You are going to vote:</h1>
+              <div>
+                <img
+                  src={isSelected.photo}
+                  alt={isSelected.name}
+                  className="popup-img"
+                />
+              </div>
+              <div>
+                <strong>Name: </strong> {isSelected.name}
+              </div>
+              <div>
+                <strong>Party: </strong>
+                {isSelected.party}
+              </div>
+              <div>
+                <button>Vote Now</button>
+              </div>
+            </div>
+          ) : (
+            <h1>You need to select your candidate</h1>
+          )}
+          <div className="popup-cut">
+            <button onClick={() => setPopUp(false)}>X</button>
           </div>
         </div>
       </div>

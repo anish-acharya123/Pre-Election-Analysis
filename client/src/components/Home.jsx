@@ -15,7 +15,7 @@ function Home() {
       <div className="home_wrapper">
         <div className="homeleft-section">
           <h1 data-aos="fade-up" data-aos-duration="1000">
-            <span>Analyze Your Valuable Vote Through Single Site. </span>
+            <span>Analyze Your Valuable Vote Through a Single Site. </span>
             {/* <Typewriter
               options={{
                 strings: [" Through Single Site."],
