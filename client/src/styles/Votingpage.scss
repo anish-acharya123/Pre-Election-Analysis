@@ -197,34 +197,5 @@ position: absolute;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.popup-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    flex-direction: column;
-    div{
-        font-size: 1.3rem;
-    }
-    
-}
-.popup-cut{
-    position: absolute;
-    top: 5%;
-    right: 5%;
-    button{
-        cursor: pointer;
-        border: none;
-        // background-color: transparent;
-        color: red;
-        font-size: 1.2rem;
-    }
-}
-.popup-img{
-    height: 7rem;
-    width: 7rem;
-    border-radius: 50%;
-    border: 2px solid black;
-    padding: 0.2rem;
-    background-color: #000;
-}
+
+

@@ -15,6 +15,7 @@ const candidateList = async (req, res) => {
 /// upload new candidate in db
 const uploadCandidate = async (req, res) => {
   const { name, description, candidateId, party } = req.body;
+  console.log(process.env.CLOUDINARY_CLOUD_NAM);
   const file = req.file;
   try {
     console.log(name, description, candidateId, file, party);
@@ -50,7 +51,8 @@ const uploadCandidate = async (req, res) => {
     await candidate.save();
     res.status(201).json({ msg: "Candidate register successfully" });
   } catch (error) {
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.log(error);
+    res.status(500).json({ msg: error });
   }
 };
 
