@@ -151,7 +151,11 @@ function Votingpage() {
         </div>
 
         <div className={`${popUp ? "votingpage-popup" : "popup"}`}>
-          <VotingPopup setPopUp={setPopUp} isSelected={isSelected} />
+          <VotingPopup
+            setPopUp={setPopUp}
+            isSelected={isSelected}
+            userId={user.name}
+          />
         </div>
       </div>
     )

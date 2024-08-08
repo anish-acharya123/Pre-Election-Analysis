@@ -7,10 +7,6 @@ const votesSchema = new mongoose.Schema(
       require: true,
       trim: true,
     },
-    voteId: {
-      type: String,
-      require: true,
-    },
     userId: {
       type: String,
       unique: true,
