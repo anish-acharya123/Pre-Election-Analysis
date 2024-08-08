@@ -22,7 +22,7 @@ function EachCandidate() {
       setData(response.data);
     };
     fetchData();
-  }, [data]);
+  }, [Params.id]);
 
   const deleteData = async () => {
     try {

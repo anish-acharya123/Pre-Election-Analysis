@@ -5,12 +5,12 @@ const { otpStorage } = require("../controllers/sendOtp");
 const verifyOtp = async (req, res, next) => {
   const { email, otp, voterId } = req.body;
   const hashedOtp = otpStorage[email];
-  console.log(hashedOtp);
+  // console.log(hashedOtp);
 
   try {
     if (hashedOtp) {
       const isMatch = await bcrypt.compare(otp, hashedOtp);
-      console.log(isMatch);
+      // console.log(isMatch);
       if (isMatch) {
         delete otpStorage[email];
         next();

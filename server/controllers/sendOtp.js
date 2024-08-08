@@ -7,8 +7,8 @@ let transporter = nodemailer.createTransport({
   port: 587,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: "acharyaanish920@gmail.com",
-    pass: "faua fghm xtzw bhiu",
+    user: process.env.EMAIL_NAME,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
@@ -24,14 +24,14 @@ const sendOtp = async (req, res) => {
   // console.log(otpStorage);
   try {
     let mailOptions = {
-      from: "acharyaanish920@gmail.com",
+      from: process.env.EMAIL_NAME,
       to: email,
       subject: "Your OTP for verification",
       text: `Your OTP is ${otp}. Use this to verify your email address.`,
     };
 
     var Info = await transporter.sendMail(mailOptions);
-    console.log(Info.response);
+    // console.log(Info.response);
 
     res
       .status(201)
