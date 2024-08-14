@@ -57,3 +57,46 @@
     color: white;
     cursor: pointer;
 }
+
+.hamburger{
+    display: none;
+}
+
+@media (max-width:1024px) {
+    .navbar_right{
+         position: relative;
+         ul {
+             position: absolute;
+             transform: translateX(150%);
+                // right: -20px;
+                right: 0;
+                // translate: ;
+                top: 50px;
+                height:100vh;
+                display: flex;
+                // justify-content: center;
+                flex-direction: column;
+                padding: 5rem 5rem;
+                background-color: rgb(0, 129, 133);
+                gap: 4rem;
+                transition: all 0.5s ;
+                border-top: 2px solid white;
+            }
+        
+       
+    }
+
+    .nav_display{
+        ul{
+
+            transform: translateX(30%);
+        }
+    }
+    .hamburger{
+        display: block;
+        img{
+            width: 27px;
+            height: 27px;
+        }
+    }
+}
