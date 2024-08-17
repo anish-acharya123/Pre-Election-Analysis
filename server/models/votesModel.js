@@ -2,12 +2,22 @@ const mongoose = require("mongoose");
 
 const votesSchema = new mongoose.Schema(
   {
-    candidateId: {
+    candidate_id: {
       type: String,
       require: true,
       trim: true,
     },
-    userId: {
+    voter_id: {
+      type: String,
+      unique: true,
+      require: true,
+    },
+    voter_age: {
+      type: String,
+      unique: true,
+      require: true,
+    },
+    voter_gender: {
       type: String,
       unique: true,
       require: true,

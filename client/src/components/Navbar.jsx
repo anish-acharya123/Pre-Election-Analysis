@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 // import { navState } from "../recoil/atoms";
 // import { useRecoilValue } from "recoil";
@@ -49,7 +49,11 @@ function Navbar() {
             </li>
           </ul>
           <div className="hamburger" onClick={handleAction}>
-            {click ? <img src={cross} alt="ham" /> : <img src={hamburger} alt="ham" />}
+            {click ? (
+              <img src={cross} alt="ham" />
+            ) : (
+              <img src={hamburger} alt="ham" />
+            )}
           </div>
         </div>
       </div>
