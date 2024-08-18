@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
+const ValidateUsers = require("../models/userModel");
 
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -15,17 +16,30 @@ let transporter = nodemailer.createTransport({
 let otpStorage = {};
 
 const sendOtp = async (req, res) => {
-  const { email } = req.body;
+  const { email, voterId, citizenshipNumber } = req.body;
   const otp = Math.floor(100000 + Math.random() * 900000);
   console.log(otp);
 
   const hashedOtp = await bcrypt.hash(otp.toString(), 10);
-  otpStorage[email] = hashedOtp;
-  // console.log(otpStorage);
+  const emailCheck = await ValidateUsers.find({ email, voterId });
+
+  /// noting change
+  if (emailCheck.length == 0) {
+    const findUser = await ValidateUsers.findOne({
+      citizenshipNumber,
+      voterId,
+    });
+    findUser.email = email;
+    await findUser.save();
+    otpStorage[email] = hashedOtp;
+  } else {
+    otpStorage[emailCheck[0].email] = hashedOtp;
+  }
+
   try {
     let mailOptions = {
       from: process.env.EMAIL_NAME,
-      to: email,
+      to: emailCheck.length > 0 ? emailCheck[0].email : email,
       subject: "Your OTP for verification",
       text: `Your OTP is ${otp}. Use this to verify your email address.`,
     };

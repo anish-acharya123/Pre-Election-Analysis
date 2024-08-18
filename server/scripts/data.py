@@ -1,9 +1,18 @@
 import random
 import pymongo
 from pymongo import MongoClient
+from dotenv import load_dotenv
+import os
+
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Access the environment variables
+database_url = os.getenv('MONGODB_STRING_PYTHON')
 
 # Connect to MongoDB
-client = MongoClient('mongodb+srv://acharyaanish920:iamanish123@onlinevote.6fxpu.mongodb.net/') 
+client = MongoClient(database_url ) 
 db = client['AEAS']  # Replace with your database name
 collection = db['validvotes']  # Replace with your collection name
 

@@ -1,8 +1,23 @@
+.analysis-section{
+   height: 100vh;
+//    background-color: red;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   h1{
+    font-size: 2rem;
+   }
+}
+
 .analysis_main{
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0 auto;
+    max-width: 80rem;
+    // background-color: gray;
+    // border: 1rem solid black;
+    width: 100%;
+    padding-top: 5rem;
 }
 .analysis_data{
     display: flex;
@@ -10,5 +25,7 @@
 }
 
 .analysis_pic{
-    display: inline-block;
+    display: flex;
+    gap: 4rem;
+
 }

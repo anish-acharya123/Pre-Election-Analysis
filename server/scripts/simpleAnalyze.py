@@ -1,8 +1,17 @@
 import pymongo
 from pymongo import MongoClient
+from dotenv import load_dotenv
+import os
+
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Access the environment variables
+database_url = os.getenv('MONGODB_STRING_PYTHON')
 
 # Connect to MongoDB
-client = MongoClient('mongodb+srv://acharyaanish920:iamanish123@onlinevote.6fxpu.mongodb.net/')  # Replace with your MongoDB connection string if different
+client = MongoClient(database_url )  # Replace with your MongoDB connection string if different
 db = client['AEAS']  # Replace with your database name
 
 # Collections
