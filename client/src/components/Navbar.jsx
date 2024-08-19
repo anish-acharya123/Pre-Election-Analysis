@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-// import { navState } from "../recoil/atoms";
-// import { useRecoilValue } from "recoil";
+import { NavLink } from "react-router-dom";
 import Logo from "../assets/logo/logo.svg";
 import "../styles/Navbar.scss";
 import hamburger from "../assets/logo/hamburger.png";
@@ -9,52 +7,55 @@ import cross from "../assets/logo/cross.png";
 
 function Navbar() {
   const [click, setClick] = useState(false);
-  // const navColor = useRecoilValue(navState);
 
   const handleAction = () => {
     setClick(!click);
   };
 
   return (
-    <nav className={`navbar_main ${"nav_color"}`}>
-      <div className="navbar_wrapper">
-        <div className="navbar_left">
-          <img src={Logo} alt="img not found" />
-          {/* <span> EAS</span> */}
-        </div>
-        <div className={`navbar_right ${click ? "nav_display" : ""}`}>
-          <ul>
+    <nav className=" py-6  flex items-center justify-center shadow-md">
+      <div className="flex items-center justify-between  max-w-[1440px] px-8 w-full  ">
+        <figure>
+          <img
+            src={Logo}
+            alt="AEAS"
+            className="h-[50px] w-[50px] lg:h-[60px] lg:w-[60px]"
+          />
+        </figure>
+
+        <div>
+          <ul className="hidden lg:flex gap-8 font-semibold">
             <li>
-              <Link to="/" className="nav_link">
-                Home
-              </Link>
+              {" "}
+              <NavLink to="/">Home</NavLink>{" "}
             </li>
             <li>
               {" "}
-              <Link to="/analysis " className="nav_link">
-                Analysis
-              </Link>
+              <NavLink to="/analysis">Analysis</NavLink>
             </li>
             <li>
-              {" "}
-              <Link to="/contact" className="nav_link">
-                Contact
-              </Link>
+              <NavLink>Contact</NavLink>
             </li>
             <li>
-              {" "}
-              <Link to="/fyq" className="nav_link">
-                FAQs
-              </Link>
+              <NavLink>FAQ</NavLink>
             </li>
           </ul>
-          <div className="hamburger" onClick={handleAction}>
+        </div>
+
+        <div className="flex gap-3 items-center">
+          <button className=" lg:text-[16px] border-2 border-[#12529C] text-[#12529C] text-[14px] p-2 rounded-md">
+            Help?
+          </button>
+          <figure
+            className="lg:hidden cursor-pointer transition-all"
+            onClick={handleAction}
+          >
             {click ? (
-              <img src={cross} alt="ham" />
+              <img src={cross} alt="" height={44} width={44} />
             ) : (
-              <img src={hamburger} alt="ham" />
+              <img src={hamburger} alt="" height={44} width={44} />
             )}
-          </div>
+          </figure>
         </div>
       </div>
     </nav>

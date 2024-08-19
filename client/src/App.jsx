@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { RecoilRoot } from "recoil";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./styles/app.scss";
+import "./App.css";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Otp from "./components/Otp";
