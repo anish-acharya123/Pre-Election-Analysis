@@ -48,10 +48,6 @@ function Otp() {
       console.log(e.response);
       if (e.response) {
         setError(e.response.data.msg);
-        // setTimeout(() => {
-        //   navigate("/login");
-        //   window.location.reload();
-        // }, 5000);
       }
     }
   };
@@ -64,11 +60,19 @@ function Otp() {
 
   return (
     isLoggedIn && (
-      <div className="otp_main">
-        <div className="otp_wrapper">
-          <form onSubmit={submitOtp}>
-            <div className="otp_field">
-              <label htmlFor="otp">Enter Your OTP:</label> <br />
+      <section className="flex justify-center items-center  h-[80vh]">
+        <div className="text-center flex flex-col gap-10">
+          <div>
+            <h1 className="md:text-[52px] text-[52px] font-semibold text-[#12529C] ">
+              OTP
+            </h1>
+          </div>
+          <form onSubmit={submitOtp} className="">
+            <div className="">
+              <label htmlFor="otp" className="text-[20px] ">
+                Enter Your OTP:
+              </label>{" "}
+              <br />
               <input
                 type="text"
                 maxLength="6"
@@ -76,20 +80,24 @@ function Otp() {
                 id="otp"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
+                className="border-2 p-2 text-center rounded"
               />
             </div>
             <br />
-
             {error && <div style={{ color: "red" }}>{error}</div>}
             <br />
-            <div className="otp_submit">
-              <input type="submit" value="verifyOtp" />
+            <div className="">
+              <input
+                type="submit"
+                value="verifyOtp"
+                className=" py-2 px-4 bg-[#12529C] text-white rounded  cursor-pointer"
+              />
             </div>
           </form>
           <br />
           {success && <div>Otp sent to your Email</div>}
         </div>
-      </div>
+      </section>
     )
   );
 }

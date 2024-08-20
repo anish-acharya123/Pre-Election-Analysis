@@ -85,7 +85,7 @@ function Login() {
     <section className="flex items-center justify-center h-[85vh] ">
       {!sendOtp && !isLoading && !isLoggedIn ? (
         <div
-          className="px-8 flex md:gap-8  flex-col pt-40 md:pt-0 pb-4"
+          className="px-8 flex md:gap-8  flex-col pt-40 md:pt-0 pb-4 max-w-[1440px]"
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-once="true"
@@ -144,7 +144,7 @@ function Login() {
                   Email:
                 </label>
                 <input
-                  className="border-2 p-2 rounded "
+                  className="border-2 p-2 rounded text-[12px]"
                   type="email"
                   id="email"
                   name="email"
