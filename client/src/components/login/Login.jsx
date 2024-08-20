@@ -9,14 +9,13 @@ import {
   isLoadingState,
   isSuccessState,
   errorState,
-} from "../recoil/atoms";
+} from "../../recoil/atoms";
 // import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import AOS from "aos";
-import img from "../assets/votingImage/image.png";
-import "../styles/Login.scss";
-import Loader from "./Loader";
+import img from "../../assets/votingImage/login.jpg";
+import Loader from "./../Loader";
 
 function Login() {
   const [voterId, setVoterId] = useRecoilState(voterIdState);
@@ -83,62 +82,85 @@ function Login() {
   }, [sendOtp, isLoading, isLoggedIn]);
 
   return (
-    <div className="login_main">
+    <section className="flex items-center justify-center h-[85vh] ">
       {!sendOtp && !isLoading && !isLoggedIn ? (
         <div
-          className="loginsection"
+          className="px-8 flex md:gap-8  flex-col pt-40 md:pt-0 pb-4"
           data-aos="fade-up"
-          data-aos-duration="1500"
+          data-aos-duration="1000"
           data-aos-once="true"
         >
-          <div className="loginImg">
-            <img src={img} alt="vote img" />
-          </div>
-          <div className="login_form">
-            <form onSubmit={handleForm}>
-              <div className="form_input">
-                <label htmlFor="voter_id">Voter ID:</label>
+          <button
+            onClick={() => navigate("/")}
+            className="text-center  bg-[#12529C] text-white w-fit px-4 py-2 rounded md:text-[16px] text-[12px]"
+          >
+            ← Back
+          </button>
+          <h1 className="text-center md:text-[52px] text-[40px]  sm:block  font-semibold text-[#12529C]">
+            LOGIN
+          </h1>
+          <div className="md:flex-row flex flex-col items-center gap-8 shadow-md  mt-4 sm:mt-0">
+            <figure className="">
+              <img src={img} alt="" className="md:h-[20rem]  h-[12rem]  " />
+            </figure>
+            <form
+              action=""
+              onSubmit={handleForm}
+              className="flex flex-col gap-4 pb-6 md:pb-0 md:pr-6"
+            >
+              <div className="flex flex-col">
+                <label htmlFor="voterId" className="sm:text-[18px] ">
+                  Voter ID:
+                </label>
+
                 <input
+                  className="border-2 p-2 rounded "
                   type="text"
-                  placeholder="Enter your vote ID"
-                  id="voter_id"
+                  id="voterId"
+                  name="voterId"
                   value={voterId}
                   onChange={(e) => setVoterId(e.target.value)}
                   autoComplete="off"
                   required
+                  placeholder="***-***-***"
                 />
               </div>
-              <br />
-
-              <div className="form_input">
-                <label htmlFor="citizenshipnumber">Citizenship Number:</label>
+              <div className="flex flex-col">
+                <label htmlFor="citizenshipNumber" className="sm:text-[18px]">
+                  CitizenShip Number:
+                </label>
                 <input
+                  className="border-2 p-2 rounded "
                   type="text"
-                  placeholder="Enter your Citizenship Number"
-                  id="citizenshipnumber"
+                  id="citizenshipNumber"
+                  name="citizenshipNumber"
                   value={citizenshipNumber}
                   onChange={(e) => setCitizenshipNumber(e.target.value)}
+                  placeholder="***-***-***"
                 />
               </div>
-              <br />
-              <div className="form_input">
-                <label htmlFor="email">Email:</label>
+              <div className="flex flex-col">
+                <label htmlFor="email" className="sm:text-[18px]">
+                  Email:
+                </label>
                 <input
+                  className="border-2 p-2 rounded "
                   type="email"
-                  placeholder="Enter your Email address"
                   id="email"
+                  name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  placeholder="jonhdoe@gmail.com"
                 />
               </div>
-              <br />
-
               {error && <div style={{ color: "red" }}>{error}</div>}
-
-              <br />
-              <div className="form_input" id="submit_btn">
-                <input type="submit" value="Send Otp" />
+              <div>
+                <input
+                  type="submit"
+                  value="Send Otp"
+                  className="border-none cursor-pointer md:p-4 p-2 w-full rounded bg-[#12529C] text-white mb-2"
+                />
               </div>
             </form>
           </div>
@@ -148,7 +170,7 @@ function Login() {
           <Loader />
         </div>
       )}
-    </div>
+    </section>
   );
 }
 

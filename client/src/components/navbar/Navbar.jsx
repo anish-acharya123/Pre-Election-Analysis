@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import Logo from "../assets/logo/logo.svg";
-import "../styles/Navbar.scss";
-import hamburger from "../assets/logo/hamburger.png";
-import cross from "../assets/logo/cross.png";
+import Logo from "../../assets/logo/logo.svg";
+import hamburger from "../../assets/logo/hamburger.png";
+import cross from "../../assets/logo/cross.png";
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -13,7 +12,7 @@ function Navbar() {
   };
 
   return (
-    <nav className=" py-6  flex items-center justify-center shadow-md">
+    <nav className=" py-6  flex items-center justify-center shadow-md bg-white">
       <div className="flex items-center justify-between  max-w-[1440px] px-8 w-full  ">
         <figure>
           <img
