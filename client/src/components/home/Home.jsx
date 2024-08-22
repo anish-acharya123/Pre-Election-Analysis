@@ -16,7 +16,7 @@ function Home() {
       data-aos-duration="1000"
       data-aos-once="true"
     >
-      <div className="overflow-hidden relative max-w-[1440px] px-8 w-full flex flex-col gap-8 sm:pt-28  pt-12 pb-6 ">
+      <div className="overflow-hidden relative max-w-[1440px] px-8 w-full flex flex-col gap-8 sm:pt-28  pt-12 pb-6 flex-1">
         <h1 className="sm:text-[45px] lg:text-[55px] text-[30px] font-bold md:max-w-[65rem] z-50">
           {" "}
           ANALYZE YOUR VALUABLE <span className="text-[#12529C]">
@@ -43,12 +43,12 @@ function Home() {
         >
           <p>Welcome to the Online Voting Platform.</p>
           <button
-            className="bg-[#12529C] text-white p-4 sm:w-[15rem] w-[12rem] sm:text-[16px] text-[15px] rounded"
+            className="bg-[#12529C] hover:bg-white hover:text-[#12528C]  transition-all border-2 border-[#12528c] b text-white p-4 sm:w-[15rem] w-[12rem] sm:text-[16px] text-[15px] rounded"
             onClick={handlebtn}
           >
             Vote Now
           </button>
-          <button className="border-2 border-[#12529C] p-4 sm:w-[15rem]  w-[12rem] sm:text-[16px] text-[15px] rounded">
+          <button className="border-2  border-[#12529C] p-4 sm:w-[15rem]  w-[12rem] sm:text-[16px] text-[15px] rounded">
             Candidate List
           </button>
         </div>

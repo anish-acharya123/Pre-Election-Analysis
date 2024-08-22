@@ -10,11 +10,12 @@ import Analysis from "./components/Analysis";
 import NotFound from "./components/NotFound";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Votingpage from "./components/Votingpage";
+import Votingpage from "./components/votingsection/Votingpage";
 import AdminDashboard from "./components/AdminDashboard";
 import EachCandidate from "./components/EachCandidate";
 import AdminLogin from "./components/AdminLogin";
-import Userguide from "./components/userguide";
+import Userguide from "./components/votingsection/Userguide";
+import Footer from "./components/footer/Footer";
 
 function App() {
   useEffect(() => {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/candidate/:id" Component={EachCandidate} />
             <Route path="/*" Component={NotFound} />
           </Routes>
+          {/* <Footer /> */}
         </div>
       </Router>
     </RecoilRoot>

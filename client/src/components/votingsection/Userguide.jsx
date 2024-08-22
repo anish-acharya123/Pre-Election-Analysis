@@ -4,7 +4,7 @@ import {
   voterIdState,
   emailState,
   voterNameState,
-} from "../recoil/atoms";
+} from "../../recoil/atoms";
 import { useRecoilValue, useRecoilState } from "recoil";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

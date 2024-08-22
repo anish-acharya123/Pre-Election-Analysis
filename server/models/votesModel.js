@@ -13,12 +13,12 @@ const votesSchema = new mongoose.Schema(
       require: true,
     },
     voter_age: {
-      type: String,
+      type: Number,
 
       require: true,
     },
     voter_gender: {
-      type: Number,
+      type: String,
 
       require: true,
     },

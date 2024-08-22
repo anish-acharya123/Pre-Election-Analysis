@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import CryptoJS from "crypto-js";
 import axios from "axios";
-import "../styles/VotingPopup.scss";
+import { voterIdState, emailState } from "../../recoil/atoms";
+import { useRecoilValue } from "recoil";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +18,8 @@ const encryptData = (data, secretKey, iv) => {
 const iv = CryptoJS.lib.WordArray.random(16).toString(CryptoJS.enc.Hex); // Generate a random 16-byte IV
 
 function VotingPopup({ isSelected, setPopUp, user }) {
+  const voterId = useRecoilValue(voterIdState);
+  const email = useRecoilValue(emailState);
   const navigate = useNavigate();
   const encryptedCandidateId = encryptData(
     isSelected.candidateId,
@@ -27,7 +30,7 @@ function VotingPopup({ isSelected, setPopUp, user }) {
   const voteConfirm = async () => {
     try {
       const response = await axios.post("http://localhost:3000/votes", {
-        voterId: user.voterId,
+        voterId,
         candidateId: encryptedCandidateId,
         iv,
       });
@@ -49,13 +52,13 @@ function VotingPopup({ isSelected, setPopUp, user }) {
   return (
     <div>
       {Object.keys(isSelected).length > 0 ? (
-        <div className="popup-content">
+        <div className="bg-white">
           <h1>Are you sure? You are going to vote:</h1>
           <div>
             <img
               src={isSelected.photo}
               alt={isSelected.name}
-              className="popup-img"
+              className="h-20 w-20"
             />
           </div>
           <div>
