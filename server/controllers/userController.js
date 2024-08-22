@@ -6,7 +6,7 @@ const registerUser = async (req, res) => {
   const { email, voterId, citizenshipNumber } = req.body;
 
   if (!email || !voterId || !citizenshipNumber) {
-    return res.status(401).json({ msg: "Input format is wrong" });
+    return res.status(401).json({ msg: "Incorrect Input format " });
   }
 
   try {
@@ -16,9 +16,9 @@ const registerUser = async (req, res) => {
     });
     findUser.email = email;
     await findUser.save();
-    res.status(200).json({ msg: " user login success" });
+    res.status(200).json({ msg: " User login success" });
   } catch (err) {
-    res.status(500).json({ msg: " Internal server error" });
+    res.status(500).json({ msg: " Internal Server Error" });
   }
 };
 

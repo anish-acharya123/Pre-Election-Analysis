@@ -35,14 +35,15 @@ function Userguide() {
 
   return (
     isLoggedIn && (
-      <section className="flex items-center justify-center   py-10">
+      <section className="flex items-center justify-center  py-10 ">
         <div className="max-w-[1440px] w-full px-6">
           <h1 className="text-center md:text-[32px] text-[20px]  sm:block  font-semibold ">
             Hi <span className="text-[#12529C]">{user || "Anish"}</span> , Go
             through user guide before select to your candidate.
           </h1>
           <div className="flex flex-col pt-10 items-center gap-4">
-            <div className="bg-gray-100 p-10 rounded-md">
+            {/* bg-user-guide bg-cover bg-center */}
+            <div className="bg-gray-100 p-10 rounded-md ">
               <h1 className="text-center md:text-[32px] text-[20px]  sm:block  font-semibold text-[#12529C]">
                 User Guide
               </h1>

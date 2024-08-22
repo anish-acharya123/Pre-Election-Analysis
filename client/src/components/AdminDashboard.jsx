@@ -26,42 +26,40 @@ function AdminDashboard() {
 
   return (
     adminLogged && (
-      <div className="admin-dashboard">
-        <div className="admin-dashobard-wrapper">
-          <div className="admin-overlay">
-            <div>
+      <section className="  ">
+        <div className="flex  flex-col justify-center items-center">
+          <div className="bg-[#12528c] text-white py-2  md:py-4 flex justify-center gap-10 w-full">
+            <div className="max-w-[1440px] flex justify-end gap-10 w-full px-6">
               <button
-                className="dashboard-btn"
+                className="text-[12px] md:text-[16px]"
                 onClick={() => handlesectionChange("candidate")}
               >
                 Manage Candidate
               </button>
-            </div>
-            <div>
+
               <button
-                className="dashboard-btn"
+                className="text-[12px] md:text-[16px]"
                 onClick={() => handlesectionChange("analysis")}
               >
                 Manage Analysis
               </button>
-            </div>
-            <div>
+
               <button
-                className="dashboard-btn"
+                className="text-[12px] md:text-[16px]"
                 onClick={() => handlesectionChange("admin")}
               >
                 Manage Admins
               </button>
             </div>
           </div>
-        </div>
 
-        <div className="admin-control">
-          {activeSection === "candidate" && <CandidateManage />}
-          {activeSection === "analysis" && <Analysis />}
-          {activeSection === "admin" && <Admin />}
+          <div className=" max-w-[1440px] px-6">
+            {activeSection === "candidate" && <CandidateManage />}
+            {activeSection === "analysis" && <Analysis />}
+            {activeSection === "admin" && <Admin />}
+          </div>
         </div>
-      </div>
+      </section>
     )
   );
 }

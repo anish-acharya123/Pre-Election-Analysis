@@ -7,7 +7,7 @@ import {
   emailState,
   isSuccessState,
 } from "../recoil/atoms";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../styles/otp.scss";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -91,13 +91,21 @@ function Otp() {
             <div className="">
               <input
                 type="submit"
-                value="verifyOtp"
+                value="Verify OTP"
                 className=" py-2 px-4 bg-[#12529C] text-white rounded  cursor-pointer"
               />
             </div>
           </form>
-          <br />
-          {success && <div>Otp sent to your Email</div>}
+        
+     
+          {success && <div>Check Your Email For OTP</div>}
+          <p>
+            Didn't get OTP ?{" "}
+            <Link to="/login">
+              {" "}
+              <span className="text-[#12528c]"> Login again</span>{" "}
+            </Link>{" "}
+          </p>
         </div>
       </section>
     )

@@ -6,9 +6,9 @@ const validateUser = require("../middleware/validateUser");
 const registerUser = async () => {
   try {
     await connectDb();
-    const name = "Bizay Timilsina";
-    const voterId = "789-456-333";
-    const citizenshipNumber = "123-456-777";
+    const name = "Bibek khattri";
+    const voterId = "789-456-444";
+    const citizenshipNumber = "123-456-888";
     const age = 22;
     const gender = "male";
     const newUser = new ValidateUsers({

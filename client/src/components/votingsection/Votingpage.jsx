@@ -50,9 +50,11 @@ function Votingpage() {
   // console.log(isSelected);
   return (
     isLoggedIn && (
-      <section className="flex flex-col items-center justify-center   py-20">
+      <section className={`flex flex-col items-center justify-center   py-10 `}>
         <div
-          className="max-w-[1440px] w-full px-6 flex flex-col "
+          className={`max-w-[1440px] w-full px-6 flex flex-col ${
+            popUp ? "pointer-events-none blur-sm" : ""
+          }`}
           // data-aos="fade-up"
           // data-aos-duration="1500"
         >
@@ -62,9 +64,12 @@ function Votingpage() {
           >
             ← Back
           </button>
-          <h1 className="text-center md:text-[52px] text-[40px]  sm:block  font-semibold text-[#12529C] py-8">
-            Candidate List
-          </h1>
+          <div className="py-4">
+            <h1 className="text-center md:text-[52px] text-[40px]  sm:block  font-semibold text-[#12529C] ">
+              Candidate List
+            </h1>
+            <p className="text-center">You can switch your vote.</p>
+          </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4  pb-10 ">
             {data.map((candidate) => (
               <div
@@ -99,11 +104,11 @@ function Votingpage() {
             className=" border-2 rounded-md bg-[#12529C] text-white py-4 px-10 w-fit  md:text-[16px] text-[12px]"
             onClick={() => verifyVote()}
           >
-            Verify vote
+            Confirm vote
           </button>
         </div>
 
-        <div className={popUp ? "block absolute" : "hidden"}>
+        <div className={popUp ? "block absolute " : "hidden"}>
           <VotingPopup setPopUp={setPopUp} isSelected={isSelected} />
         </div>
       </section>

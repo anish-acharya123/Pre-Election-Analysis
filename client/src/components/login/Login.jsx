@@ -127,7 +127,7 @@ function Login() {
               </div>
               <div className="flex flex-col">
                 <label htmlFor="citizenshipNumber" className="sm:text-[18px]">
-                  CitizenShip Number:
+                  Citizenship Number:
                 </label>
                 <input
                   className="border-2 p-2 rounded "
@@ -158,7 +158,7 @@ function Login() {
               <div>
                 <input
                   type="submit"
-                  value="Send Otp"
+                  value="Send OTP"
                   className="border-none cursor-pointer md:p-4 p-2 w-full rounded bg-[#12529C] text-white mb-2"
                 />
               </div>

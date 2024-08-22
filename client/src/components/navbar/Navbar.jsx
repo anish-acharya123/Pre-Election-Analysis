@@ -36,7 +36,7 @@ function Navbar() {
               <NavLink>Contact</NavLink>
             </li>
             <li>
-              <NavLink>FAQ</NavLink>
+              <NavLink>FAQs</NavLink>
             </li>
           </ul>
         </div>

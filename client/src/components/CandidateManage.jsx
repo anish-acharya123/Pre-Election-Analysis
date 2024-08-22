@@ -29,28 +29,35 @@ function CandidateManage() {
   };
 
   return (
-    <div className="candidatemanage_main">
+    <div className=" md:py-10 py-4 flex flex-col justify-center items-center">
+      <h1 className="text-center  md:text-[52px] text-[32px]  py-4 sm:block  font-semibold text-[#12529C] leading-[100%]">
+        Manage Candidates
+      </h1>
       {candidates ? (
-        <div className="candidate_cardsection">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4  pb-10 ">
           {candidates.map((candidate) => (
             <div
               key={candidate._id}
-              className="candidate_card"
+              className={`  flex gap-6 text-left md:text-left md:items-center flex-col md:flex-row justify- p-4 border-2 rounded-md shadow-lg ${
+                uploadForm && "pointer-events-none blur-sm"
+              }`}
               onClick={() => candidateDetail(candidate.id)}
             >
-              <img
-                src={candidate.photo}
-                alt={candidate.name}
-                className="candidate-image"
-              />
-              <div>
+              <figure className=" ">
+                <img
+                  src={candidate.photo}
+                  alt={candidate.name}
+                  className="lg:h-20 lg:w-20 h-20 w-20 "
+                />
+              </figure>
+              <div className="text-[14px] md:text-[16px] flex-1 f">
                 <strong>{candidate.name}</strong> <br />
                 <strong>Party: </strong> {candidate.party}
                 <br />
                 <strong>Candidate ID: </strong> {candidate.candidateId}
-                <div className="candidate-card-description">
+                <div className="">
                   <strong>Description: </strong>{" "}
-                  {candidate.description.slice(0, 25) + " .............."}
+                  {candidate.description.slice(0, 5) + " ......"}
                 </div>
               </div>
             </div>
@@ -60,13 +67,17 @@ function CandidateManage() {
         "Candidate list is empty"
       )}
 
-      <br />
-      <button className="candidate_btn" onClick={(e) => setUploadForm(true)}>
+      <button
+        className=" border-2 rounded-md bg-[#12529C] text-white py-4 px-10 w-fit  md:text-[16px] text-[12px]"
+        onClick={(e) => setUploadForm(true)}
+      >
         {" "}
         Add New Candidate
       </button>
       <div
-        className={`  ${uploadForm ? "form_canditate" : "newcandidate_form"}`}
+        className={`  ${
+          uploadForm ? "block absolute bg-white p-6 border-2 translate-y-20" : "hidden"
+        }`}
       >
         <UploadForm setUploadForm={setUploadForm} />
       </div>

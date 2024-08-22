@@ -35,7 +35,7 @@ function VotingPopup({ isSelected, setPopUp, user }) {
         iv,
       });
       if (response.status === 200) {
-        toast.success("Your vote success");
+        toast.success("congratulation! Your vote success");
         setPopUp(false);
       }
     } catch (error) {
@@ -50,34 +50,61 @@ function VotingPopup({ isSelected, setPopUp, user }) {
   };
 
   return (
-    <div>
+    <div className={`relative bg-white shadow-md py-8 px-4 w-[25rem] border-2`}>
       {Object.keys(isSelected).length > 0 ? (
-        <div className="bg-white">
-          <h1>Are you sure? You are going to vote:</h1>
+        <div className="  text-center flex flex-col items-center gap-4">
+          <h1 className="text-[20px] font-bold ">
+            Are you sure you want to vote this candidate?
+          </h1>
           <div>
             <img
               src={isSelected.photo}
               alt={isSelected.name}
-              className="h-20 w-20"
+              className="h-30 w-20 rounded-md"
             />
           </div>
-          <div>
-            <strong>Name: </strong> {isSelected.name}
+          <div className="flex flex-col">
+            <span>
+              <strong>Name: </strong> {isSelected.name}
+            </span>
+            <span>
+              <strong>Party: </strong>
+              {isSelected.party}
+            </span>
+            <span>
+              <strong>CandidateId: </strong>
+              {isSelected.candidateId}
+            </span>
           </div>
-          <div>
-            <strong>Party: </strong>
-            {isSelected.party}
-          </div>
-          <div>
-            <button onClick={() => voteConfirm()}>Vote Now</button>
+
+          <div className="flex  flex-col gap-4">
+            <button
+              onClick={() => voteConfirm()}
+              className="text-center  bg-[#12529C] text-white w-fit px-4 py-2 rounded md:text-[16px] text-[12px]"
+            >
+              Vote 
+            </button>
+            <button
+              onClick={() => setPopUp(false)}
+              className="border-2 p-2 rounded md:text-[16px] text-[12px]"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       ) : (
-        <h1>You need to select your candidate</h1>
+        <div className="flex flex-col items-center text-center gap-4">
+          <h1 className="text-[20px] font-bold ">
+            You need to select your candidate
+          </h1>
+          <button
+            onClick={() => setPopUp(false)}
+            className="border-2 p-2 rounded md:text-[16px] text-[12px]"
+          >
+            Cancel
+          </button>
+        </div>
       )}
-      <div className="popup-cut">
-        <button onClick={() => setPopUp(false)}>X</button>
-      </div>
     </div>
   );
 }
