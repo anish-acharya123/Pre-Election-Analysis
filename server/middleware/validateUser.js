@@ -15,7 +15,7 @@ const validateUser = async (req, res, next) => {
     // console.log(checkUser);
 
     if (checkUser.length === 0) {
-      return res.status(401).json({ msg: "You are not eligible to vote" });
+      return res.status(401).json({ msg: "Your credientials are wrong" });
     }
     const result = User.safeParse({
       Email: email,

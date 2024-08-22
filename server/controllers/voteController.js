@@ -1,28 +1,52 @@
 const Validvotes = require("../models/votesModel");
+const crypto = require("crypto");
 
-const voteCount = async(req, res) => {
-  const { voterId, citizenshipId } = req.body;
+// Hash function
+const hashData = (data) => {
+  return crypto.createHash("sha256").update(data).digest("hex");
+};
 
-  if (!voterId || !citizenshipId) {
+const voteCount = async (req, res) => {
+  const { voterId, candidateId, voterAge, iv } = req.body;
+  console.log(req.body);
+
+  // Hash the encrypted voterId
+  const hashedVoterId = hashData(voterId);
+  console.log(hashedVoterId);
+
+  if (!voterId || !candidateId) {
     return res
       .status(400)
-      .json({ msg: "There was error while voting.Please Login again" });
+      .json({ msg: "There was an error while voting. Please log in again." });
   }
 
-  try{
-     const user = await Validvotes.findOne({voterId})
-     if(user){
-      return res.status(409).josn({msg:""})
-     }
+  try {
+    // Check if the user has already voted
+    const user = await Validvotes.findOne({ voter_id: hashedVoterId });
+    console.log(user);
+    if (user) {
+      return res
+        .status(409)
+        .json({ error: "You have already voted for your candidate." });
+    }
 
-  }catch(error){
-    res.status(500).json({msg:"Internal Server error"})
+    const voteSubmit = new Validvotes({
+      candidate_id: candidateId,
+      voter_id: hashedVoterId,
+      iv, /// remaining to make model for this
+      voter_age: voterAge || "22",
+      voter_gender: "male",
+    });
+
+    await voteSubmit.save();
+
+    res.status(200).json({
+      msg: "Your vote has been counted.",
+    });
+  } catch (error) {
+    console.error("Error:", error.message); // Log the actual error message for debugging
+    res.status(500).json({ msg: "Internal Server " });
   }
-  res.status(200).json({
-    msg: "your vote is counted",
-    voterId,
-    citizenshipId,
-  });
 };
 
 module.exports = voteCount;

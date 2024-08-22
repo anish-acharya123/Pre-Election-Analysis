@@ -17,42 +17,40 @@ let otpStorage = {};
 
 const sendOtp = async (req, res) => {
   const { email, voterId, citizenshipNumber } = req.body;
-  const otp = Math.floor(100000 + Math.random() * 900000);
-  console.log(otp);
-
-  const hashedOtp = await bcrypt.hash(otp.toString(), 10);
-  const emailCheck = await ValidateUsers.find({ email, voterId });
-
-  /// noting change
-  if (emailCheck.length == 0) {
-    const findUser = await ValidateUsers.findOne({
-      citizenshipNumber,
-      voterId,
-    });
-    findUser.email = email;
-    await findUser.save();
-    otpStorage[email] = hashedOtp;
-  } else {
-    otpStorage[emailCheck[0].email] = hashedOtp;
-  }
 
   try {
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    console.log(otp);
+    const hashedOtp = await bcrypt.hash(otp.toString(), 10);
+
+    const user = await ValidateUsers.findOne({ citizenshipNumber, voterId });
+
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    if (user.email !== email && user.email) {
+      return res.status(401).json({ msg: "Email does not match our records" });
+    }
+
+    otpStorage[email] = hashedOtp;
+
     let mailOptions = {
       from: process.env.EMAIL_NAME,
-      to: emailCheck.length > 0 ? emailCheck[0].email : email,
+      to: email,
       subject: "Your OTP for verification",
       text: `Your OTP is ${otp}. Use this to verify your email address.`,
     };
 
-    var Info = await transporter.sendMail(mailOptions);
-    // console.log(Info.response);
+    let info = await transporter.sendMail(mailOptions);
 
     res
       .status(201)
-      .json({ success: true, message: "OTP sent successfully", Info });
+      .json({ success: true, message: "OTP sent successfully", info });
   } catch (error) {
     console.error("Error sending email: ", error);
     res.status(500).json({ success: false, error: "Failed to send OTP" });
   }
 };
+
 module.exports = { sendOtp, otpStorage };

@@ -5,85 +5,39 @@ import "../styles/VotingPopup.scss";
 
 // console.log(import.meta.env.VITE_APP_SECRET_KEY);
 const secretKey = CryptoJS.enc.Hex.parse(import.meta.env.VITE_APP_SECRET_KEY);
-const hmacKey = CryptoJS.enc.Hex.parse(import.meta.env.VITE_APP_HMAC_KEY);
+const encryptData = (data, secretKey, iv) => {
+  const key = CryptoJS.enc.Utf8.parse(secretKey); // Convert secret key to a WordArray
+  const ivWordArray = CryptoJS.enc.Utf8.parse(iv); // Convert IV to a WordArray
 
-const generateRandomIV = () => {
-  return CryptoJS.lib.WordArray.random(16);
+  return CryptoJS.AES.encrypt(data, key, { iv: ivWordArray }).toString();
 };
 
-const encrypt = (text) => {
-  const iv = generateRandomIV();
-  const encrypted = CryptoJS.AES.encrypt(
-    CryptoJS.enc.Utf8.parse(text),
+const iv = CryptoJS.lib.WordArray.random(16).toString(CryptoJS.enc.Hex); // Generate a random 16-byte IV
+
+function VotingPopup({ isSelected, setPopUp, user }) {
+  const encryptedCandidateId = encryptData(
+    isSelected.candidateId,
     secretKey,
-    {
-      iv: iv,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
-    }
+    iv
   );
-
-  const cipherText = iv.concat(encrypted.ciphertext);
-  const hmac = CryptoJS.HmacSHA256(cipherText, hmacKey).toString();
-
-  return `${hmac}:${cipherText.toString(CryptoJS.enc.Base64)}`;
-};
-
-const decrypt = (ciphertext) => {
-  const [hmac, encryptedData] = ciphertext.split(":");
-  const cipherText = CryptoJS.enc.Base64.parse(encryptedData);
-
-  const iv = CryptoJS.lib.WordArray.create(cipherText.words.slice(0, 4));
-  const actualCipherText = CryptoJS.lib.WordArray.create(
-    cipherText.words.slice(4)
-  );
-
-  const calculatedHmac = CryptoJS.HmacSHA256(cipherText, hmacKey).toString();
-
-  if (calculatedHmac !== hmac) {
-    throw new Error("Data integrity check failed.");
-  }
-
-  const bytes = CryptoJS.AES.decrypt(
-    { ciphertext: actualCipherText },
-    secretKey,
-    {
-      iv: iv,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
-    }
-  );
-
-  return CryptoJS.enc.Utf8.stringify(bytes);
-};
-
-function VotingPopup({ isSelected, setPopUp, userId }) {
-  // const [encryptedData, setEncryptedData] = useState("");
-  // const [decryptedData, setDecryptedData] = useState("");
-  // const [userId, setUserId] = useState("");
-  // const [candidateId, setCandidateId] = useState("");
-
-  const encryptedUserId = encrypt(userId);
-  const encryptedCandidateId = encrypt(isSelected.candidateId);
-
-  // const handleDecrypt = () => {
-  //   const decryptedUserId = decrypt(
-  //     encryptedData.split(", ")[0].split(": ")[1]
-  //   );
-  //   const decryptedCandidateId = decrypt(
-  //     encryptedData.split(", ")[1].split(": ")[1]
-  //   );
-  //   setDecryptedData(
-  //     `UserID: ${decryptedUserId}, CandidateID: ${decryptedCandidateId}`
-  //   );
-  // };
 
   const voteConfirm = async () => {
-    const response = await axios.post("http://localhost:3000/votes", {
-      voterId: encryptedUserId,
-      citizenshipId: encryptedCandidateId,
-    });
-    console.log(response);
+    try {
+      const response = await axios.post("http://localhost:3000/votes", {
+        voterId: user.voterId,
+        candidateId: encryptedCandidateId,
+        iv,
+      });
+      if (response.status === 200) {
+        setPopUp(false);
+      }
+    } catch (error) {
+      if (error.response.status === 409) {
+        setPopUp(false);
+        alert("you already voted");
+        console.log("confilt errror");
+      }
+    }
   };
 
   return (

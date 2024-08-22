@@ -15,7 +15,7 @@ const candidateList = async (req, res) => {
 /// upload new candidate in db
 const uploadCandidate = async (req, res) => {
   const { name, description, candidateId, party } = req.body;
-  console.log(process.env.CLOUDINARY_CLOUD_NAM);
+  // console.log(process.env.CLOUDINARY_CLOUD_NAM);
   const file = req.file;
   try {
     console.log(name, description, candidateId, file, party);

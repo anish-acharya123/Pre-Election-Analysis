@@ -19,7 +19,17 @@ const validUserSchema = new mongoose.Schema({
     type: String,
     trim: true,
     lowercase: true,
-    // unique: true,
+    unique: true,
+  },
+  age: {
+    type: Number,
+    require: true,
+    default: 22,
+  },
+  gender: {
+    type: String,
+    require: true,
+    default: "male",
   },
 });
 

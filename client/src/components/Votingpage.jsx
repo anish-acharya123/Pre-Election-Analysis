@@ -154,7 +154,7 @@ function Votingpage() {
           <VotingPopup
             setPopUp={setPopUp}
             isSelected={isSelected}
-            userId={user.name}
+            user={user}
           />
         </div>
       </div>

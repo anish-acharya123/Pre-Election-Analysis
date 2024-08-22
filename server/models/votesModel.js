@@ -14,13 +14,17 @@ const votesSchema = new mongoose.Schema(
     },
     voter_age: {
       type: String,
-      unique: true,
+
       require: true,
     },
     voter_gender: {
-      type: String,
-      unique: true,
+      type: Number,
+
       require: true,
+    },
+    iv: {
+      type: String, // Store the IV as a hexadecimal string
+      required: true,
     },
   },
   {
@@ -29,7 +33,7 @@ const votesSchema = new mongoose.Schema(
 );
 
 // to ensure that only one user can vote to one candidate
-votesSchema.index({ candidateId: 1, userId: 1 }, { unique: true });
+// votesSchema.index({ candidateId: 1, userId: 1 }, { unique: true });
 
 const Validvotes = mongoose.model("validvote", votesSchema);
 
