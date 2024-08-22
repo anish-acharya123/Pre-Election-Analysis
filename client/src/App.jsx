@@ -14,6 +14,7 @@ import Votingpage from "./components/Votingpage";
 import AdminDashboard from "./components/AdminDashboard";
 import EachCandidate from "./components/EachCandidate";
 import AdminLogin from "./components/AdminLogin";
+import Userguide from "./components/userguide";
 
 function App() {
   useEffect(() => {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/otp" Component={Otp} />
             <Route path="/analysis" Component={Analysis} />
             <Route path="/adminlogin" Component={AdminLogin} />
+            <Route path="/userguide" Component={Userguide} />
             <Route path="/votingpage" Component={Votingpage} />
             <Route path="/admin-dashboard" Component={AdminDashboard} />
             <Route path="/candidate/:id" Component={EachCandidate} />

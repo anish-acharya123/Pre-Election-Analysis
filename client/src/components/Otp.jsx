@@ -10,6 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import "../styles/otp.scss";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function Otp() {
   const voterId = useRecoilValue(voterIdState);
@@ -38,16 +39,17 @@ function Otp() {
 
       if (response.status === 200) {
         setIsLoggedIn(true);
-        navigate("/votingpage", { replace: true });
+        toast.success(response.data.msg);
+        navigate("/userguide", { replace: true });
       } else if (response.status === 400) {
-        setError(response.data.msg);
+        toast.error(response.data.msg);
         // setIsLoggedIn(false);
         // navigate("/login");
       }
     } catch (e) {
       console.log(e.response);
       if (e.response) {
-        setError(e.response.data.msg);
+        toast.error(e.response.data.msg);
       }
     }
   };

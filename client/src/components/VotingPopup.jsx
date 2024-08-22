@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import CryptoJS from "crypto-js";
 import axios from "axios";
 import "../styles/VotingPopup.scss";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 // console.log(import.meta.env.VITE_APP_SECRET_KEY);
 const secretKey = CryptoJS.enc.Hex.parse(import.meta.env.VITE_APP_SECRET_KEY);
@@ -15,6 +17,7 @@ const encryptData = (data, secretKey, iv) => {
 const iv = CryptoJS.lib.WordArray.random(16).toString(CryptoJS.enc.Hex); // Generate a random 16-byte IV
 
 function VotingPopup({ isSelected, setPopUp, user }) {
+  const navigate = useNavigate();
   const encryptedCandidateId = encryptData(
     isSelected.candidateId,
     secretKey,
@@ -29,13 +32,16 @@ function VotingPopup({ isSelected, setPopUp, user }) {
         iv,
       });
       if (response.status === 200) {
+        toast.success("Your vote success");
         setPopUp(false);
       }
     } catch (error) {
       if (error.response.status === 409) {
         setPopUp(false);
-        alert("you already voted");
-        console.log("confilt errror");
+        toast.error("you already voted");
+        setTimeout(() => {
+          navigate("/");
+        }, 5000);
       }
     }
   };

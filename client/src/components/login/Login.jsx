@@ -10,7 +10,7 @@ import {
   isSuccessState,
   errorState,
 } from "../../recoil/atoms";
-// import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import AOS from "aos";
@@ -64,9 +64,9 @@ function Login() {
       if (error.response) {
         if (error.response.status === 401) {
           setError(error.response.data.msg || "Unauthorized access");
-          // toast.error(error.response.data.msg);
+          toast.error(error.response.data.msg);
         } else if (error.response.status === 403) {
-          setError(error.response.data.msg || "Forbidden: Invalid input");
+          toast.error(error.response.data.msg || "Forbidden: Invalid input");
         }
       }
     }
@@ -154,7 +154,7 @@ function Login() {
                   placeholder="jonhdoe@gmail.com"
                 />
               </div>
-              {error && <div style={{ color: "red" }}>{error}</div>}
+              {/* {error && <div style={{ color: "red" }}>{error}</div>} */}
               <div>
                 <input
                   type="submit"

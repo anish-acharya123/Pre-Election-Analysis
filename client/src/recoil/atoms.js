@@ -16,16 +16,25 @@ export const emailState = atom({
   key: "emailState",
   default: "",
 });
+export const voterNameState = atom({
+  key: "voterName",
+  default: "",
+});
+
+///navbar
 export const navState = atom({
   key: "navState",
   default: false,
 });
+
+//admin
 
 export const isAdminLogState = atom({
   key: "adminState",
   default: false,
 });
 
+//loading
 export const isLoadingState = atom({
   key: "isLoadingState",
   default: false,

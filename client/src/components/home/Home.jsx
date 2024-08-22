@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import img from "../../assets/logo/pie.png";
+import img from "../../assets/logo/nepal.png";
 import Typewriter from "typewriter-effect";
 
 function Home() {
@@ -17,7 +17,7 @@ function Home() {
       data-aos-once="true"
     >
       <div className="overflow-hidden relative max-w-[1440px] px-8 w-full flex flex-col gap-8 sm:pt-28  pt-12 pb-6 ">
-        <h1 className="sm:text-[45px] lg:text-[55px] text-[30px] font-bold md:max-w-[65rem]">
+        <h1 className="sm:text-[45px] lg:text-[55px] text-[30px] font-bold md:max-w-[65rem] z-50">
           {" "}
           ANALYZE YOUR VALUABLE <span className="text-[#12529C]">
             VOTE
@@ -53,12 +53,12 @@ function Home() {
           </button>
         </div>
 
-        <div className="hidden md:block absolute p-8 right-0 bottom-0 translate-y-[5rem] translate-x-16">
+        <div className="hidden md:block absolute p-8 right-0 bottom-0 translate-y-[5rem]  translate-x-20">
           <figure>
             <img
               src={img}
               alt=""
-              className="lg:h-[40rem] lg:w-[40rem] md:h-[30rem] md:w-[25rem] sm: "
+              className="lg:h-[40rem] lg:w-[40rem] md:h-[30rem] md:w-[30rem] sm: "
             />
           </figure>
         </div>
