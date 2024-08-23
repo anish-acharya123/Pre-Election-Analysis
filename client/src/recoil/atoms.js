@@ -16,8 +16,8 @@ export const emailState = atom({
   key: "emailState",
   default: "",
 });
-export const voterNameState = atom({
-  key: "voterName",
+export const voterinfoState = atom({
+  key: "voterinfo",
   default: "",
 });
 

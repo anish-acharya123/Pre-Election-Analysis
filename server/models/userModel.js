@@ -3,16 +3,16 @@ const mongoose = require("mongoose");
 const validUserSchema = new mongoose.Schema({
   name: {
     type: String,
-    require: true,
+    required: true,
   },
   voterId: {
     type: String,
-    require: true,
+    required: true,
     unique: true,
   },
   citizenshipNumber: {
     type: String,
-    require: true,
+    required: true,
     unique: true,
   },
   email: {
@@ -23,14 +23,15 @@ const validUserSchema = new mongoose.Schema({
   },
   age: {
     type: Number,
-    require: true,
+    required: true,
     default: 22,
   },
   gender: {
     type: String,
-    require: true,
-    default: "male",
+    required: true,
   },
+  otp: String,
+  verifyOtpExpiry: Date,
 });
 
 const ValidateUsers = mongoose.model("validUser", validUserSchema);

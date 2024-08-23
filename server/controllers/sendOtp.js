@@ -13,8 +13,6 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-let otpStorage = {};
-
 const sendOtp = async (req, res) => {
   const { email, voterId, citizenshipNumber } = req.body;
 
@@ -23,8 +21,15 @@ const sendOtp = async (req, res) => {
     console.log(otp);
     const hashedOtp = await bcrypt.hash(otp.toString(), 10);
 
-    const user = await ValidateUsers.findOne({ citizenshipNumber, voterId });
-
+    const user = await ValidateUsers.findOneAndUpdate(
+      { citizenshipNumber, voterId },
+      {
+        otp: hashedOtp,
+        verifyOtpExpiry: Date.now() + 60 * 1000,
+      },
+      { new: true }
+    );
+    // console.log(user);
     if (!user) {
       return res.status(404).json({ msg: "User not found" });
     }
@@ -32,8 +37,6 @@ const sendOtp = async (req, res) => {
     if (user.email !== email && user.email) {
       return res.status(401).json({ msg: "Email does not match our records" });
     }
-
-    otpStorage[email] = hashedOtp;
 
     let mailOptions = {
       from: process.env.EMAIL_NAME,
@@ -53,4 +56,4 @@ const sendOtp = async (req, res) => {
   }
 };
 
-module.exports = { sendOtp, otpStorage };
+module.exports = { sendOtp };

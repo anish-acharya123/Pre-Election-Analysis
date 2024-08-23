@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CryptoJS from "crypto-js";
 import axios from "axios";
-import { voterIdState, emailState } from "../../recoil/atoms";
+import { voterIdState, emailState, voterinfoState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -17,9 +17,10 @@ const encryptData = (data, secretKey, iv) => {
 
 const iv = CryptoJS.lib.WordArray.random(16).toString(CryptoJS.enc.Hex); // Generate a random 16-byte IV
 
-function VotingPopup({ isSelected, setPopUp, user }) {
+function VotingPopup({ isSelected, setPopUp }) {
   const voterId = useRecoilValue(voterIdState);
-  const email = useRecoilValue(emailState);
+  const user = useRecoilValue(voterinfoState);
+  // const email = useRecoilValue(emailState);
   const navigate = useNavigate();
   const encryptedCandidateId = encryptData(
     isSelected.candidateId,
@@ -33,6 +34,8 @@ function VotingPopup({ isSelected, setPopUp, user }) {
         voterId,
         candidateId: encryptedCandidateId,
         iv,
+        voterAge: user.age,
+        voterGender: user.gender,
       });
       if (response.status === 200) {
         toast.success("congratulation! Your vote success");
@@ -82,7 +85,7 @@ function VotingPopup({ isSelected, setPopUp, user }) {
               onClick={() => voteConfirm()}
               className="text-center  bg-[#12529C] text-white w-fit px-4 py-2 rounded md:text-[16px] text-[12px]"
             >
-              Vote 
+              Vote
             </button>
             <button
               onClick={() => setPopUp(false)}

@@ -21,6 +21,7 @@ function Otp() {
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [seconds, setSeconds] = useState(60);
 
   const submitOtp = async (e) => {
     e.preventDefault();
@@ -49,7 +50,7 @@ function Otp() {
     } catch (e) {
       console.log(e.response);
       if (e.response) {
-        toast.error(e.response.data.msg);
+        toast.error(e.response.data.error);
       }
     }
   };
@@ -58,12 +59,25 @@ function Otp() {
     if (!isLoggedIn) {
       navigate("/login");
     }
-  }, [isLoggedIn, navigate]);
+    if (seconds > 0) {
+      const interval = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds - 1);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [isLoggedIn, navigate, seconds]);
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+  };
 
   return (
     isLoggedIn && (
       <section className="flex justify-center items-center  h-[80vh]">
-        <div className="text-center flex flex-col gap-10">
+        <div className="text-center flex flex-col gap-4">
           <div>
             <h1 className="md:text-[52px] text-[52px] font-semibold text-[#12529C] ">
               OTP
@@ -96,8 +110,14 @@ function Otp() {
               />
             </div>
           </form>
-        
-     
+          <div>
+            {seconds === 0 ? (
+              <h3>Time's up!</h3>
+            ) : (
+              <h2>{formatTime(seconds)}</h2>
+            )}
+          </div>
+
           {success && <div>Check Your Email For OTP</div>}
           <p>
             Didn't get OTP ?{" "}

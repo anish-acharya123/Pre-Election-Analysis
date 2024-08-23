@@ -7,12 +7,12 @@ const hashData = (data) => {
 };
 
 const voteCount = async (req, res) => {
-  const { voterId, candidateId, voterAge, iv } = req.body;
-  console.log(req.body);
+  const { voterId, candidateId, voterAge, iv, voterGender } = req.body;
+  // console.log(req.body);
 
   // Hash the encrypted voterId
   const hashedVoterId = hashData(voterId);
-  console.log(hashedVoterId);
+  // console.log(hashedVoterId);
 
   if (!voterId || !candidateId) {
     return res
@@ -23,7 +23,7 @@ const voteCount = async (req, res) => {
   try {
     // Check if the user has already voted
     const user = await Validvotes.findOne({ voter_id: hashedVoterId });
-    console.log(user);
+    // console.log(user);
     if (user) {
       return res
         .status(409)
@@ -34,8 +34,8 @@ const voteCount = async (req, res) => {
       candidate_id: candidateId,
       voter_id: hashedVoterId,
       iv, /// remaining to make model for this
-      voter_age: voterAge || "22",
-      voter_gender: "male",
+      voter_age: voterAge,
+      voter_gender: voterGender,
     });
 
     await voteSubmit.save();

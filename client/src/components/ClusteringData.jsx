@@ -7,11 +7,11 @@ function ClusterScatterPlot() {
 
   const encodeCandidateId = (id) => {
     const mapping = {
-      "780-671": 0,
-      "863-217": 1,
-      "196-723": 2,
-      "658-957": 3,
-      "391-723": 4,
+      "213-846": 0,
+      "855-525": 1,
+      "521-757": 2,
+      "875-393": 3,
+      "151-426": 4,
     };
     return mapping[id];
   };
@@ -24,7 +24,7 @@ function ClusterScatterPlot() {
       const scatterData = {
         datasets: [
           {
-            label: "Anish",
+            label: "cluster 0",
             data: data
               .filter((d) => d.cluster === 0)
               .map((d) => ({
@@ -34,7 +34,7 @@ function ClusterScatterPlot() {
             backgroundColor: "red",
           },
           {
-            label: "Bibek",
+            label: "cluster 1",
             data: data
               .filter((d) => d.cluster === 1)
               .map((d) => ({
@@ -44,7 +44,7 @@ function ClusterScatterPlot() {
             backgroundColor: "green",
           },
           {
-            label: "Bizay",
+            label: "cluster 2",
             data: data
               .filter((d) => d.cluster === 2)
               .map((d) => ({

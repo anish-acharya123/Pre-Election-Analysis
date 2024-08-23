@@ -11,15 +11,15 @@ load_dotenv()
 database_url = os.getenv('MONGODB_STRING_PYTHON')
 
 # Connecting to MongoDB
-client = MongoClient(database_url) 
-db = client['AEAS'] 
+client = MongoClient(database_url)
+db = client['AEAS']
 collection = db['validvotes']
 
 # Retrieving voting data
 voting_data = list(collection.find({}, {'_id': 0, 'candidate_id': 1, 'voter_id': 1, 'voter_age': 1, 'voter_gender': 1}))
 
 # Preparing data for clustering (using age and candidate_id)
-voter_ages = np.array([voter['voter_age'] for voter in voting_data])
+voter_ages = np.array([float(voter['voter_age']) for voter in voting_data])
 candidate_ids = np.array([voter['candidate_id'] for voter in voting_data])
 
 # Encoding candidate_id (categorical data to numerical)
@@ -29,7 +29,7 @@ encoded_candidate_ids = label_encoder.fit_transform(candidate_ids)
 # Combining these features into a single data matrix
 X = np.column_stack((voter_ages, encoded_candidate_ids))
 
-# K-means clustering 
+# K-means clustering
 def kmeans(X, n_clusters, max_iter=300):
     # Initialize centroids randomly from the data points
     np.random.seed(42)  # For reproducibility
@@ -61,8 +61,11 @@ for idx, voter in enumerate(voting_data):
     voter['cluster'] = int(clusters[idx])
     clustered_data.append(voter)
 
-# Inserting clustered data back into MongoDB (in a new collection)
+# Clearing existing data in the collection before inserting new data
 cluster_collection = db['clustered_voting_datas']
+cluster_collection.delete_many({})  # Delete all documents in the collection
+
+# Inserting clustered data back into MongoDB (in a new collection)
 cluster_collection.insert_many(clustered_data)
 
 print("Clustering and data insertion complete.")

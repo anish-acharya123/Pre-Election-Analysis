@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { isLoggedInState, voterNameState } from "../../recoil/atoms";
+import { isLoggedInState, voterinfoState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 // import "../styles/Votingpage.scss";
 import axios from "axios";
@@ -11,7 +11,7 @@ function Votingpage() {
   const [isSelected, setIsSelected] = useState({});
   const [popUp, setPopUp] = useState(false);
   const isLoggedIn = useRecoilValue(isLoggedInState);
-  const user = useRecoilValue(voterNameState);
+  const user = useRecoilValue(voterinfoState);
   const navigate = useNavigate();
 
   useEffect(() => {
