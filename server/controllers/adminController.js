@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const Admins = require("../models/adminModel");
 
 const adminLogin = async (req, res) => {
+  // console.log(process.env.JWT_TOKEN_SECRET);
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(401).json({ msg: "Please Input all the field" });
@@ -24,12 +25,18 @@ const adminLogin = async (req, res) => {
       },
     };
 
-    jwt.sign(payload, "abcd", { expiresIn: "1h" }, (error, token) => {
-      if (error) {
-        return res.status(500).json({ msg: "Error generating token" });
-      }
-      res.status(200).json({ token });
+    const token = jwt.sign(payload, process.env.JWT_TOKEN_SECRET, {
+      expiresIn: "1h",
     });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Use secure in production
+      sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax",
+      path: "/",
+    });
+    // console.log(token);
+    return res.status(200).json({ msg: "Login successful", success: true });
 
     // res.sjson({ token });
   } catch (error) {

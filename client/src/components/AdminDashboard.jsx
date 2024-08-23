@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import CandidateManage from "./CandidateManage";
 import Analysis from "./Analysis";
 import Admin from "./AdminLogin";
+import adminAuth from "../hook/adminAuth";
 import "../styles/AdminDashboard.scss";
 
 function AdminDashboard() {
+  adminAuth(false);
   const [activeSection, setActiveSection] = useState("candidate");
   const adminLogged = useRecoilValue(isAdminLogState);
   const navigate = useNavigate();
@@ -16,13 +18,13 @@ function AdminDashboard() {
     setActiveSection(section);
   };
 
-  useEffect(() => {
-    if (!adminLogged) {
-      navigate("/adminlogin");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!adminLogged) {
+  //     navigate("/adminlogin");
+  //   }
+  // }, []);
 
-  console.log(adminLogged);
+  // console.log(adminLogged);
 
   return (
     adminLogged && (

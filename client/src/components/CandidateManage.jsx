@@ -22,7 +22,7 @@ function CandidateManage() {
       }
     };
     fetchData();
-  }, [candidates]);
+  }, []);
 
   const candidateDetail = (id) => {
     navigate(`/candidate/${id}`);
@@ -76,7 +76,9 @@ function CandidateManage() {
       </button>
       <div
         className={`  ${
-          uploadForm ? "block absolute bg-white p-6 border-2 translate-y-20" : "hidden"
+          uploadForm
+            ? "block absolute bg-white p-6 border-2 translate-y-20"
+            : "hidden"
         }`}
       >
         <UploadForm setUploadForm={setUploadForm} />

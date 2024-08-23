@@ -3,9 +3,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { isAdminLogState } from "../recoil/atoms";
+import adminAuth from "../hook/adminAuth";
 import "../styles/AdminLogin.scss";
 
 function AdminLogin() {
+  adminAuth(true);
   // const [data, setData] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +16,7 @@ function AdminLogin() {
 
   const handleAdmin = async (e) => {
     e.preventDefault();
+    axios.defaults.withCredentials = true;
 
     try {
       const response = await axios.post("http://localhost:3000/admin/login", {
@@ -32,43 +35,44 @@ function AdminLogin() {
   // setAdminlogged(false);
 
   return (
-    // !adminLogged &&
-    <div className="admin_main">
-      <div className="adminlogin_wrapper">
-        <h1>Admin Login</h1>
-        <div className="adminlogin_form">
-          <form onSubmit={handleAdmin}>
-            <div className="adminlogin_input">
-              <div className="adminlogin_labelInput">
-                <label htmlFor="email"> Email:</label> <br />
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Enter Your Email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+    !adminLogged && (
+      <div className="admin_main">
+        <div className="adminlogin_wrapper">
+          <h1>Admin Login</h1>
+          <div className="adminlogin_form">
+            <form onSubmit={handleAdmin}>
+              <div className="adminlogin_input">
+                <div className="adminlogin_labelInput">
+                  <label htmlFor="email"> Email:</label> <br />
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter Your Email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="adminlogin_labelInput">
+                  <label htmlFor="password"> Password:</label> <br />
+                  <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter Your Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <div>
+                  <input type="submit" value="LogIn" />
+                </div>
               </div>
-              <div className="adminlogin_labelInput">
-                <label htmlFor="password"> Password:</label> <br />
-                <input
-                  type="password"
-                  id="password"
-                  placeholder="Enter Your Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <input type="submit" value="LogIn" />
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    )
   );
 }
 

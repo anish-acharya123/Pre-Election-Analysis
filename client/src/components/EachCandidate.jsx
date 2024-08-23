@@ -3,10 +3,12 @@ import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { isAdminLogState } from "../recoil/atoms";
 import { useParams, useNavigate } from "react-router-dom";
+import adminAuth from "../hook/adminAuth";
 import "../styles/Eachcandidate.scss";
 import EditForm from "./EditForm";
 
 function EachCandidate() {
+  // adminAuth(false);
   const [data, setData] = useState([]);
   const [form, setForm] = useState(false);
 
