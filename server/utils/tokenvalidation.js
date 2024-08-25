@@ -5,7 +5,7 @@ const adminTokenvalidation = async (req, res) => {
   //   console.log(token);
 
   if (!token) {
-    console.log("anish");
+    // console.log("anish");
     return res
       .status(400)
       .json({ isValid: false, message: "Token is required" });
