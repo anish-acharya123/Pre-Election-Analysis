@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../styles/UploadCandidate.scss";
+// import "../styles/UploadCandidate.scss";
 
 function UploadForm({ setUploadForm }) {
   const [name, setName] = useState("");
@@ -63,31 +63,39 @@ function UploadForm({ setUploadForm }) {
   };
 
   return (
-    <div>
-      <h2>Upload Candidate Information</h2>
+    <div className="md:w-[25rem] w-[15rem] " >
+      <h2 className="md:text-[26px] text-[20px] text-center">
+        Upload Candidate Information
+      </h2>
       <form onSubmit={handleSubmit}>
-        <div className="candidateForm_inputs">
-          <div className="candidateForm_input">
-            <label htmlFor="name">Name:</label>
+        <div className=" flex flex-col gap-2">
+          <div className="flex flex-col">
+            <label htmlFor="name" className="sm:text-[18px] ">
+              Name:
+            </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               name="name"
               id="name"
+              className="border-2  rounded "
             />
           </div>
 
-          <div className="candidateForm_input">
-            <label>Party:</label>
+          <div className="flex flex-col">
+            <label htmlFor="party" className="sm:text-[18px]">
+              Party:
+            </label>
             <input
               type="text"
               value={party}
               onChange={(e) => setParty(e.target.value)}
               name="party"
+              className="border-2  rounded "
             />
           </div>
-          <div className="candidateForm_input">
+          <div className="flex flex-col">
             <label>Candidate ID:</label>
             <input
               type="text"
@@ -95,18 +103,20 @@ function UploadForm({ setUploadForm }) {
               onChange={(e) => setCandidateId(e.target.value)}
               name="candidateId"
               required
+              className="border-2  rounded "
             />
           </div>
-          <div className="candidateForm_input">
+          <div className="flex flex-col">
             <label>Image:</label>
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
               name="image"
+              className=" "
             />
           </div>
-          <div className="candidateForm_input full-width">
+          <div className="flex flex-col">
             <label>Description:</label>
             <textarea
               type="text"
@@ -115,19 +125,20 @@ function UploadForm({ setUploadForm }) {
               name="description"
               rows="3"
               cols="50"
+              className="border-2  rounded "
             />
           </div>
         </div>
-        <div className="candidateForm_btn">
+        <div className="flex flex-row items-center justify-center gap-4 py-4">
           <button
-            className="candidateForm_cancle candidateFormsubmit_btn"
+            className="rounded border-2 px-4 py-2 md:text-[16px] text-[12px] text-center"
             onClick={(e) => cancleBtn()}
           >
             cancle
           </button>
           <button
             type="submit"
-            className="candidateForm_submit candidateFormsubmit_btn"
+            className="text-center  bg-[#12529C] text-white w-fit px-4 py-2 rounded md:text-[16px] text-[12px]"
           >
             Upload
           </button>

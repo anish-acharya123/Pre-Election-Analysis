@@ -29,12 +29,16 @@ function CandidateManage() {
   };
 
   return (
-    <div className=" md:py-10 py-4 flex flex-col justify-center items-center">
+    <div className={` md:py-10 py-4 flex flex-col justify-center items-center h-[70vh] `}>
       <h1 className="text-center  md:text-[52px] text-[32px]  py-4 sm:block  font-semibold text-[#12529C] leading-[100%]">
         Manage Candidates
       </h1>
-      {candidates ? (
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4  pb-10 ">
+      {candidates.length ? (
+        <div
+          className={`${
+            uploadForm ? "pointer-events-none blur-sm" : ""
+          } grid grid-cols-2 lg:grid-cols-3 gap-4  pb-10 `}
+        >
           {candidates.map((candidate) => (
             <div
               key={candidate._id}
@@ -64,7 +68,7 @@ function CandidateManage() {
           ))}
         </div>
       ) : (
-        "Candidate list is empty"
+        <div className="p-4 md:text-[26px]">Candidate list is empty</div>
       )}
 
       <button
@@ -77,7 +81,7 @@ function CandidateManage() {
       <div
         className={`  ${
           uploadForm
-            ? "block absolute bg-white p-6 border-2 translate-y-20"
+            ? "block absolute bg-white p-6  border-2 translate-y-[0%] md:translate-y-[0%]"
             : "hidden"
         }`}
       >
