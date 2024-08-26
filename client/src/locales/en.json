@@ -1,0 +1,26 @@
+{
+  "homepage": {
+    "header": {
+      "first": "ANALYZE YOUR VALUABLE ",
+      "second": "VOTE",
+      "third": "THROUGH A SINGLE SITE!"
+    },
+    "subheader": {
+      "first": "KNOW THE CANDIDATE",
+      "second": " KNOW THE POSSIBLE OUTCOME"
+    },
+    "welcome_message": "Welcome to the Online Voting Platform.",
+    "buttons": {
+      "vote_now": "Vote Now",
+      "candidate_list": "Candidate List"
+    }
+  },
+  "navbar": {
+    "home": "Home",
+    "analysis": "Analysis",
+    "contact": "Contact",
+    "faqs": "FAQs"
+  },
+  "login": "Login",
+  "signup": "Sign Up"
+}

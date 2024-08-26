@@ -3,9 +3,12 @@ import { NavLink } from "react-router-dom";
 import Logo from "../../assets/logo/logo2.svg";
 import hamburger from "../../assets/logo/hamburger.png";
 import cross from "../../assets/logo/cross.png";
+import LanguageSwitcher from "../LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 function Navbar() {
   const [click, setClick] = useState(false);
+  const {t} = useTranslation()
 
   const handleAction = () => {
     setClick(!click);
@@ -26,17 +29,20 @@ function Navbar() {
           <ul className="hidden lg:flex gap-8 font-semibold">
             <li>
               {" "}
-              <NavLink to="/">Home</NavLink>{" "}
+              <NavLink to="/"> {t("navbar.home")}</NavLink>{" "}
             </li>
             <li>
               {" "}
-              <NavLink to="/analysis">Analysis</NavLink>
+              <NavLink to="/analysis">{t("navbar.analysis")}</NavLink>
             </li>
             <li>
-              <NavLink>Contact</NavLink>
+              <NavLink>{t("navbar.contact")}</NavLink>
             </li>
             <li>
-              <NavLink>FAQs</NavLink>
+              <NavLink>{t("navbar.faqs")}</NavLink>
+            </li>
+            <li>
+              <LanguageSwitcher />
             </li>
           </ul>
         </div>

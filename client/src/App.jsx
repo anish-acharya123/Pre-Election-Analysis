@@ -15,6 +15,7 @@ import Userguide from "./components/votingsection/Userguide";
 import Footer from "./components/footer/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "./i18n"; 
 import "./App.css";
 
 function App() {
