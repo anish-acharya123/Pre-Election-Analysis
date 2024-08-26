@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { isAdminLogState } from "../recoil/atoms";
+import { isAdminLogState } from "../../recoil/atoms";
 import { useNavigate } from "react-router-dom";
-import CandidateManage from "./CandidateManage";
-import Analysis from "./Analysis";
+import CandidateManage from "../CandidateManage";
+import Analysis from "../Analysis";
 import Admin from "./AdminLogin";
-import adminAuth from "../hook/adminAuth";
-import "../styles/AdminDashboard.scss";
+import adminAuth from "../../hook/adminAuth";
+// import "../styles/AdminDashboard.scss";
 
 function AdminDashboard() {
   adminAuth(false);

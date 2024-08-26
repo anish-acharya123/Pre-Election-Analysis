@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { RecoilRoot } from "recoil";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./App.css";
 import Home from "./components/home/Home";
 import Login from "./components/login/Login";
 import Otp from "./components/Otp";
 import Navbar from "./components/navbar/Navbar";
 import Analysis from "./components/Analysis";
 import NotFound from "./components/NotFound";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Votingpage from "./components/votingsection/Votingpage";
-import AdminDashboard from "./components/AdminDashboard";
+import AdminDashboard from "./components/Admin/AdminDashboard";
 import EachCandidate from "./components/EachCandidate";
-import AdminLogin from "./components/AdminLogin";
+import AdminLogin from "./components/Admin/AdminLogin";
 import Userguide from "./components/votingsection/Userguide";
 import Footer from "./components/footer/Footer";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import "./App.css";
 
 function App() {
   useEffect(() => {
