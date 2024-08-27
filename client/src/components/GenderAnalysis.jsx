@@ -24,10 +24,10 @@ function GenderAnalysis() {
   if (chartData.length === 0) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h2>Gender Analysis</h2>
+    <div className="bg-red-200 flex flex-col items-center gap-4 p-4">
+      <h2 className="text-center font-bold">Gender Analysis</h2>
       <div
-        style={{ width: "300px", height: "300px" }}
+        style={{ width: "400px", height: "400px" }}
         className="analysis_data"
       >
         <Pie

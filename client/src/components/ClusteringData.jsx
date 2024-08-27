@@ -61,10 +61,12 @@ function ClusterScatterPlot() {
   }, []);
 
   return (
-    <div>
-      <h2>Age and Candidate Clustering</h2>
+    <div className="py-4 col-span-2 px-20 max-w-[80rem]">
+      <div className="bg-yellow-200 p-4 grid gap-4">
+        <h2 className="text-center font-bold">Age and Candidate Clustering</h2>
 
-      {chartData && <Scatter data={chartData} />}
+        {chartData && <Scatter data={chartData} />}
+      </div>
     </div>
   );
 }

@@ -24,8 +24,8 @@ const CandidateAnalysis = () => {
   if (chartData.length === 0) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h2>Candidate Vote Distribution</h2>
+    <div className="bg-green-200 p-4 grid gap-4">
+      <h2 className="text-center font-bold">Candidate Vote Distribution</h2>
       <div
         style={{ width: "600px", height: "400px" }}
         className="analysis_data"
