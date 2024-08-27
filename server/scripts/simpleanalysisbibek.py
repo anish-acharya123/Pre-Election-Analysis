@@ -1,17 +1,21 @@
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
 import pymongo
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
-
+import hashlib
+import binascii
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Access the environment variables
 database_url = os.getenv('MONGODB_STRING_PYTHON')
+secret_key = os.getenv('SECRET_KEY_HEX')  # Make sure this matches your encryption key
 
 # Connect to MongoDB
-client = MongoClient(database_url )  # Replace with your MongoDB connection string if different
+client = MongoClient(database_url)  # Replace with your MongoDB connection string if different
 db = client['AEAS']  # Replace with your database name
 
 # Collections
@@ -25,6 +29,19 @@ candidate_percentage_collection.delete_many({})
 gender_percentage_collection.delete_many({})
 age_group_percentage_collection.delete_many({})
 
+# Decryption function
+def decrypt_candidate_id(encrypted_candidate_id, iv):
+    # Convert secret key and iv to bytes
+    key = binascii.unhexlify(secret_key)
+    iv_bytes = binascii.unhexlify(iv)
+    
+    # Create cipher object and decrypt
+    cipher = AES.new(key, AES.MODE_CBC, iv_bytes)
+    decrypted = cipher.decrypt(binascii.unhexlify(encrypted_candidate_id))
+    
+    # Unpad the decrypted data
+    return unpad(decrypted, AES.block_size).decode('utf-8')
+
 # Fetch all votes
 votes = list(votes_collection.find())
 
@@ -34,7 +51,10 @@ total_votes = len(votes)
 # 1. Candidate Winning Percentage
 candidate_votes = {}
 for vote in votes:
-    candidate_id = vote['candidate_id']
+    encrypted_candidate_id = vote['candidate_id']
+    iv = vote['iv']  # Assume IV is stored in the database with each vote
+    candidate_id = decrypt_candidate_id(encrypted_candidate_id, iv)
+
     if candidate_id in candidate_votes:
         candidate_votes[candidate_id] += 1
     else:
@@ -78,7 +98,9 @@ age_group_candidate_votes = {
 
 for vote in votes:
     age = vote['voter_age']
-    candidate_id = vote['candidate_id']
+    encrypted_candidate_id = vote['candidate_id']
+    iv = vote['iv']  # Assume IV is stored in the database with each vote
+    candidate_id = decrypt_candidate_id(encrypted_candidate_id, iv)
 
     if 18 <= age <= 25:
         age_group = "18-25"

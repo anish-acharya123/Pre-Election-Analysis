@@ -18,7 +18,7 @@ const uploadCandidate = async (req, res) => {
   // console.log(process.env.CLOUDINARY_CLOUD_NAM);
   const file = req.file;
   try {
-    console.log(name, description, candidateId, file, party);
+    // console.log(name, description, candidateId, file, party);
     if (!name || !description || !candidateId || !file || !party) {
       return res
         .status(400)

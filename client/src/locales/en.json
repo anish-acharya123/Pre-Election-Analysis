@@ -20,5 +20,13 @@
     "analysis": "Analysis",
     "contact": "Contact",
     "faqs": "FAQs"
+  },
+  "login":{
+    "title":"LOGIN",
+    "buttons":{
+        "back": "Back",
+        "send_otp":"Send OTP"
+    }
   }
+  
 }

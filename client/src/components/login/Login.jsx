@@ -16,6 +16,7 @@ import axios from "axios";
 import AOS from "aos";
 import img from "../../assets/votingImage/login.jpg";
 import Loader from "./../Loader";
+import { useTranslation } from "react-i18next";
 
 function Login() {
   const [voterId, setVoterId] = useRecoilState(voterIdState);
@@ -29,6 +30,7 @@ function Login() {
   const [error, setError] = useRecoilState(errorState);
   const [sendOtp, setSendOtp] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation()
 
   useEffect(() => {
     setIsLoggedIn(false);
@@ -94,10 +96,10 @@ function Login() {
             onClick={() => navigate("/")}
             className="text-center  bg-[#12529C] text-white w-fit px-4 py-2 rounded md:text-[16px] text-[12px]"
           >
-            ← Back
+            ← {t("login.buttons.back")}
           </button>
           <h1 className="text-center md:text-[52px] text-[40px]  sm:block  font-semibold text-[#12529C]">
-            LOGIN
+            {t("login.title")}
           </h1>
           <div className="md:flex-row flex flex-col items-center gap-8 shadow-md  mt-4 sm:mt-0">
             <figure className="">
@@ -158,7 +160,7 @@ function Login() {
               <div>
                 <input
                   type="submit"
-                  value="Send OTP"
+                  value={t("login.buttons.send_otp")}
                   className="border-none cursor-pointer md:p-4 p-2 w-full rounded bg-[#12529C] text-white mb-2"
                 />
               </div>
