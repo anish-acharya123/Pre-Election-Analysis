@@ -5,7 +5,7 @@ import GenderAnalysis from "./GenderAnalysis";
 
 const Analysis = () => {
   return (
-    <section className="flex items-center justify-center py-20 h-[vh]">
+    <section className="flex items-center justify-center py-40 min-h-screen bg-red-100">
       <div className="max-w-[1440px] px-6 flex flex-col gap-10 ">
         <h1 className="text-center  md:text-[52px] text-[32px]  py-4 sm:block  font-semibold text-[#12529C] leading-[100%]">
           Election Data Analysis

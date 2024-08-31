@@ -29,7 +29,7 @@ function CandidateManage() {
   };
 
   return (
-    <div className={` md:py-10 py-4 flex flex-col justify-center items-center h-[70vh] `}>
+    <div className={` md:py-10 py-4 flex flex-col justify-center items-center h-[70vh]  `}>
       <h1 className="text-center  md:text-[52px] text-[32px]  py-4 sm:block  font-semibold text-[#12529C] leading-[100%]">
         Manage Candidates
       </h1>

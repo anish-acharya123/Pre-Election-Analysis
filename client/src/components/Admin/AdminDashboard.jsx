@@ -28,7 +28,7 @@ function AdminDashboard() {
 
   return (
     adminLogged && (
-      <section className="  ">
+      <section className=" text-center content-center  ">
         <div className="flex  flex-col justify-center items-center">
           <div className="bg-[#12528c] text-white py-2  md:py-4 flex justify-center gap-10 w-full">
             <div className="max-w-[1440px] flex justify-end gap-10 w-full px-6">

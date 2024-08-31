@@ -3,61 +3,67 @@ import { Scatter } from "react-chartjs-2";
 import axios from "axios";
 
 function ClusterScatterPlot() {
-  const [chartData, setChartData] = useState(null);
+  const [chartData, setChartData] = useState({ datasets: [] });
 
   const encodeCandidateId = (id) => {
     const mapping = {
-      "213-846": 0,
-      "855-525": 1,
+      "213-846": 1,
+      "855-525": 3,
       "521-757": 2,
-      "875-393": 3,
-      "151-426": 4,
+      "875-393": 4,
+      "151-426": 0,
     };
     return mapping[id];
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/clustered-data").then((response) => {
-      const data = response.data;
+    axios
+      .get("http://localhost:3000/api/clustered-data")
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
 
-      // Prepare data for scatter plot
-      const scatterData = {
-        datasets: [
-          {
-            label: "cluster 0",
-            data: data
-              .filter((d) => d.cluster === 0)
-              .map((d) => ({
-                x: d.voter_age,
-                y: encodeCandidateId(d.candidate_id),
-              })),
-            backgroundColor: "red",
-          },
-          {
-            label: "cluster 1",
-            data: data
-              .filter((d) => d.cluster === 1)
-              .map((d) => ({
-                x: d.voter_age,
-                y: encodeCandidateId(d.candidate_id),
-              })),
-            backgroundColor: "green",
-          },
-          {
-            label: "cluster 2",
-            data: data
-              .filter((d) => d.cluster === 2)
-              .map((d) => ({
-                x: d.voter_age,
-                y: encodeCandidateId(d.candidate_id),
-              })),
-            backgroundColor: "blue",
-          },
-        ],
-      };
+        // Prepare data for scatter plot
+        const scatterData = {
+          datasets: [
+            {
+              label: "Cluster 0",
+              data: data
+                .filter((d) => d.cluster === 0)
+                .map((d) => ({
+                  x: d.age, // Use d.age if your schema uses this field
+                  y: encodeCandidateId(d.candidate_id),
+                })),
+              backgroundColor: "red",
+            },
+            {
+              label: "Cluster 1",
+              data: data
+                .filter((d) => d.cluster === 1)
+                .map((d) => ({
+                  x: d.age, // Use d.age if your schema uses this field
+                  y: encodeCandidateId(d.candidate_id),
+                })),
+              backgroundColor: "green",
+            },
+            {
+              label: "Cluster 2",
+              data: data
+                .filter((d) => d.cluster === 2)
+                .map((d) => ({
+                  x: d.age, // Use d.age if your schema uses this field
+                  y: encodeCandidateId(d.candidate_id),
+                })),
+              backgroundColor: "blue",
+            },
+          ],
+        };
 
-      setChartData(scatterData);
-    });
+        setChartData(scatterData);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
   return (
@@ -65,7 +71,11 @@ function ClusterScatterPlot() {
       <div className="bg-yellow-200 p-4 grid gap-4">
         <h2 className="text-center font-bold">Age and Candidate Clustering</h2>
 
-        {chartData && <Scatter data={chartData} />}
+        {chartData && chartData.datasets.length > 0 ? (
+          <Scatter data={chartData} />
+        ) : (
+          <p>Loading chart data...</p>
+        )}
       </div>
     </div>
   );

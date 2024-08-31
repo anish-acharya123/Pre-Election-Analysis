@@ -30,7 +30,7 @@ function Login() {
   const [error, setError] = useRecoilState(errorState);
   const [sendOtp, setSendOtp] = useState(false);
   const navigate = useNavigate();
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   useEffect(() => {
     setIsLoggedIn(false);
@@ -84,10 +84,10 @@ function Login() {
   }, [sendOtp, isLoading, isLoggedIn]);
 
   return (
-    <section className="flex items-center justify-center h-[85vh] ">
+    <section className="flex items-center justify-center min-h-screen  pt-20 md:pt-0">
       {!sendOtp && !isLoading && !isLoggedIn ? (
         <div
-          className="px-8 flex md:gap-8  flex-col pt-40 md:pt-0 pb-4 max-w-[1440px]"
+          className="px-8 flex md:gap-8  flex-col sm:pt-28  pt-12 pb-4 max-w-[1440px]"
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-once="true"

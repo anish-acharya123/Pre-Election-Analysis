@@ -40,7 +40,7 @@ function Userguide() {
   console.log(user);
   return (
     isLoggedIn && (
-      <section className="flex items-center justify-center  py-10 ">
+      <section className="flex items-center justify-center min-h-screen  ">
         <div className="max-w-[1440px] w-full px-6">
           <h1 className="text-center md:text-[32px] text-[20px]  sm:block  font-semibold ">
             Hi <span className="text-[#12529C]">{user.name || "User"}</span> ,

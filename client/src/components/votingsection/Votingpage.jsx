@@ -50,7 +50,9 @@ function Votingpage() {
   // console.log(isSelected);
   return (
     isLoggedIn && (
-      <section className={`flex flex-col items-center justify-center   py-10 `}>
+      <section
+        className={`flex flex-col items-center justify-center min-h-screen    py-10 `}
+      >
         <div
           className={`max-w-[1440px] w-full px-6 flex flex-col ${
             popUp ? "pointer-events-none blur-sm" : ""

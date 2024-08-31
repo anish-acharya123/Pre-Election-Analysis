@@ -12,7 +12,7 @@ function Home() {
   };
   return (
     <section
-      className=" flex justify-center  items-center max-h-[80vh]"
+      className=" flex justify-center  items-center min-h-screen "
       data-aos="fade-up"
       data-aos-duration="1000"
       data-aos-once="true"
@@ -24,8 +24,10 @@ function Home() {
             VOTE
           </span>{" "}
           THROUGH A SINGLE SITE! */}
-          {t("homepage.header.first")}{" "} <br className="md:block hidden" />
-          <span className="text-[#12529C]">{t("homepage.header.second")}</span>{" "}
+          {t("homepage.header.first")} <br className="md:block hidden" />
+          <span className="text-[#12529C]">
+            {t("homepage.header.second")}
+          </span>{" "}
           {t("homepage.header.third")}
         </h1>
         <div

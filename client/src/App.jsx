@@ -26,7 +26,7 @@ function App() {
   return (
     <RecoilRoot>
       <Router>
-        <div className="router">
+        <div className="router overflow-hidden">
           <Navbar />
           <Routes>
             <Route exact path="/" Component={Home} />

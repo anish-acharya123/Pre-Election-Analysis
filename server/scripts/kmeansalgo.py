@@ -21,6 +21,7 @@ voting_data = list(collection.find({}, {'_id': 0, 'candidate_id': 1, 'voter_id':
 # Preparing data for clustering (using age and candidate_id)
 voter_ages = np.array([float(voter['voter_age']) for voter in voting_data])
 candidate_ids = np.array([voter['candidate_id'] for voter in voting_data])
+print(candidate_ids)
 
 # Encoding candidate_id (categorical data to numerical)
 label_encoder = LabelEncoder()

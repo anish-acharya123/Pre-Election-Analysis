@@ -8,14 +8,14 @@ import { useTranslation } from "react-i18next";
 
 function Navbar() {
   const [click, setClick] = useState(false);
-  const {t} = useTranslation()
+  const { t } = useTranslation();
 
   const handleAction = () => {
     setClick(!click);
   };
 
   return (
-    <nav className=" py-6  flex items-center justify-center shadow-md bg-white">
+    <nav className="fixed py-6  flex items-center justify-center shadow-md bg-white  w-full z-30">
       <div className="flex items-center justify-between  max-w-[1440px] px-8 w-full  ">
         <figure>
           <img

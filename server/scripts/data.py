@@ -8,6 +8,7 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from Crypto.Random import get_random_bytes
 import binascii
+import csv
 
 # Load environment variables from .env file
 load_dotenv()
@@ -16,7 +17,7 @@ load_dotenv()
 database_url = os.getenv('MONGODB_STRING_PYTHON')
 
 # Connect to MongoDB
-client = MongoClient(database_url) 
+client = MongoClient(database_url)
 db = client['AEAS']  # Replace with your database name
 collection = db['validvotes']  # Replace with your collection name
 
@@ -54,43 +55,57 @@ def encrypt_candidate_id(candidate_id, secret_key):
 # Secret key for AES encryption
 secret_key = binascii.unhexlify(os.getenv('SECRET_KEY_HEX'))
 
+# Seed the random number generator for consistent results
+random.seed(42)
+
 # Function to generate random voter data
-def generate_voter_data(candidate_ids):
-    voter_id = generate_voter_id()
+def generate_voter_data(voter_id=None):
+    if not voter_id:
+        voter_id = generate_voter_id()
     voter_age = random.randint(18, 90)
     voter_gender = random.choice(['Male', 'Female'])
     candidate_id = random.choice(list(candidate_ids.keys()))  # Choose a candidate from the list
-    encrypted_candidate_id, iv = encrypt_candidate_id(candidate_id, secret_key)
     return {
-        'voter_id': hash_voter_id(voter_id),
+        'voter_id': voter_id,
         'voter_age': voter_age,
         'voter_gender': voter_gender,
-        'candidate_id': encrypted_candidate_id,
-        'iv': iv
+        'candidate_id': candidate_id
     }
 
 # Add specific voter IDs
 specific_voter_ids = ["789-456-333", "789-456-444"]
 
-# Generate and insert 1000 mock voting data entries
+# Generate data
 data = []
 for _ in range(998):
-    data.append(generate_voter_data(candidate_ids))
+    data.append(generate_voter_data())
 
 # Adding specific voter IDs
 for voter_id in specific_voter_ids:
-    voter_age = random.randint(18, 90)
-    voter_gender = random.choice(['Male', 'Female'])
-    candidate_id = random.choice(list(candidate_ids.keys()))
-    encrypted_candidate_id, iv = encrypt_candidate_id(candidate_id, secret_key)
-    data.append({
-        'voter_id': hash_voter_id(voter_id),
-        'voter_age': voter_age,
-        'voter_gender': voter_gender,
+    data.append(generate_voter_data(voter_id))
+
+# Save data to CSV
+csv_file = 'voter_data.csv'
+with open(csv_file, mode='w', newline='') as file:
+    writer = csv.DictWriter(file, fieldnames=['voter_id', 'voter_age', 'voter_gender', 'candidate_id'])
+    writer.writeheader()
+    writer.writerows(data)
+
+print(f"CSV file '{csv_file}' created successfully.")
+
+# Encrypt the data before inserting into MongoDB
+encrypted_data = []
+for item in data:
+    encrypted_candidate_id, iv = encrypt_candidate_id(item['candidate_id'], secret_key)
+    encrypted_data.append({
+        'voter_id': hash_voter_id(item['voter_id']),
+        'voter_age': item['voter_age'],
+        'voter_gender': item['voter_gender'],
         'candidate_id': encrypted_candidate_id,
         'iv': iv
     })
 
-collection.insert_many(data)
+# Insert encrypted data into MongoDB
+collection.insert_many(encrypted_data)
 
-print("Data generation and insertion complete.")
+print("Data encryption and insertion into MongoDB complete.")
