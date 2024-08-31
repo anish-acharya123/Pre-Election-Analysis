@@ -53,15 +53,11 @@ function EachCandidate() {
 
   return (
     adminLogged && (
-      <div className="">
-        <div className="">
+      <section className="py-10 flex justify-center items-center">
+        <div className="max-w-[1440px] px-6 bg-red-50 w-full">
           <div className="">
-            <div className="">
-              <img
-                src={data.photo}
-                alt={data.name}
-                className=""
-              />
+            <div className="flex md:flex-row flex-col justify-center items-center">
+              <img src={data.photo} alt={data.name} className="h-52 w-52 mix-blend-multiply" />
               <div className="">
                 <div>
                   <strong>Name: </strong> {data.name}
@@ -72,9 +68,9 @@ function EachCandidate() {
                 <div>
                   <strong>CandidateId :</strong> {data.candidateId}
                 </div>
-              </div>
-              <div>
-                <strong>Description: </strong> {data.description}
+                <div>
+                  <strong>Description: </strong> {data.description}
+                </div>
               </div>
             </div>
             <div className="">
@@ -86,19 +82,19 @@ function EachCandidate() {
               </button>
             </div>
           </div>
-        </div>
 
-        <div className={`${form ? " block" : "hidden"} `}>
-          <EditForm
-            Cname={data.name}
-            Cparty={data.party}
-            CcandidateId={data.candidateId}
-            Cdescription={data.description}
-            Cphoto={data.photo}
-            setForm={setForm}
-          />
+          <div className={`${form ? " block" : "hidden"} `}>
+            <EditForm
+              Cname={data.name}
+              Cparty={data.party}
+              CcandidateId={data.candidateId}
+              Cdescription={data.description}
+              Cphoto={data.photo}
+              setForm={setForm}
+            />
+          </div>
         </div>
-      </div>
+      </section>
     )
   );
 }

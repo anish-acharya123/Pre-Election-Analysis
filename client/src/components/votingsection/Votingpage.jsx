@@ -84,7 +84,7 @@ function Votingpage() {
                   <img
                     src={candidate.photo}
                     alt={candidate.name}
-                    className="h-20 w-20 rounded-full"
+                    className="h-20 w-20 rounded-full "
                   />
                 </figure>
                 <div className="text-[12px] md:text-[16px]">
