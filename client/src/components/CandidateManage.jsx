@@ -29,7 +29,9 @@ function CandidateManage() {
   };
 
   return (
-    <div className={` md:py-10 py-4 flex flex-col justify-center items-center h-[70vh]  `}>
+    <div
+      className={` md:py-10 py-4 flex flex-col justify-center items-center pb-20`}
+    >
       <h1 className="text-center  md:text-[52px] text-[32px]  py-4 sm:block  font-semibold text-[#12529C] leading-[100%]">
         Manage Candidates
       </h1>
@@ -37,7 +39,7 @@ function CandidateManage() {
         <div
           className={`${
             uploadForm ? "pointer-events-none blur-sm" : ""
-          } grid grid-cols-2 lg:grid-cols-3 gap-4  pb-10 `}
+          } grid grid-cols-2 lg:grid-cols-3 gap-4  pb-10 leading-[130%] sm:leading-normal text-[12px] md:text-[16px]"`}
         >
           {candidates.map((candidate) => (
             <div

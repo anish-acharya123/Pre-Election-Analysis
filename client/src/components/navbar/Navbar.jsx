@@ -15,7 +15,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="fixed py-6  flex items-center justify-center shadow-md bg-white  w-full z-30">
+    <nav className="sticky py-6 top-0    flex items-center justify-center shadow-md bg-white  w-full z-30">
       <div className="flex items-center justify-between  max-w-[1440px] px-8 w-full  ">
         <figure>
           <img

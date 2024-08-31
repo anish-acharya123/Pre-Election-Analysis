@@ -51,7 +51,7 @@ function Votingpage() {
   return (
     isLoggedIn && (
       <section
-        className={`flex flex-col items-center justify-center min-h-screen    py-10 `}
+        className={`flex flex-col items-center justify-center    py-10 `}
       >
         <div
           className={`max-w-[1440px] w-full px-6 flex flex-col ${
@@ -67,12 +67,12 @@ function Votingpage() {
             ← Back
           </button>
           <div className="py-4">
-            <h1 className="text-center md:text-[52px] text-[40px]  sm:block  font-semibold text-[#12529C] ">
+            <h1 className="text-center md:text-[52px] text-[32px]  sm:block  font-semibold text-[#12529C] ">
               Candidate List
             </h1>
             <p className="text-center">You can switch your vote.</p>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4  pb-10 ">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4  pb-10 leading-[100%]">
             {data.map((candidate) => (
               <div
                 key={candidate._id}
@@ -87,7 +87,7 @@ function Votingpage() {
                     className="h-20 w-20 rounded-full"
                   />
                 </figure>
-                <div className="">
+                <div className="text-[12px] md:text-[16px]">
                   <strong>{candidate.name}</strong> <br />
                   <strong>Party:</strong> {candidate.party}
                 </div>
@@ -110,7 +110,11 @@ function Votingpage() {
           </button>
         </div>
 
-        <div className={popUp ? "block absolute " : "hidden"}>
+        <div
+          className={`${
+            popUp ? "block absolute " : "hidden"
+          } md:scale-100 scale-75`}
+        >
           <VotingPopup setPopUp={setPopUp} isSelected={isSelected} />
         </div>
       </section>

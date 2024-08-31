@@ -12,7 +12,7 @@ function Home() {
   };
   return (
     <section
-      className=" flex justify-center  items-center min-h-screen "
+      className=" flex justify-center  items-center  "
       data-aos="fade-up"
       data-aos-duration="1000"
       data-aos-once="true"

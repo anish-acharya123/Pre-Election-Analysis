@@ -53,16 +53,16 @@ function EachCandidate() {
 
   return (
     adminLogged && (
-      <div className="eachcandidate_main">
-        <div className="eachcandidate_wrapper">
-          <div className="eachcandidate_detail">
-            <div className="eachcandidate_imginfo">
+      <div className="">
+        <div className="">
+          <div className="">
+            <div className="">
               <img
                 src={data.photo}
                 alt={data.name}
-                className="eachcandidate_img"
+                className=""
               />
-              <div className="eachcandidate_info">
+              <div className="">
                 <div>
                   <strong>Name: </strong> {data.name}
                 </div>
@@ -77,7 +77,7 @@ function EachCandidate() {
                 <strong>Description: </strong> {data.description}
               </div>
             </div>
-            <div className="eachcandidate_btn">
+            <div className="">
               <button className="edit" onClick={() => setForm(true)}>
                 Edit
               </button>
@@ -88,7 +88,7 @@ function EachCandidate() {
           </div>
         </div>
 
-        <div className={`${form ? " EditForm" : "eachcandidate_form"} `}>
+        <div className={`${form ? " block" : "hidden"} `}>
           <EditForm
             Cname={data.name}
             Cparty={data.party}

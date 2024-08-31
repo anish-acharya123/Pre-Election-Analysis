@@ -40,7 +40,7 @@ function Userguide() {
   console.log(user);
   return (
     isLoggedIn && (
-      <section className="flex items-center justify-center min-h-screen  ">
+      <section className="flex items-center justify-center py-8 ">
         <div className="max-w-[1440px] w-full px-6">
           <h1 className="text-center md:text-[32px] text-[20px]  sm:block  font-semibold ">
             Hi <span className="text-[#12529C]">{user.name || "User"}</span> ,
@@ -53,7 +53,7 @@ function Userguide() {
                 User Guide
               </h1>
               <div>
-                <ol className="list-decimal list-inside grid gap-8 pt-4">
+                <ol className="list-decimal list-inside grid gap-8 pt-4 text-[12px] md:text-[16px]">
                   <li>
                     <strong>Verify Your Choice:</strong> Ensure you carefully
                     review your choice before casting your vote.
@@ -76,7 +76,7 @@ function Userguide() {
                 </ol>
 
                 <br />
-                <p>
+                <p className="text-[12px] md:text-[16px] font-semibold">
                   Your vote is your voice. Make it count by carefully
                   considering each candidate's vision and how it aligns with
                   your values and the needs of our community.
@@ -85,7 +85,7 @@ function Userguide() {
             </div>
             <div>
               <button
-                className="border-none rounded bg-[#12529C] text-white py-4 px-8"
+                className="border-2 rounded-md bg-[#12529C] text-white py-4 px-10 w-fit  md:text-[16px] text-[12px]"
                 onClick={() => navigate("/votingpage")}
               >
                 Ready to Vote

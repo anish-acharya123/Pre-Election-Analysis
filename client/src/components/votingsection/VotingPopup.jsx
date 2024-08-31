@@ -53,7 +53,7 @@ function VotingPopup({ isSelected, setPopUp }) {
   };
 
   return (
-    <div className={`relative bg-white shadow-md py-8 px-4 w-[25rem] border-2`}>
+    <div className={`relative bg-white shadow-md py-8 px-4 w-[25rem] border-2 `}>
       {Object.keys(isSelected).length > 0 ? (
         <div className="  text-center flex flex-col items-center gap-4">
           <h1 className="text-[20px] font-bold ">

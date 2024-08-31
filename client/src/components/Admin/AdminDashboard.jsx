@@ -28,8 +28,8 @@ function AdminDashboard() {
 
   return (
     adminLogged && (
-      <section className=" text-center content-center  ">
-        <div className="flex  flex-col justify-center items-center">
+      <section className=" flex justify-center items-center ">
+        <div className="flex  flex-col justify-evenly items-center w-full gap-22 md:gap-0">
           <div className="bg-[#12528c] text-white py-2  md:py-4 flex justify-center gap-10 w-full">
             <div className="max-w-[1440px] flex justify-end gap-10 w-full px-6">
               <button
@@ -46,12 +46,12 @@ function AdminDashboard() {
                 Manage Analysis
               </button>
 
-              <button
+              {/* <button
                 className="text-[12px] md:text-[16px]"
                 onClick={() => handlesectionChange("admin")}
               >
                 Manage Admins
-              </button>
+              </button> */}
             </div>
           </div>
 
