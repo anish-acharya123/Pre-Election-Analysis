@@ -6,6 +6,7 @@ import {
   citizenshipNumberState,
   emailState,
   isSuccessState,
+  isLoadingState,
 } from "../recoil/atoms";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/otp.scss";
@@ -20,11 +21,15 @@ function Otp() {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
   const navigate = useNavigate();
   const [seconds, setSeconds] = useState(60);
-
+  useEffect(() => {
+    setIsLoading(false);
+  }, [isLoading]);
   const submitOtp = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const response = await axios.post(
@@ -40,9 +45,11 @@ function Otp() {
 
       if (response.status === 200) {
         setIsLoggedIn(true);
+        setIsLoading(false);
         toast.success(response.data.msg);
         navigate("/userguide", { replace: true });
       } else if (response.status === 400) {
+        setIsLoading(false);
         toast.error(response.data.msg);
         // setIsLoggedIn(false);
         // navigate("/login");

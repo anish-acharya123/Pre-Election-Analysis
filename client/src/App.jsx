@@ -15,8 +15,9 @@ import Userguide from "./components/votingsection/Userguide";
 import Footer from "./components/footer/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import "./i18n"; 
+import "./i18n";
 import "./App.css";
+import FAQ from "./components/FAQ";
 
 function App() {
   useEffect(() => {
@@ -33,6 +34,7 @@ function App() {
             <Route exact path="/login" Component={Login} />
             <Route path="/otp" Component={Otp} />
             <Route path="/analysis" Component={Analysis} />
+            <Route path="/faqs" Component={FAQ} />
             <Route path="/adminlogin" Component={AdminLogin} />
             <Route path="/userguide" Component={Userguide} />
             <Route path="/votingpage" Component={Votingpage} />

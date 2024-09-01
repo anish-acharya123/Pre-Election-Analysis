@@ -39,7 +39,7 @@ function Navbar() {
               <NavLink>{t("navbar.contact")}</NavLink>
             </li>
             <li>
-              <NavLink>{t("navbar.faqs")}</NavLink>
+              <NavLink to='/faqs'>{t("navbar.faqs")}</NavLink>
             </li>
             <li>
               <LanguageSwitcher />

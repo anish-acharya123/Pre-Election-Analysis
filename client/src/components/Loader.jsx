@@ -1,17 +1,18 @@
 import React from "react";
-import { Bars } from "react-loader-spinner";
+import {  Triangle } from "react-loader-spinner";
 
 function Loader() {
   return (
-    <div>
-      <Bars
+    <div className=" text-clip content-center h-[80vh] flex justify-center   items-center flex-col">
+      <Triangle
+        visible={true}
         height="100"
         width="100"
         radius="9"
         color="#12529C"
-        ariaLabel="three-dots-loading"
-        wrapperStyle
-        wrapperClass
+        ariaLabel="triangle-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
       />
       <br />
       <h3>Loading...</h3>

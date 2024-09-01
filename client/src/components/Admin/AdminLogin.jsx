@@ -36,7 +36,7 @@ function AdminLogin() {
 
   return (
     !adminLogged && (
-      <section className=" flex justify-center items-center min-h-screen  bg-red-200 ">
+      <section className=" flex justify-center items-center  py-28 ">
         <div className="px-6 flex md:gap-8 flex-col pt-40 md:pt-0 pb-4 max-w-[1440px] ">
           <h1 className="text-center md:text-[52px] text-[26px] pb-4  sm:block  font-semibold text-[#12529C]">
             Admin Login
