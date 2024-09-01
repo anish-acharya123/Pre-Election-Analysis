@@ -53,45 +53,57 @@ function EachCandidate() {
 
   return (
     adminLogged && (
-      <section className="py-10 flex justify-center items-center">
-        <div className="max-w-[1440px] px-6 bg-red-50 w-full">
-          <div className="">
-            <div className="flex md:flex-row flex-col justify-center items-center">
-              <img src={data.photo} alt={data.name} className="h-52 w-52 mix-blend-multiply" />
-              <div className="">
-                <div>
-                  <strong>Name: </strong> {data.name}
-                </div>
-                <div>
-                  <strong>Party: </strong> {data.party}
-                </div>
-                <div>
-                  <strong>CandidateId :</strong> {data.candidateId}
-                </div>
-                <div>
-                  <strong>Description: </strong> {data.description}
+      <section className=" flex justify-center items-center py-52 ">
+        <div className="max-w-[1440px] px-6">
+          <div className="relative">
+            <div className="bg-gray-200 p-4 rounded-md flex flex-col justify-center items-center gap-4">
+              <div className="flex flex-col md:flex-row items-center justify-center text-[14px] md:text-[16px] ">
+                <img
+                  src={data.photo}
+                  alt={data.name}
+                  className="h-52 w-52 mix-blend-multiply"
+                />
+                <div className="max-w-[40rem]">
+                  <div>
+                    <strong>Name: </strong> {data.name}
+                  </div>
+                  <div>
+                    <strong>Party: </strong> {data.party}
+                  </div>
+                  <div>
+                    <strong>CandidateId :</strong> {data.candidateId}
+                  </div>
+                  <div>
+                    <strong>Description: </strong> {data.description}
+                  </div>
                 </div>
               </div>
+              <div className=" flex gap-4">
+                <button
+                  className="text-center border-none outline-none   bg-[#12529C] text-white w-fit px-4 py-2 rounded md:text-[16px] text-[12px]"
+                  onClick={() => setForm(true)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="text-center  bg-red-500 text-white border-none outline-none w-fit px-4 py-2 rounded md:text-[16px] text-[12px]"
+                  onClick={() => deleteData()}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-            <div className="">
-              <button className="edit" onClick={() => setForm(true)}>
-                Edit
-              </button>
-              <button className="delete" onClick={() => deleteData()}>
-                Delete
-              </button>
-            </div>
-          </div>
 
-          <div className={`${form ? " block" : "hidden"} `}>
-            <EditForm
-              Cname={data.name}
-              Cparty={data.party}
-              CcandidateId={data.candidateId}
-              Cdescription={data.description}
-              Cphoto={data.photo}
-              setForm={setForm}
-            />
+            <div className={`${form ? " block absolute top-0 bg-white border-4 p-4 " : "hidden"} `}>
+              <EditForm
+                Cname={data.name}
+                Cparty={data.party}
+                CcandidateId={data.candidateId}
+                Cdescription={data.description}
+                Cphoto={data.photo}
+                setForm={setForm}
+              />
+            </div>
           </div>
         </div>
       </section>

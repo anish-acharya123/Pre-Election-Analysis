@@ -167,11 +167,11 @@ function EditForm({
             className="candidateForm_cancle candidateFormsubmit_btn"
             onClick={cancleBtn}
           >
-            cancle
+            cancel
           </button>
           <input
             type="submit"
-            className="candidateForm_submit candidateFormsubmit_btn"
+            className="candidateForm_submit candidateFormsubmit_btn  bg-[#12529C]"
             value="Update"
           />
         </div>
