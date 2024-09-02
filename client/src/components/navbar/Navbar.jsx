@@ -29,17 +29,31 @@ function Navbar() {
           <ul className="hidden lg:flex gap-8 font-semibold">
             <li>
               {" "}
-              <NavLink to="/"> {t("navbar.home")}</NavLink>{" "}
+              <NavLink
+                to="/"
+                className={({ isActive }) => isActive && "text-[#12529C]"}
+              >
+                {t("navbar.home")}
+              </NavLink>
             </li>
             <li>
-              {" "}
-              <NavLink to="/analysis">{t("navbar.analysis")}</NavLink>
+              <NavLink
+                to="/analysis"
+                className={({ isActive }) => isActive && "text-[#12529C]"}
+              >
+                {t("navbar.analysis")}
+              </NavLink>
             </li>
             <li>
               <NavLink>{t("navbar.contact")}</NavLink>
             </li>
             <li>
-              <NavLink to='/faqs'>{t("navbar.faqs")}</NavLink>
+              <NavLink
+                to="/faqs"
+                className={({ isActive }) => isActive && "text-[#12529C]"}
+              >
+                {t("navbar.faqs")}
+              </NavLink>
             </li>
             <li>
               <LanguageSwitcher />

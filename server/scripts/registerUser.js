@@ -1,14 +1,14 @@
 const { default: mongoose } = require("mongoose");
 const ValidateUsers = require("../models/userModel");
 const connectDb = require("../config/db");
-const validateUser = require("../middleware/validateUser");
+require("dotenv").config();
 
+ connectDb();
 const registerUser = async () => {
   try {
-    await connectDb();
-    const name = "Nirmal Thapa";
-    const voterId = "789-456-111";
-    const citizenshipNumber = "123-456-999";
+    const name = "Anish Acharya";
+    const voterId = "789-456-333";
+    const citizenshipNumber = "123-456-777";
     const age = 32;
     const gender = "male";
     const newUser = new ValidateUsers({
@@ -17,6 +17,7 @@ const registerUser = async () => {
       citizenshipNumber,
       age,
       gender,
+      email: undefined,
     });
     await newUser.save();
 
