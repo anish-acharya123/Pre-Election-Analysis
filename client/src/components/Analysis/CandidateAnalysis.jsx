@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import axios from "axios";
-import "../styles/Analysis.scss";
+// import "../styles/Analysis.scss";
 
 const CandidateAnalysis = () => {
   const [chartData, setChartData] = useState([]);

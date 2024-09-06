@@ -12,7 +12,7 @@ const deleteValidvote = async () => {
     console.log("Error:", error.message);
   } finally {
     mongoose.disconnect();
-  }
+  } 
 };
 
 deleteValidvote();

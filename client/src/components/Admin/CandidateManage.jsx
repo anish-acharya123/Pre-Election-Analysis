@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/CandidateManage.scss";
+// import "../styles/CandidateManage.scss";
 import axios from "axios";
-import UploadForm from "./UploadCandidate";
+import UploadCandidate from "./UploadCandidate";
 
 function CandidateManage() {
   const [candidates, setCandidates] = useState([]);
@@ -87,7 +87,7 @@ function CandidateManage() {
             : "hidden"
         }`}
       >
-        <UploadForm setUploadForm={setUploadForm} />
+        <UploadCandidate setUploadForm={setUploadForm} />
       </div>
     </div>
   );

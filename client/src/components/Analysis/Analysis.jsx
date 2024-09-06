@@ -1,4 +1,4 @@
-import "../styles/Analysis.scss";
+// import "../styles/Analysis.scss";
 import CandidateAnalysis from "./CandidateAnalysis";
 import ClusterScatterPlot from "./ClusteringData";
 import GenderAnalysis from "./GenderAnalysis";

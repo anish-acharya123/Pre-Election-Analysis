@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
-import { isAdminLogState } from "../recoil/atoms";
+import { isAdminLogState } from "../../recoil/atoms";
 import { useParams, useNavigate } from "react-router-dom";
-import adminAuth from "../hook/adminAuth";
-import "../styles/Eachcandidate.scss";
+import adminAuth from "../../hook/adminAuth";
+// import "../styles/Eachcandidate.scss";
 import EditForm from "./EditForm";
 
 function EachCandidate() {
@@ -94,7 +94,11 @@ function EachCandidate() {
               </div>
             </div>
 
-            <div className={`${form ? " block absolute top-0 bg-white border-4 p-4 " : "hidden"} `}>
+            <div
+              className={`${
+                form ? " block absolute top-0 bg-white border-4 p-4 " : "hidden"
+              } `}
+            >
               <EditForm
                 Cname={data.name}
                 Cparty={data.party}

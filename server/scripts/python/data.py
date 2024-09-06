@@ -18,8 +18,8 @@ database_url = os.getenv('MONGODB_STRING_PYTHON')
 
 # Connect to MongoDB
 client = MongoClient(database_url)
-db = client['AEAS']  # Replace with your database name
-collection = db['validvotes']  # Replace with your collection name
+db = client['AEAS']  
+collection = db['validvotes'] 
 
 # Clear existing data (optional)
 collection.delete_many({})

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import "../styles/UploadCandidate.scss";
+// import "../styles/UploadCandidate.scss";
 
 function EditForm({
   Cname = "",
