@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 import { isAdminLogState } from "../../recoil/atoms";
 import { useNavigate } from "react-router-dom";
 import CandidateManage from "./CandidateManage";
+import VoteTimeManage from "./voteTimeManage";
 import Analysis from "../Analysis/Analysis";
 import Admin from "./AdminLogin";
 import adminAuth from "../../hook/adminAuth";
@@ -45,6 +46,12 @@ function AdminDashboard() {
               >
                 Manage Analysis
               </button>
+              <button
+                className="text-[12px] md:text-[16px]"
+                onClick={() => handlesectionChange("voteTime")}
+              >
+                Manage VoteTime
+              </button>
 
               {/* <button
                 className="text-[12px] md:text-[16px]"
@@ -55,10 +62,10 @@ function AdminDashboard() {
             </div>
           </div>
 
-          <div className=" max-w-[1440px] px-6">
+          <div className=" max-w-[1440px] px-6 w-full">
             {activeSection === "candidate" && <CandidateManage />}
             {activeSection === "analysis" && <Analysis />}
-            {activeSection === "admin" && <Admin />}
+            {activeSection === "voteTime" && <VoteTimeManage />}
           </div>
         </div>
       </section>

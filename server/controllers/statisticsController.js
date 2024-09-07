@@ -4,7 +4,7 @@ const AnalyzedData = async (req, res) => {
   const { type } = req.query;
   try {
     const Data = await Statistics.find({ type });
-    console.log(Data);
+
     if (!Data) {
       res.status(400).json({ error: "No Data Available" });
     }

@@ -15,11 +15,11 @@ load_dotenv()
 
 # Access the environment variables
 database_url = os.getenv('MONGODB_STRING_PYTHON')
-
+    
 # Connect to MongoDB
 client = MongoClient(database_url)
-db = client['AEAS']
-collection = db['validvotes']
+db = client['AEAS']  
+collection = db['validvotes'] 
 
 # Clear existing data (optional)
 collection.delete_many({})
@@ -54,6 +54,9 @@ def encrypt_candidate_id(candidate_id, secret_key):
 
 # Secret key for AES encryption
 secret_key = binascii.unhexlify(os.getenv('SECRET_KEY_HEX'))
+
+# Seed the random number generator for consistent results
+random.seed(42)
 
 # Function to generate random voter data
 def generate_voter_data(voter_id=None):

@@ -74,7 +74,7 @@ function CandidateManage() {
       )}
 
       <button
-        className=" border-2 rounded-md bg-[#12529C] text-white py-4 px-10 w-fit  md:text-[16px] text-[12px]"
+        className=" border-none rounded-md bg-[#12529C] text-white py-4 px-10 w-fit  md:text-[16px] text-[12px]"
         onClick={(e) => setUploadForm(true)}
       >
         {" "}

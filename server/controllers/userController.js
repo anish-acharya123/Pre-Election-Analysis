@@ -1,8 +1,9 @@
 // const bcrypt = require("bcrypt");
 const ValidateUsers = require("../models/userModel");
+const VotingTime = require("../models/votingTimeModel");
 
 ///sign up
-const registerUser = async (req, res) => {
+const loginUser = async (req, res) => {
   const { email, voterId, citizenshipNumber } = req.body;
 
   if (!email || !voterId || !citizenshipNumber) {
@@ -33,4 +34,4 @@ const userData = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, userData };
+module.exports = { loginUser, userData };

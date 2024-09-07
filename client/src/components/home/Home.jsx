@@ -1,15 +1,44 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import img from "../../assets/logo/nepal.png";
 import { useTranslation } from "react-i18next";
+import axios from "axios"
 import Typewriter from "typewriter-effect";
 
 function Home() {
+  const [votingEnabled, setVotingEnabled] = useState(false);
+  const [votingStartTime, setVotingStartTime] = useState("");
+  const [votingEndTime, setVotingEndTime] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
   const handlebtn = () => {
     navigate("/login");
   };
+
+  useEffect(() => {
+    const fetchVotingConfig = async () => {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:3000/admin/get-voting-config"
+        );
+        console.log(data)
+        if (data) {
+          setVotingEnabled(data.votingEnabled);
+          setVotingStartTime(
+            new Date(data.votingStartTime).toISOString().slice(0, 16)
+          ); // Format for datetime-local input
+          setVotingEndTime(
+            new Date(data.votingEndTime).toISOString().slice(0, 16)
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching voting config:", error);
+      }
+    };
+
+    fetchVotingConfig();
+  }, []);
+
   return (
     <section
       className=" flex justify-center  items-center  "
@@ -45,6 +74,20 @@ function Home() {
           </h3>
         </div>
         <div
+          className={`${votingStartTime && votingEndTime ? "block" : "hidden"}`}
+        >
+          {votingStartTime && votingEndTime && (
+            <div className="mt-4">
+              <p>
+                Election starts on: {new Date(votingStartTime).toLocaleString()}
+              </p>
+              <p>
+                Election ends on: {new Date(votingEndTime).toLocaleString()}
+              </p>
+            </div>
+          )}
+        </div>
+        <div
           className="flex flex-col gap-4 "
           data-aos="fade-up"
           data-aos-duration="2000"
@@ -59,7 +102,7 @@ function Home() {
           </button>
           <button
             className="border-2  border-[#12529C] p-4 sm:w-[15rem]  w-[12rem] sm:text-[16px] text-[15px] rounded"
-            onClick={()=>navigate("/candidate")}
+            onClick={() => navigate("/candidate")}
           >
             {t("homepage.buttons.candidate_list")}
           </button>

@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Admins = require("../models/adminModel");
+const VotingTime = require("../models/votingTimeModel");
 
 const adminLogin = async (req, res) => {
   // console.log(process.env.JWT_TOKEN_SECRET);
@@ -44,4 +45,26 @@ const adminLogin = async (req, res) => {
   }
 };
 
-module.exports = adminLogin;
+const voteTime = async (req, res) => {
+  const { votingEnabled, votingStartTime, votingEndTime } = req.body;
+  console.log(req.body);
+
+  await VotingTime.updateOne(
+    {},
+    { votingEnabled, votingStartTime, votingEndTime },
+    { upsert: true }
+  );
+
+  res.status(200).json({ message: "Voting status updated" });
+};
+
+const getVoteTime = async (req, res) => {
+  try {
+    const votingConfig = await VotingTime.findOne({});
+    res.status(200).json(votingConfig);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching voting config" });
+  }
+};
+
+module.exports = { adminLogin, voteTime, getVoteTime };

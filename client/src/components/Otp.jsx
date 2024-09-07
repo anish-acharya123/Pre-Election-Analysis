@@ -9,7 +9,6 @@ import {
   isLoadingState,
 } from "../recoil/atoms";
 import { useNavigate, Link } from "react-router-dom";
-import "../styles/otp.scss";
 import axios from "axios";
 import { toast } from "react-toastify";
 

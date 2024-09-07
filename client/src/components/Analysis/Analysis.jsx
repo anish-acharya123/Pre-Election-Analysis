@@ -1,4 +1,5 @@
 // import "../styles/Analysis.scss";
+import AprioriResults from "./AprioriResults";
 import CandidateAnalysis from "./CandidateAnalysis";
 import ClusterScatterPlot from "./ClusteringData";
 import GenderAnalysis from "./GenderAnalysis";
@@ -17,6 +18,7 @@ const Analysis = () => {
         >
           <GenderAnalysis />
           <CandidateAnalysis />
+          <AprioriResults />
           {/* <ClusterScatterPlot /> */}
         </div>
       </div>

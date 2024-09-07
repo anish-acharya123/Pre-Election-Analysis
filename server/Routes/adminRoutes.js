@@ -1,7 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const adminLogin = require("../controllers/adminController");
+const {
+  adminLogin,
+  voteTime,
+  getVoteTime,
+} = require("../controllers/adminController");
 
 router.post("/login", adminLogin);
+router.post("/toggle-voting", voteTime);
+router.get("/get-voting-config", getVoteTime);
 
 module.exports = router;
