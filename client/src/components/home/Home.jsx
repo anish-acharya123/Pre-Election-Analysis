@@ -57,7 +57,10 @@ function Home() {
           >
             {t("homepage.buttons.vote_now")}
           </button>
-          <button className="border-2  border-[#12529C] p-4 sm:w-[15rem]  w-[12rem] sm:text-[16px] text-[15px] rounded">
+          <button
+            className="border-2  border-[#12529C] p-4 sm:w-[15rem]  w-[12rem] sm:text-[16px] text-[15px] rounded"
+            onClick={()=>navigate("/candidate")}
+          >
             {t("homepage.buttons.candidate_list")}
           </button>
         </div>

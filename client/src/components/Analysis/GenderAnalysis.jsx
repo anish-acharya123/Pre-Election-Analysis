@@ -10,8 +10,11 @@ function GenderAnalysis() {
     // Fetch pie chart data from the server
     const fetchChartData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/gender");
+        const response = await axios.get(
+          "http://localhost:3000/api/statistics?type=gender"
+        );
         setChartData(response.data.data);
+        console.log(chartData)
         // console.log(response.data.data);
       } catch (error) {
         console.error("Error fetching chart data:", error);

@@ -23,7 +23,7 @@ app.use("/user", require("./Routes/userRoutes"));
 app.use("/candidate", require("./Routes/candidateRoutes"));
 app.use("/admin", require("./Routes/adminRoutes"));
 app.use("/votes", require("./Routes/voteRoutes"));
-app.use("/api", require("./Routes/simpleAnalysis"));
+app.use("/api", require("./Routes/statisticsRoutes"));
 app.use("/token", require("./Routes/tokencheckRoute"));
 
 app.listen(PORT, () => {

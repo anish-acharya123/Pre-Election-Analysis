@@ -11,8 +11,11 @@ const CandidateAnalysis = () => {
     // Fetch bar chart data from the server
     const fetchChartData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/candidate");
+        const response = await axios.get(
+          "http://localhost:3000/api/statistics?type=candidate"
+        );
         setChartData(response.data.data);
+        console.log(chartData)
       } catch (error) {
         console.error("Error fetching chart data:", error);
       }

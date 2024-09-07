@@ -47,3 +47,9 @@ export const errorState = atom({
   key: "errorState",
   default: "",
 });
+
+//// candidatefetch
+// export const candidateState = atom({
+//   key: "candidateState",
+//   default: [],
+// });

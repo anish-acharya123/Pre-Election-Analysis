@@ -18,6 +18,7 @@ import "aos/dist/aos.css";
 import "./i18n";
 import "./App.css";
 import FAQ from "./components/FAQ";
+import CandidatesList from "./components/Candidates/CandidatesList";
 
 function App() {
   useEffect(() => {
@@ -39,6 +40,7 @@ function App() {
             <Route path="/userguide" Component={Userguide} />
             <Route path="/votingpage" Component={Votingpage} />
             <Route path="/admin-dashboard" Component={AdminDashboard} />
+            <Route path="/candidate" Component={CandidatesList} />
             <Route path="/candidate/:id" Component={EachCandidate} />
             <Route path="/*" Component={NotFound} />
           </Routes>
