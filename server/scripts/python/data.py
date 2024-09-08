@@ -56,7 +56,7 @@ def encrypt_candidate_id(candidate_id, secret_key):
 secret_key = binascii.unhexlify(os.getenv('SECRET_KEY_HEX'))
 
 # Seed the random number generator for consistent results
-random.seed(42)
+random.seed(20)
 
 # Function to generate random voter data
 def generate_voter_data(voter_id=None):

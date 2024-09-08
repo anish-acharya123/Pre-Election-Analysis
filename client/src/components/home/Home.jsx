@@ -2,42 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import img from "../../assets/logo/nepal.png";
 import { useTranslation } from "react-i18next";
-import axios from "axios"
+import VotingTime from "../VotingTime";
 import Typewriter from "typewriter-effect";
 
 function Home() {
-  const [votingEnabled, setVotingEnabled] = useState(false);
-  const [votingStartTime, setVotingStartTime] = useState("");
-  const [votingEndTime, setVotingEndTime] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const localTimezone = "Asia/Kathmandu";
   const handlebtn = () => {
     navigate("/login");
   };
-
-  useEffect(() => {
-    const fetchVotingConfig = async () => {
-      try {
-        const { data } = await axios.get(
-          "http://localhost:3000/admin/get-voting-config"
-        );
-        console.log(data)
-        if (data) {
-          setVotingEnabled(data.votingEnabled);
-          setVotingStartTime(
-            new Date(data.votingStartTime).toISOString().slice(0, 16)
-          ); // Format for datetime-local input
-          setVotingEndTime(
-            new Date(data.votingEndTime).toISOString().slice(0, 16)
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching voting config:", error);
-      }
-    };
-
-    fetchVotingConfig();
-  }, []);
 
   return (
     <section
@@ -47,7 +21,7 @@ function Home() {
       data-aos-once="true"
     >
       <div className="overflow-hidden relative max-w-[1440px] px-8 w-full flex flex-col gap-8 sm:pt-28  pt-12 pb-6 flex-1">
-        <h1 className="sm:text-[45px] lg:text-[55px] text-[30px] font-bold md:max-w-[65rem] z-50">
+        <h1 className="text-left sm:text-[45px] lg:text-[55px] text-[30px] font-bold md:max-w-[65rem] z-50">
           {" "}
           {/* ANALYZE YOUR VALUABLE <span className="text-[#12529C]">
             VOTE
@@ -73,20 +47,7 @@ function Home() {
             {t("homepage.subheader.second")}
           </h3>
         </div>
-        <div
-          className={`${votingStartTime && votingEndTime ? "block" : "hidden"}`}
-        >
-          {votingStartTime && votingEndTime && (
-            <div className="mt-4">
-              <p>
-                Election starts on: {new Date(votingStartTime).toLocaleString()}
-              </p>
-              <p>
-                Election ends on: {new Date(votingEndTime).toLocaleString()}
-              </p>
-            </div>
-          )}
-        </div>
+        <VotingTime />
         <div
           className="flex flex-col gap-4 "
           data-aos="fade-up"

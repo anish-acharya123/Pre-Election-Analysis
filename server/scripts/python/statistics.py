@@ -90,13 +90,15 @@ for gender, count in gender_votes.items():
 age_groups = {
     "18-25": 0,
     "26-40": 0,
-    "40+": 0
+    "41-60": 0,
+    "60+":0,
 }
 
 age_group_candidate_votes = {
     "18-25": {},
     "26-40": {},
-    "40+": {}
+    "41-60": {},
+    "60+": {},
 }
 
 for vote in votes:
@@ -109,8 +111,10 @@ for vote in votes:
         age_group = "18-25"
     elif 26 <= age <= 40:
         age_group = "26-40"
+    elif 41 <= age <= 60:
+        age_group = "41-60"
     else:
-        age_group = "40+"
+        age_group = "60+"
 
     age_groups[age_group] += 1
 

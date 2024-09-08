@@ -36,6 +36,7 @@ const voteCount = async (req, res) => {
       iv, /// remaining to make model for this
       voter_age: voterAge,
       voter_gender: voterGender,
+      isvoted: true,
     });
 
     await voteSubmit.save();

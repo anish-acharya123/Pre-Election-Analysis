@@ -1,4 +1,5 @@
 // import "../styles/Analysis.scss";
+import AgeGroupChart from "./AgeGroupChart";
 import AprioriResults from "./AprioriResults";
 import CandidateAnalysis from "./CandidateAnalysis";
 import ClusterScatterPlot from "./ClusteringData";
@@ -14,11 +15,14 @@ const Analysis = () => {
 
         <div
           style={{}}
-          className=" grid md:grid-cols-2 grid-cols-1 md:gap-10 gap-4"
+          className=" grid md:grid-cols-1 grid-cols-1 md:gap-10 gap-4"
         >
-          <GenderAnalysis />
-          <CandidateAnalysis />
+          <div>
+            <GenderAnalysis />
+            <CandidateAnalysis />
+          </div>
           <AprioriResults />
+          <AgeGroupChart />
           {/* <ClusterScatterPlot /> */}
         </div>
       </div>

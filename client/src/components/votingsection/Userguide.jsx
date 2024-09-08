@@ -29,6 +29,7 @@ function Userguide() {
           name: response.data.user.name,
           gender: response.data.user.gender,
           age: response.data.user.age,
+          isvoted: response.data.user.isvoted,
         });
       } catch (error) {
         console.error("Error fetching user", error);
@@ -44,7 +45,7 @@ function Userguide() {
         <div className="max-w-[1440px] w-full px-6">
           <h1 className="text-center md:text-[32px] text-[20px]  sm:block  font-semibold ">
             Hi <span className="text-[#12529C]">{user.name || "User"}</span> ,
-            Go through user guide before select to your candidate.
+            Go through user guide before selecting your candidate.
           </h1>
           <div className="flex flex-col pt-10 items-center gap-4">
             {/* bg-user-guide bg-cover bg-center */}
@@ -84,12 +85,18 @@ function Userguide() {
               </div>
             </div>
             <div>
-              <button
-                className="border-2 rounded-md bg-[#12529C] text-white py-4 px-10 w-fit  md:text-[16px] text-[12px]"
-                onClick={() => navigate("/votingpage")}
-              >
-                Ready to Vote
-              </button>
+              {user.isvoted ? (
+                <button className="border-2 rounded-md bg-[#12529C] text-white py-4 px-10 w-fit  md:text-[16px] text-[12px]">
+                  You can't vote again
+                </button>
+              ) : (
+                <button
+                  className="border-2 rounded-md bg-[#12529C] text-white py-4 px-10 w-fit  md:text-[16px] text-[12px]"
+                  onClick={() => navigate("/votingpage")}
+                >
+                  Ready to Vote
+                </button>
+              )}
             </div>
           </div>
         </div>

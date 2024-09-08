@@ -21,11 +21,11 @@ export const voterinfoState = atom({
   default: "",
 });
 
-///navbar
-export const navState = atom({
-  key: "navState",
-  default: false,
-});
+// ///navbar
+// export const navState = atom({
+//   key: "navState",
+//   default: false,
+// });
 
 //admin
 
@@ -53,3 +53,13 @@ export const errorState = atom({
 //   key: "candidateState",
 //   default: [],
 // });
+
+// voting time
+export const voteStartTimeState = atom({
+  key: "voteStartTimeState",
+  default: "",
+});
+export const voteEndTimeState = atom({
+  key: "voteEndTimeState",
+  default: "",
+});

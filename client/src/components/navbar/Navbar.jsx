@@ -26,7 +26,7 @@ function Navbar() {
         </figure>
 
         <div>
-          <ul className="hidden lg:flex gap-8 font-semibold">
+          <ul className="hidden lg:flex gap-8 font-semibold md:text-[18px]">
             <li>
               {" "}
               <NavLink
@@ -44,9 +44,9 @@ function Navbar() {
                 {t("navbar.analysis")}
               </NavLink>
             </li>
-            <li>
-              <NavLink>{t("navbar.contact")}</NavLink>
-            </li>
+            {/* <li>
+              <NavLink to='/admin-dashboard'>{t("navbar.contact")}</NavLink>
+            </li> */}
             <li>
               <NavLink
                 to="/faqs"

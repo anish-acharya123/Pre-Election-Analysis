@@ -31,7 +31,7 @@ const AprioriResults = () => {
       .then((response) => {
         console.log(response.data);
         const data = response.data[0]; 
-        console.log(data.frequent_itemsets);
+        // console.log(data.frequent_itemsets);
         setFrequentItemsets(data.frequent_itemsets);
         setAssociationRules(data.association_rules);
       })
@@ -39,7 +39,7 @@ const AprioriResults = () => {
         console.error("Error fetching Apriori results:", error);
       });
   }, []);
-  console.log(frequentItemsets);
+  // console.log(frequentItemsets);
   // Prepare data for Chart.js
   const chartData = {
     labels: frequentItemsets.map((itemset) => itemset.itemset.join(", ")),

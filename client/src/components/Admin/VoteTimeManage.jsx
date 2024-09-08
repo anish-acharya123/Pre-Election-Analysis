@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import VotingTime from "../VotingTime";
+import { toast } from "react-toastify";
 
 const VoteTimeManage = () => {
   const [votingEnabled, setVotingEnabled] = useState(false);
@@ -7,13 +9,14 @@ const VoteTimeManage = () => {
   const [votingEndTime, setVotingEndTime] = useState("");
 
   const updateVotingTime = async (e) => {
-    e.preventDefault()
+    console.log(votingStartTime, votingEndTime);
+    e.preventDefault();
     await axios.post("http://localhost:3000/admin/toggle-voting", {
       votingEnabled,
       votingStartTime,
       votingEndTime,
     });
-    alert("Voting time updated successfully");
+    toast.success("Voting time updated successfully");
   };
 
   return (
@@ -21,7 +24,11 @@ const VoteTimeManage = () => {
       <h1 className="text-center  md:text-[52px] text-[32px]  py-4 sm:block  font-semibold text-[#12529C] leading-[100%]">
         Voting Time Management
       </h1>
-      <form onSubmit={updateVotingTime} className="flex flex-col justify-center items-center gap-10 w-full">
+      <VotingTime />
+      <form
+        onSubmit={updateVotingTime}
+        className="flex flex-col justify-center items-center gap-10 w-full"
+      >
         <div className="p-8 bg-gray-200 gap-4   flex flex-col md:flex-row  items-center lg:justify-between justify-center flex-wrap w-full">
           <div className="flex  gap-2">
             <label htmlFor="checkbox " className="sm:text-[20px]">

@@ -20,7 +20,7 @@ export default function FAQ() {
         <h1 className="text-center  md:text-[52px] text-[32px]  py-4 sm:block  font-semibold text-[#12529C] leading-[100%]">
           FAQs
         </h1>
-        <div>
+        <div className="flex flex-col gap-2">
           <AccordionItem>
             <AccordionItemHeading>
               <AccordionItemButton className="rounded-md p-4 bg-gray-300 text-black">

@@ -30,6 +30,10 @@ const validUserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isvoted: {
+    type: Boolean,
+    default: false,
+  },
   otp: String,
   verifyOtpExpiry: Date,
 });
