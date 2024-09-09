@@ -92,6 +92,7 @@ A simple and secure online voting system built with **React.js**, **Tailwind CSS
   - Set the election time period and monitor voting statistics.
 
 ## Project Structure
+
     ```bash
     ├── client                # Frontend (React + Tailwind CSS)
     │   ├── public            # Public assets (favicon, index.html,    etc.)
@@ -115,12 +116,10 @@ A simple and secure online voting system built with **React.js**, **Tailwind CSS
     ├── .env                  # Environment variables for sensitive    configurations
     ├── README.md             # Project documentation (this file)
     └── package.json          # Dependencies and project metadata
+    ```
 
-```
 ## Upcoming Features
-  - Multi-language support (English/Nepali)
-  - Real-time vote count updates
-  - More advanced analytics for admins
 
-
-
+- Multi-language support (English/Nepali)
+- Real-time vote count updates
+- More advanced analytics for admins
