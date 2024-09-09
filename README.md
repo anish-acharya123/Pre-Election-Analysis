@@ -39,5 +39,27 @@ A simple and secure online voting system built with **React.js**, **Tailwind CSS
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/online-voting-platform.git
+   git clone https://github.com/anish-acharya123/Pre-Election-Analysis
    cd online-voting-platform
+
+2. Install dependencies:
+   ```bash
+   npm install
+   cd client
+   npm install
+
+3. Set up environment variables: Create a .env file in the root directory with the following:
+   ```bash
+   MONGO_URI=<your-mongodb-connection-string>
+   JWT_SECRET=<your-jwt-secret>
+
+   #nodemailer
+   EMAIL_USER=<your-email>
+   EMAIL_PASS=<your-email-password>
+   VITE_APP_SECRET_KEY=<your-secret-key-for-AES-encryption>
+   
+   #  cloudinary
+   CLOUDINARY_CLOUD_NAME=<your-cloundinary-name>
+   CLOUDINARY_API_KEY=<your-cloundinary-api-key>
+   CLOUDINARY_API_SECRET=<your-cloundinary-secret-key>
+
