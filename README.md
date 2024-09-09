@@ -123,3 +123,7 @@ A simple and secure online voting system built with **React.js**, **Tailwind CSS
 - Multi-language support (English/Nepali)
 - Real-time vote count updates
 - More advanced analytics for admins
+
+## Contributing
+Feel free to submit pull requests or report issues. Contributions are welcome!
+
