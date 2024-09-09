@@ -57,9 +57,27 @@ A simple and secure online voting system built with **React.js**, **Tailwind CSS
    EMAIL_USER=<your-email>
    EMAIL_PASS=<your-email-password>
    VITE_APP_SECRET_KEY=<your-secret-key-for-AES-encryption>
-   
+
    #  cloudinary
    CLOUDINARY_CLOUD_NAME=<your-cloundinary-name>
    CLOUDINARY_API_KEY=<your-cloundinary-api-key>
    CLOUDINARY_API_SECRET=<your-cloundinary-secret-key>
+
+4. Run the app:
+   ```bash
+   # Backend (inside /server folder)
+   npm start
+
+   # Frontend (inside /client folder)
+   npm run dev
+
+## Usage
+
+- **For Users:**
+  - Register by providing your vote ID, citizenship number, and email for OTP verification.
+  - Once verified, you can log in and cast your vote for your preferred candidate.
+
+- **For Admins:**
+  - Log in as an admin to manage candidates (add, update, or delete candidates).
+  - Set the election time period and monitor voting statistics.
 
