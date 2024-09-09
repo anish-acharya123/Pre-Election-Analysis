@@ -81,3 +81,29 @@ A simple and secure online voting system built with **React.js**, **Tailwind CSS
   - Log in as an admin to manage candidates (add, update, or delete candidates).
   - Set the election time period and monitor voting statistics.
 
+
+## Project Structure
+
+```bash
+├── client                # Frontend (React + Tailwind CSS)
+│   ├── public            # Public assets (favicon, index.html, etc.)
+│   └── src               # Source code for React components and views
+│       ├── components    # Reusable components
+│       ├── hook          # Custom React hooks
+│       ├── locales       # To setup the keyword for langauge change
+│       ├── recoil       # use for the state management 
+│       ├── styles        # Tailwind or custom CSS files
+│       └── App.js        # Main React app component
+│       └── i18n.js        # To configure the language setup
+├── server                # Backend (Express + MongoDB)
+│   ├── controllers       # API controllers for handling requests
+│   ├── models            # Mongoose models for MongoDB collections (Voters, Candidates)
+│   ├── routes            # API routes (e.g., /api/voters, /api/candidates)
+│   ├── middlewares       # Custom middlewares (e.g., authentication, error handling)
+│   └── utils             # Utility functions (e.g., email, OTP generation)
+│   └── server.js         # Main Express server file
+├── config                # Configuration files (e.g., database, email service)
+├── scripts               # Python scripts for data analysis or cron jobs
+├── .env                  # Environment variables for sensitive configurations
+├── README.md             # Project documentation (this file)
+└── package.json          # Dependencies and project metadata  
