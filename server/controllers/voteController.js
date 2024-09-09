@@ -33,10 +33,9 @@ const voteCount = async (req, res) => {
     const voteSubmit = new Validvotes({
       candidate_id: candidateId,
       voter_id: hashedVoterId,
-      iv, /// remaining to make model for this
+      iv,
       voter_age: voterAge,
       voter_gender: voterGender,
-      isvoted: true,
     });
 
     await voteSubmit.save();

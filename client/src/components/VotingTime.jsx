@@ -4,19 +4,21 @@ import { voteStartTimeState, voteEndTimeState } from "../recoil/atoms";
 import axios from "axios";
 
 const VotingTime = () => {
-//   const [votingEnabled, setVotingEnabled] = useState(false);
+  //   const [votingEnabled, setVotingEnabled] = useState(false);
   const [votingStartTime, setVotingStartTime] =
     useRecoilState(voteStartTimeState);
   const [votingEndTime, setVotingEndTime] = useRecoilState(voteEndTimeState);
+  const current = new Date().toLocaleString();
+  console.log(current);
   useEffect(() => {
     const fetchVotingConfig = async () => {
       try {
         const { data } = await axios.get(
           "http://localhost:3000/admin/get-voting-config"
         );
-        console.log(data);
+        // console.log(data);
         if (data) {
-        //   setVotingEnabled(data.votingEnabled);
+          //   setVotingEnabled(data.votingEnabled);
           if (data.votingStartTime) {
             const localStartTime = new Date(
               data.votingStartTime
@@ -45,7 +47,7 @@ const VotingTime = () => {
     };
 
     fetchVotingConfig();
-  }, []);
+  }, [setVotingEndTime,setVotingStartTime]);
   return (
     <div
       // className={`${votingStartTime && votingEndTime ? "block" : "hidden"}`}
@@ -54,10 +56,21 @@ const VotingTime = () => {
       {votingStartTime && votingEndTime ? (
         <div>
           <p>
-            <span className="text-[#12529C] font-bold">
-              Election starts on:{" "}
-            </span>
-            {votingStartTime}
+            {current < votingStartTime ? (
+              <div>
+                <span className="text-[#12529C] font-bold">
+                  Election starts on:{" "}
+                </span>
+                {votingStartTime}
+              </div>
+            ) : (
+              <div>
+                <span className="text-[#12529C] font-bold">
+                  Election is open Now.
+                </span>
+                {/* {votingStartTime} */}
+              </div>
+            )}
           </p>
           <p>
             <span className="text-[#12529C] font-bold">Election ends on: </span>

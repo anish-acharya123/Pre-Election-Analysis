@@ -84,10 +84,10 @@ function Login() {
   }, [sendOtp, isLoading, isLoggedIn]);
 
   return (
-    <section className="flex items-center justify-center  pt-0">
+    <section className="flex items-center justify-center  sm:py-20  pt-0">
       {!sendOtp && !isLoading && !isLoggedIn ? (
         <div
-          className="px-8 flex md:gap-8  flex-col sm:pt-28  pt-12 pb-4 max-w-[1440px]"
+          className="px-8 flex md:gap-8  flex-col sm:pt-0  pt-12 pb-4 max-w-[1440px]"
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-once="true"
