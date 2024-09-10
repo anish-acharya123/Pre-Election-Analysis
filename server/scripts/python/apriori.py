@@ -55,16 +55,16 @@ def apriori(df, minsupport):
                 else:
                     itemsets[combination] = 1
         total_rows = len(df)
-        return {itemset: support / total_rows for itemset, support in itemsets.items() if support / total_rows >= min_support}
+        return {itemset: support / total_rows for itemset, support in itemsets.items() if support / total_rows >= minsupport}
 
     itemset_size = 1
     frequent_itemsets = []
-    current_frequent_itemsets = get_frequent_itemsets(df, itemset_size, min_support)
+    current_frequent_itemsets = get_frequent_itemsets(df, itemset_size, minsupport)
 
     while current_frequent_itemsets:
         frequent_itemsets.extend([(itemset, support) for itemset, support in current_frequent_itemsets.items()])
         itemset_size += 1
-        current_frequent_itemsets = get_frequent_itemsets(df, itemset_size, min_support)
+        current_frequent_itemsets = get_frequent_itemsets(df, itemset_size, minsupport)
 
     frequent_itemsets_df = pd.DataFrame(frequent_itemsets, columns=['itemsets', 'support'])
     return frequent_itemsets_df
