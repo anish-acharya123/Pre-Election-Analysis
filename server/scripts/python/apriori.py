@@ -44,7 +44,7 @@ df_encoded = pd.get_dummies(df[['age_group', 'voter_gender', 'candidate_id']], c
 
 #function implementing apriori
 def apriori(df, minsupport):
-    def get_frequent_itemsets(df, itemset_size, min_support):
+    def get_frequent_itemsets(df, itemset_size, minsupport):
         itemsets = {}
         for idx, row in df.iterrows():
             items = row[row == 1].index
