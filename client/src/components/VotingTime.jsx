@@ -47,7 +47,7 @@ const VotingTime = () => {
     };
 
     fetchVotingConfig();
-  }, [setVotingEndTime,setVotingStartTime]);
+  }, [setVotingEndTime, setVotingStartTime]);
   return (
     <div
       // className={`${votingStartTime && votingEndTime ? "block" : "hidden"}`}
