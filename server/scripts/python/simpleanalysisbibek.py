@@ -7,14 +7,14 @@ import os
 import hashlib
 import binascii
 
-# Load environment variables from .env file
+# Loading environment variables from .env file
 load_dotenv()
 
-# Access the environment variables
+# Accessing the environment variables
 database_url = os.getenv('MONGODB_STRING_PYTHON')
 secret_key = os.getenv('SECRET_KEY_HEX')  # Make sure this matches your encryption key
 
-# Connect to MongoDB
+# Connecting to MongoDB
 client = MongoClient(database_url)  # Replace with your MongoDB connection string if different
 db = client['AEAS']  # Replace with your database name
 
@@ -24,7 +24,7 @@ candidate_percentage_collection = db['candidate_percentages']
 gender_percentage_collection = db['gender_percentages']
 age_group_percentage_collection = db['age_group_percentages']
 
-# Clear existing data in analysis collections (optional)
+# Clearing existing data in analysis collections (optional)
 candidate_percentage_collection.delete_many({})
 gender_percentage_collection.delete_many({})
 age_group_percentage_collection.delete_many({})
@@ -35,14 +35,14 @@ def decrypt_candidate_id(encrypted_candidate_id, iv):
     key = binascii.unhexlify(secret_key)
     iv_bytes = binascii.unhexlify(iv)
     
-    # Create cipher object and decrypt
+    # Creating cipher object and decrypt
     cipher = AES.new(key, AES.MODE_CBC, iv_bytes)
     decrypted = cipher.decrypt(binascii.unhexlify(encrypted_candidate_id))
     
-    # Unpad the decrypted data
+    # Unpadding the decrypted data
     return unpad(decrypted, AES.block_size).decode('utf-8')
 
-# Fetch all votes
+# Fetching all votes
 votes = list(votes_collection.find())
 
 # Total number of votes
