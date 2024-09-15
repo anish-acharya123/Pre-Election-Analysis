@@ -1,5 +1,3 @@
-// aesUtils.js
-
 // Function to convert a string to an array of bytes (Uint8Array)
 function stringToBytes(str) {
   const encoder = new TextEncoder(); // Converts text to bytes
@@ -24,12 +22,15 @@ function pad(dataBytes, blockSize = 16) {
 
 // Function to generate a random IV (initialization vector)
 function generateIv() {
-  return crypto.getRandomValues(new Uint8Array(16)); // Generate random IV of 16 bytes
+  const iv = crypto.getRandomValues(new Uint8Array(16)); // Generate random IV of 16 bytes
+  return bytesToHex(iv);
 }
 
-// Function to create a key from the secret string
-async function createKey(secretKey) {
-  const keyBytes = stringToBytes(secretKey);
+// Function to create a key from the secret string (which is in hex format)
+async function createKey(secretKeyHex) {
+  const keyBytes = new Uint8Array(
+    secretKeyHex.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))
+  );
   return crypto.subtle.importKey("raw", keyBytes, { name: "AES-CBC" }, false, [
     "encrypt",
     "decrypt",
@@ -37,8 +38,11 @@ async function createKey(secretKey) {
 }
 
 // Function to encrypt data using AES-CBC with PKCS#7 padding
-async function encryptData(data, secretKey, iv) {
-  const key = await createKey(secretKey);
+async function encryptData(data, secretKeyHex, ivHex) {
+  const iv = new Uint8Array(
+    ivHex.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))
+  );
+  const key = await createKey(secretKeyHex);
   const dataBytes = pad(stringToBytes(data)); // Apply PKCS#7 padding manually
   const encrypted = await crypto.subtle.encrypt(
     { name: "AES-CBC", iv: iv },
@@ -46,28 +50,10 @@ async function encryptData(data, secretKey, iv) {
     dataBytes
   );
   return {
-    iv: bytesToHex(iv),
-    encryptedData: bytesToHex(new Uint8Array(encrypted)),
+    iv: ivHex,
+    encryptedData: bytesToHex(new Uint8Array(encrypted)), // Ensure the output is hex
   };
 }
 
-// Function to decrypt the encrypted data (for testing)
-async function decryptData(encryptedHex, secretKey, ivHex) {
-  const key = await createKey(secretKey);
-  const ivBytes = new Uint8Array(
-    ivHex.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))
-  );
-  const encryptedBytes = new Uint8Array(
-    encryptedHex.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))
-  );
-  const decrypted = await crypto.subtle.decrypt(
-    { name: "AES-CBC", iv: ivBytes },
-    key,
-    encryptedBytes
-  );
-  return new TextDecoder().decode(decrypted);
-}
-
 // Export the functions
-export { encryptData, decryptData, generateIv };
-// s;
+export { encryptData, generateIv };

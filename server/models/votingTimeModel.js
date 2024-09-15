@@ -31,7 +31,7 @@ const checkVotingStatus = async () => {
         console.log("Voting has ended, status has been updated.");
 
         const scriptPaths = [
-          path.join(__dirname, "../scripts/python/data.py"),
+          // path.join(__dirname, "../scripts/python/data.py"),
           path.join(__dirname, "../scripts/python/statistics.py"),
           path.join(__dirname, "../scripts/python/apriori.py"),
         ];

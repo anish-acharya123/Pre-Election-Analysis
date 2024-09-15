@@ -4,34 +4,10 @@ import { voterIdState, voterinfoState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import CryptoJS from "crypto-js";
+import { encryptData, generateIv } from "../../utils/aesUtils"; // Import from aesUtils
 
-// Import your environment variables
-const secretKey = CryptoJS.enc.Hex.parse(import.meta.env.VITE_APP_SECRET_KEY);
-
-const encryptData = (data, secretKey, iv) => {
-  try {
-    const key = CryptoJS.enc.Hex.parse(secretKey); // Ensure key is in the correct format
-    const ivWordArray = CryptoJS.enc.Hex.parse(iv); // Ensure IV is in the correct format
-
-    const encrypted = CryptoJS.AES.encrypt(data, key, {
-      iv: ivWordArray,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
-    });
-
-    // Convert encrypted data to Hexadecimal format
-    return CryptoJS.enc.Hex.stringify(encrypted.ciphertext);
-  } catch (error) {
-    console.error("Encryption error:", error);
-    return null;
-  }
-};
-
-const generateIv = () => {
-  // Generate a random IV and convert to hexadecimal format
-  return CryptoJS.lib.WordArray.random(16).toString(CryptoJS.enc.Hex);
-};
+// The secret key is in hex format
+const secretKeyHex = import.meta.env.VITE_APP_SECRET_KEY;
 
 function VotingPopup({ isSelected, setPopUp }) {
   const voterId = useRecoilValue(voterIdState);
@@ -40,13 +16,16 @@ function VotingPopup({ isSelected, setPopUp }) {
 
   const voteConfirm = async () => {
     try {
-      const iv = generateIv();
-      const encryptedCandidateId = encryptData(
+      const iv = generateIv(); // Generate random IV in hex
+      console.log("first",iv)
+      const { encryptedData: encryptedCandidateId } = await encryptData(
         isSelected.candidateId,
-        secretKey,
+        secretKeyHex,
         iv
       );
+      console.log("second",iv)
 
+      console.log(encryptedCandidateId, iv)
       if (!encryptedCandidateId) {
         throw new Error("Encryption failed.");
       }
@@ -54,7 +33,7 @@ function VotingPopup({ isSelected, setPopUp }) {
       const response = await axios.post("http://localhost:3000/votes", {
         voterId,
         candidateId: encryptedCandidateId,
-        iv,
+        iv, // Send the IV in hex format
         voterAge: user.age,
         voterGender: user.gender,
       });

@@ -25,7 +25,7 @@ collection2 = db["statistics"]
 
 # Count the total number of documents in the 'validvotes' collection
 total_documents = collection.count_documents({})
-collection.delete_many({})
-collection1.delete_many({})
-collection2.delete_many({})
+# collection.delete_many({})
+# collection1.delete_many({})
+# collection2.delete_many({})
 print(f"Total number of documents: {total_documents}")
