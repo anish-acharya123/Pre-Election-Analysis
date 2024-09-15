@@ -1,12 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
-import { voterIdState, emailState, voterinfoState } from "../../recoil/atoms";
+import { voterIdState, voterinfoState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { encryptData, generateIv } from "../../utils/aesUtils";
+import CryptoJS from "crypto-js";
 
-const secretKey = import.meta.env.VITE_APP_SECRET_KEY;
+// Import your environment variables
+const secretKey = CryptoJS.enc.Hex.parse(import.meta.env.VITE_APP_SECRET_KEY);
+
+const encryptData = (data, secretKey, iv) => {
+  try {
+    const key = CryptoJS.enc.Hex.parse(secretKey); // Ensure key is in the correct format
+    const ivWordArray = CryptoJS.enc.Hex.parse(iv); // Ensure IV is in the correct format
+
+    const encrypted = CryptoJS.AES.encrypt(data, key, {
+      iv: ivWordArray,
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7,
+    });
+
+    // Convert encrypted data to Hexadecimal format
+    return CryptoJS.enc.Hex.stringify(encrypted.ciphertext);
+  } catch (error) {
+    console.error("Encryption error:", error);
+    return null;
+  }
+};
+
+const generateIv = () => {
+  // Generate a random IV and convert to hexadecimal format
+  return CryptoJS.lib.WordArray.random(16).toString(CryptoJS.enc.Hex);
+};
 
 function VotingPopup({ isSelected, setPopUp }) {
   const voterId = useRecoilValue(voterIdState);
@@ -16,22 +41,23 @@ function VotingPopup({ isSelected, setPopUp }) {
   const voteConfirm = async () => {
     try {
       const iv = generateIv();
-      const { iv: ivHex, encryptedData } = await encryptData(
+      const encryptedCandidateId = encryptData(
         isSelected.candidateId,
         secretKey,
         iv
       );
-      // console.log(encryptedData)
 
-      console.log(ivHex,",", encryptedData);
+      if (!encryptedCandidateId) {
+        throw new Error("Encryption failed.");
+      }
+
       const response = await axios.post("http://localhost:3000/votes", {
         voterId,
-        candidateId: encryptedData,
-        iv: ivHex,
+        candidateId: encryptedCandidateId,
+        iv,
         voterAge: user.age,
         voterGender: user.gender,
       });
-      console.log(response);
 
       if (response.status === 200) {
         toast.success("Congratulations! Your vote was successful.");
@@ -45,6 +71,8 @@ function VotingPopup({ isSelected, setPopUp }) {
         setTimeout(() => {
           navigate("/");
         }, 5000);
+      } else {
+        toast.error("An error occurred while processing your vote.");
       }
     }
   };

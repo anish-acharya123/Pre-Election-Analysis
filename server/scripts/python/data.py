@@ -10,18 +10,18 @@ from Crypto.Random import get_random_bytes
 import binascii
 import csv
 
-# Load environment variables from .env file
+# Loading environment variables from .env file
 load_dotenv()
 
-# Access the environment variables
+# Accessing the environment variables
 database_url = os.getenv('MONGODB_STRING_PYTHON')
     
-# Connect to MongoDB
+# Connecting to MongoDB
 client = MongoClient(database_url)
 db = client['AEAS']  
 collection = db['validvotes'] 
 
-# Clear existing data (optional)
+# Clearing existing data (optional)
 collection.delete_many({})
 
 # Function to generate random voter ID in "***-***-***" format

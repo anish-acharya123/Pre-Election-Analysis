@@ -3,13 +3,13 @@ const ValidateUsers = require("../models/userModel");
 const connectDb = require("../config/db");
 require("dotenv").config();
 
- connectDb();
 const registerUser = async () => {
+  await connectDb();
   try {
-    const name = "Anish Acharya";
-    const voterId = "789-456-333";
-    const citizenshipNumber = "123-456-777";
-    const age = 32;
+    const name = "Saksham Panthee";
+    const voterId = "789-456-000";
+    const citizenshipNumber = "123-456-111";
+    const age = 22;
     const gender = "male";
     const newUser = new ValidateUsers({
       name,

@@ -47,11 +47,13 @@ function Home() {
             {t("homepage.subheader.second")}
           </h3>
         </div>
-        <VotingTime />
+        <div data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+          <VotingTime />
+        </div>
         <div
           className="flex flex-col gap-4 "
           data-aos="fade-up"
-          data-aos-duration="2000"
+          data-aos-duration="2500"
           data-aos-once="true"
         >
           <p className="font-bold">{t("homepage.welcome_message")}</p>

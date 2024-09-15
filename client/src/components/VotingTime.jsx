@@ -50,6 +50,7 @@ const VotingTime = () => {
   }, [setVotingEndTime, setVotingStartTime]);
   return (
     <div
+      
       // className={`${votingStartTime && votingEndTime ? "block" : "hidden"}`}
       className=""
     >

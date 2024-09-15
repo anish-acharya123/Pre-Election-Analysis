@@ -61,10 +61,10 @@ function Navbar() {
           </ul>
         </div>
 
-        <div className="flex gap-3 items-center">
-          <button className=" lg:text-[16px] border-2 border-[#12529C] text-[#12529C] text-[14px] p-2 rounded-md">
+        {/* <div className="flex gap-3 items-center"> */}
+          {/* <button className=" lg:text-[16px] border-2 border-[#12529C] text-[#12529C] text-[14px] p-2 rounded-md">
             Help?
-          </button>
+          </button> */}
           <figure
             className="lg:hidden cursor-pointer transition-all"
             onClick={handleAction}
@@ -75,7 +75,7 @@ function Navbar() {
               <img src={hamburger} alt="" height={44} width={44} />
             )}
           </figure>
-        </div>
+        {/* </div> */}
       </div>
     </nav>
   );

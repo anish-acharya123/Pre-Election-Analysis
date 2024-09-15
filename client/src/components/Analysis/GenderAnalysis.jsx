@@ -14,7 +14,7 @@ function GenderAnalysis() {
           "http://localhost:3000/api/statistics?type=gender"
         );
         setChartData(response.data.data);
-        console.log(chartData)
+        console.log(chartData);
         // console.log(response.data.data);
       } catch (error) {
         console.error("Error fetching chart data:", error);
@@ -24,14 +24,25 @@ function GenderAnalysis() {
     fetchChartData();
   }, []);
 
-  if (chartData.length === 0) return <div>Loading...</div>;
+  if (chartData.length === 0) return <div className="text-center text-[28px]">Please wait until the voting period has ended to see the results.</div>;
+
+const votersInfo = chartData
+  .map((chart, index) => (
+    <span key={index}>
+      <strong>{chart.percentage.toFixed(2)}%</strong>{" "}
+      <strong>{chart.gender}</strong>
+    </span>
+  ))
+  .reduce((prev, curr) => [prev, " and ", curr]);
 
   return (
-    <div className="bg-red-200 flex flex-col items-center gap-4 p-4">
-      <h2 className="text-center font-bold">Gender Analysis</h2>
+    <div className=" flex flex-col items-center gap-8 p-4">
+      <h2 className=" font-bold text-[#12529C] mb-6 text-[55px]">
+        Gender Analysis
+      </h2>
       <div
         style={{ width: "400px", height: "400px" }}
-        className="analysis_data"
+        className="flex flex-col gap-4"
       >
         <Pie
           data={{
@@ -46,6 +57,7 @@ function GenderAnalysis() {
           }}
         />
       </div>
+      <div className="">The voters in the election were {votersInfo}</div>
     </div>
   );
 }

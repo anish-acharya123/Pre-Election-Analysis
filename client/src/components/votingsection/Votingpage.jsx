@@ -51,6 +51,9 @@ function Votingpage() {
   return (
     isLoggedIn && (
       <section
+        data-aos="fade-right"
+        data-aos-duration="1000"
+        data-aos-once="true"
         className={`flex flex-col items-center justify-center    py-10 `}
       >
         <div
@@ -111,6 +114,7 @@ function Votingpage() {
         </div>
 
         <div
+        
           className={`${
             popUp ? "block absolute " : "hidden"
           } md:scale-100 scale-75`}

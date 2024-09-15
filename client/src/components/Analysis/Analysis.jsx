@@ -1,4 +1,5 @@
 // import "../styles/Analysis.scss";
+import React, { useState } from "react";
 import AgeGroupChart from "./AgeGroupChart";
 import AprioriResults from "./AprioriResults";
 import CandidateAnalysis from "./CandidateAnalysis";
@@ -6,24 +7,49 @@ import ClusterScatterPlot from "./ClusteringData";
 import GenderAnalysis from "./GenderAnalysis";
 
 const Analysis = () => {
-  return (
-    <section className="flex items-center justify-center py-20  ">
-      <div className="max-w-[1440px] px-6 flex flex-col gap-10 ">
-        <h1 className="text-center  md:text-[52px] text-[32px]  py-4 sm:block  font-semibold text-[#12529C] leading-[100%]">
-          Election Data Analysis
-        </h1>
+  const [activeSection, setActiveSection] = useState("gender");
+  const handlesectionChange = (section) => {
+    setActiveSection(section);
+  };
 
-        <div
-          style={{}}
-          className=" grid md:grid-cols-1 grid-cols-1 md:gap-10 gap-4"
-        >
-          <div>
-            <GenderAnalysis />
-            <CandidateAnalysis />
+  return (
+    <section className=" flex justify-center items-center ">
+      <div className="flex  flex-col justify-evenly items-center w-full gap-22 md:gap-0">
+        <div className="bg-[#12528c] text-white py-2  md:py-4 flex justify-center gap-10 w-full">
+          <div className="max-w-[1440px] flex  justify-end gap-10 w-full px-6">
+            <button
+              className="text-[12px] md:text-[16px]"
+              onClick={() => handlesectionChange("gender")}
+            >
+              Gender Distribution
+            </button>
+
+            <button
+              className="text-[12px] md:text-[16px]"
+              onClick={() => handlesectionChange("vote")}
+            >
+              Vote Distribution
+            </button>
+            <button
+              className="text-[12px] md:text-[16px]"
+              onClick={() => handlesectionChange("age")}
+            >
+              Age Distribution
+            </button>
+            <button
+              className="text-[12px] md:text-[16px]"
+              onClick={() => handlesectionChange("apriori")}
+            >
+              Association Rule
+            </button>
           </div>
-          <AprioriResults />
-          <AgeGroupChart />
-          {/* <ClusterScatterPlot /> */}
+        </div>
+
+        <div className=" max-w-[1440px] px-6 w-full py-16">
+          {activeSection === "gender" && <GenderAnalysis />}
+          {activeSection === "vote" && <CandidateAnalysis />}
+          {activeSection === "age" && <AgeGroupChart />}
+          {activeSection === "apriori" && <AprioriResults />}
         </div>
       </div>
     </section>

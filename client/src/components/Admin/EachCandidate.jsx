@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { isAdminLogState } from "../../recoil/atoms";
 import { useParams, useNavigate } from "react-router-dom";
 import adminAuth from "../../hook/adminAuth";
 // import "../styles/Eachcandidate.scss";
 import EditForm from "./EditForm";
+
 
 function EachCandidate() {
   // adminAuth(false);
@@ -33,7 +35,7 @@ function EachCandidate() {
       );
       if (response.status === 200) {
         console.log(response.data.msg);
-        navigate("/admin-dashboard");
+        // navigate("/admin-dashboard");
       }
     } catch (error) {
       if (error.response.status === 400) {
@@ -45,39 +47,52 @@ function EachCandidate() {
     }
   };
 
-  useEffect(() => {
-    if (!adminLogged) {
-      navigate("/adminlogin");
-    }
-  });
+  // useEffect(() => {
+  //   if (!adminLogged) {
+  //     navigate("/adminlogin");
+  //   }
+  // });
 
   return (
-    adminLogged && (
-      <section className=" flex justify-center items-center py-52 ">
-        <div className="max-w-[1440px] px-6">
-          <div className="relative">
-            <div className="bg-gray-200 p-4 rounded-md flex flex-col justify-center items-center gap-4">
-              <div className="flex flex-col md:flex-row items-center justify-center text-[14px] md:text-[16px] ">
-                <img
-                  src={data.photo}
-                  alt={data.name}
-                  className="h-52 w-52 mix-blend-multiply"
-                />
-                <div className="max-w-[40rem]">
-                  <div>
-                    <strong>Name: </strong> {data.name}
-                  </div>
-                  <div>
-                    <strong>Party: </strong> {data.party}
-                  </div>
-                  <div>
-                    <strong>CandidateId :</strong> {data.candidateId}
-                  </div>
-                  <div>
-                    <strong>Description: </strong> {data.description}
-                  </div>
+    <section
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      data-aos-once="true"
+      className=" flex flex-col gap-10 justify-center items-center py-32 "
+    >
+      <div className=" w-full max-w-[1440px]">
+        <button
+          onClick={() => navigate("/candidate")}
+          className="text-center  bg-[#12529C] text-white w-fit px-4 py-2 rounded md:text-[16px] text-[12px]"
+        >
+          ← Back
+        </button>
+      </div>
+      <div className="max-w-[1440px] px-6 flex flex-col gap-10">
+        <div className="relative">
+          <div className="bg-gray-200 p-4 rounded-md flex flex-col justify-center items-center gap-4">
+            <div className="flex flex-col md:flex-row items-center justify-center text-[14px] md:text-[16px] ">
+              <img
+                src={data.photo}
+                alt={data.name}
+                className="h-52 w-52 mix-blend-multiply"
+              />
+              <div className="max-w-[40rem]">
+                <div>
+                  <strong>Name: </strong> {data.name}
+                </div>
+                <div>
+                  <strong>Party: </strong> {data.party}
+                </div>
+                <div>
+                  <strong>CandidateId :</strong> {data.candidateId}
+                </div>
+                <div>
+                  <strong>Description: </strong> {data.description}
                 </div>
               </div>
+            </div>
+            {adminLogged && (
               <div className=" flex gap-4">
                 <button
                   className="text-center border-none outline-none   bg-[#12529C] text-white w-fit px-4 py-2 rounded md:text-[16px] text-[12px]"
@@ -92,8 +107,10 @@ function EachCandidate() {
                   Delete
                 </button>
               </div>
-            </div>
+            )}
+          </div>
 
+          {adminLogged && (
             <div
               className={`${
                 form ? " block absolute top-0 bg-white border-4 p-4 " : "hidden"
@@ -108,10 +125,10 @@ function EachCandidate() {
                 setForm={setForm}
               />
             </div>
-          </div>
+          )}
         </div>
-      </section>
-    )
+      </div>
+    </section>
   );
 }
 

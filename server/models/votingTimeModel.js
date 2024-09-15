@@ -31,20 +31,36 @@ const checkVotingStatus = async () => {
         console.log("Voting has ended, status has been updated.");
 
         const scriptPaths = [
-          path.join(__dirname, "../scripts/python/apriori.py"),
+          path.join(__dirname, "../scripts/python/data.py"),
           path.join(__dirname, "../scripts/python/statistics.py"),
+          path.join(__dirname, "../scripts/python/apriori.py"),
         ];
 
-        scriptPaths.forEach((scriptPath) => {
-          // Enclose the script path in quotes to handle spaces
-          exec(`python "${scriptPath}"`, (error, stdout, stderr) => {
-            if (error) {
-              console.error(`Error executing script ${scriptPath}: ${error}`);
-              return;
-            }
-            console.log(`Script ${scriptPath} output: ${stdout}`);
+        const runScript = (scriptPath) => {
+          return new Promise((resolve, reject) => {
+            exec(`python "${scriptPath}"`, (error, stdout, stderr) => {
+              if (error) {
+                reject(`Error executing script ${scriptPath}: ${error}`);
+              } else {
+                console.log(`Script ${scriptPath} output: ${stdout}`);
+                resolve();
+              }
+            });
           });
-        });
+        };
+
+        const executeScriptsSequentially = async () => {
+          try {
+            for (const scriptPath of scriptPaths) {
+              await runScript(scriptPath);
+            }
+            console.log("All scripts executed successfully.");
+          } catch (err) {
+            console.error(err);
+          }
+        };
+
+        await executeScriptsSequentially();
       }
     }
   } catch (err) {

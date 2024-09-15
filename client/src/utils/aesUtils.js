@@ -8,61 +8,66 @@ function stringToBytes(str) {
 
 // Function to convert a byte array (Uint8Array) to a hex string
 function bytesToHex(bytes) {
-  return Array.from(bytes) // Convert the byte array to an array of hex strings
-    .map((byte) => byte.toString(16).padStart(2, "0")) // Convert each byte to a two-character hex string
-    .join(""); // Join the array into a single hex string
+  return Array.from(bytes)
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+// Function to manually apply PKCS#7 padding (consistent with Python)
+function pad(dataBytes, blockSize = 16) {
+  const padLength = blockSize - (dataBytes.length % blockSize);
+  const paddedData = new Uint8Array(dataBytes.length + padLength);
+  paddedData.set(dataBytes);
+  paddedData.fill(padLength, dataBytes.length);
+  return paddedData;
 }
 
 // Function to generate a random IV (initialization vector)
 function generateIv() {
-  const iv = crypto.getRandomValues(new Uint8Array(16)); // Generate 16 random bytes
-  return iv; // Return the random bytes as the IV
+  return crypto.getRandomValues(new Uint8Array(16)); // Generate random IV of 16 bytes
 }
 
-// Function to create a key from the secret string (simple version)
+// Function to create a key from the secret string
 async function createKey(secretKey) {
-  const keyBytes = stringToBytes(secretKey); // Convert the secret key string to bytes
-  return crypto.subtle.importKey(
-    "raw", // Key format (raw means the key is in plain bytes)
-    keyBytes, // The key bytes
-    { name: "AES-CBC" }, // The algorithm we're going to use
-    false, // This key can't be exported
-    ["encrypt", "decrypt"] // This key will be used for both encryption and decryption
-  );
+  const keyBytes = stringToBytes(secretKey);
+  return crypto.subtle.importKey("raw", keyBytes, { name: "AES-CBC" }, false, [
+    "encrypt",
+    "decrypt",
+  ]);
 }
 
-// Function to encrypt some data using AES
+// Function to encrypt data using AES-CBC with PKCS#7 padding
 async function encryptData(data, secretKey, iv) {
-  const key = await createKey(secretKey); // Create the encryption key
-  const ivBytes = iv; // The IV should be in byte array format
-  const dataBytes = stringToBytes(data); // Convert the data to bytes
+  const key = await createKey(secretKey);
+  const dataBytes = pad(stringToBytes(data)); // Apply PKCS#7 padding manually
   const encrypted = await crypto.subtle.encrypt(
-    { name: "AES-CBC", iv: ivBytes }, // The AES-CBC algorithm with the IV
-    key, // The key we created
-    dataBytes // The data to encrypt (as bytes)
+    { name: "AES-CBC", iv: iv },
+    key,
+    dataBytes
   );
   return {
-    iv: bytesToHex(iv), // Convert the IV to a hex string
-    encryptedData: bytesToHex(new Uint8Array(encrypted)), // Convert the encrypted bytes to a hex string
+    iv: bytesToHex(iv),
+    encryptedData: bytesToHex(new Uint8Array(encrypted)),
   };
 }
 
-// Function to decrypt the encrypted data (optional, for testing)
+// Function to decrypt the encrypted data (for testing)
 async function decryptData(encryptedHex, secretKey, ivHex) {
-  const key = await createKey(secretKey); // Create the decryption key
+  const key = await createKey(secretKey);
   const ivBytes = new Uint8Array(
-    ivHex.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)) // Convert the hex string back to bytes
+    ivHex.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))
   );
   const encryptedBytes = new Uint8Array(
-    encryptedHex.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)) // Convert the hex string back to bytes
+    encryptedHex.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))
   );
   const decrypted = await crypto.subtle.decrypt(
-    { name: "AES-CBC", iv: ivBytes }, // The AES-CBC algorithm with the IV
-    key, // The key we created
-    encryptedBytes // The encrypted data (as bytes)
+    { name: "AES-CBC", iv: ivBytes },
+    key,
+    encryptedBytes
   );
-  return new TextDecoder().decode(decrypted); // Convert the decrypted bytes back to a string
+  return new TextDecoder().decode(decrypted);
 }
 
-// Exporting the functions so they can be used in other files
+// Export the functions
 export { encryptData, decryptData, generateIv };
+// s;

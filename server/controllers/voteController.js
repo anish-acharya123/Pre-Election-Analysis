@@ -8,6 +8,7 @@ const hashData = (data) => {
 
 const voteCount = async (req, res) => {
   const { voterId, candidateId, voterAge, iv, voterGender } = req.body;
+  console.log(candidateId, voterId, iv);
   // console.log(req.body);
 
   // Hash the encrypted voterId

@@ -43,11 +43,21 @@ function Userguide() {
     isLoggedIn && (
       <section className="flex items-center justify-center py-8 ">
         <div className="max-w-[1440px] w-full px-6">
-          <h1 className="text-center md:text-[32px] text-[20px]  sm:block  font-semibold ">
+          <h1
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            data-aos-once="true"
+            className="text-center md:text-[32px] text-[20px]  sm:block  font-semibold "
+          >
             Hi <span className="text-[#12529C]">{user.name || "User"}</span> ,
             Go through user guide before selecting your candidate.
           </h1>
-          <div className="flex flex-col pt-10 items-center gap-4">
+          <div
+            data-aos="fade-left"
+            data-aos-duration="1000"
+            data-aos-once="true"
+            className="flex flex-col pt-10 items-center gap-4"
+          >
             {/* bg-user-guide bg-cover bg-center */}
             <div className="bg-gray-100 p-10 rounded-md ">
               <h1 className="text-center md:text-[32px] text-[20px]  sm:block  font-semibold text-[#12529C]">

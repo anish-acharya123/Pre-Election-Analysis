@@ -8,18 +8,18 @@ from Crypto.Util.Padding import unpad
 from datetime import datetime
 from itertools import combinations
 
-# Load environment variables from .env file
+# Loading environment variables from .env file
 load_dotenv()
 
-# Access the environment variables
+# Accessing the environment variables
 database_url = os.getenv('MONGODB_STRING_PYTHON')
 secret_key = os.getenv('SECRET_KEY_HEX')
 
-# Connect to MongoDB
+# Connecting to MongoDB
 client = MongoClient(database_url)  
 db = client['AEAS']  
 collection = db['validvotes']  
-# Load the dataset from MongoDB
+# Loading the dataset from MongoDB
 data = list(collection.find({}))  
 df = pd.DataFrame(data)
 
@@ -34,7 +34,7 @@ def decrypt_candidate_id(encrypted_candidate_id, iv):
 # Decrypt candidate_id for each row in the DataFrame
 df['candidate_id'] = df.apply(lambda row: decrypt_candidate_id(row['candidate_id'], row['iv']), axis=1)
 
-# Convert age into categorical bins for better analysis
+# Converting age into categorical bins for better analysis
 bins = [0, 18, 25, 35, 45, 55, 65, 100]
 labels = ['0-17', '18-25', '26-35', '36-45', '46-55', '56-65', '66+']
 df['age_group'] = pd.cut(df['voter_age'], bins=bins, labels=labels, right=False)
@@ -42,7 +42,7 @@ df['age_group'] = pd.cut(df['voter_age'], bins=bins, labels=labels, right=False)
 # One-hot encode the categorical variables
 df_encoded = pd.get_dummies(df[['age_group', 'voter_gender', 'candidate_id']], columns=['age_group', 'voter_gender', 'candidate_id'])
 
-#function implementing apriori
+# Function implementing apriori
 def apriori(df, minsupport):
     def get_frequent_itemsets(df, itemset_size, minsupport):
         itemsets = {}
@@ -69,7 +69,7 @@ def apriori(df, minsupport):
     frequent_itemsets_df = pd.DataFrame(frequent_itemsets, columns=['itemsets', 'support'])
     return frequent_itemsets_df
 
-# function call for Apriori algorithm
+# Function call for Apriori algorithm
 minsupport = 0.05
 frequent_itemsets = apriori(df_encoded, minsupport)
 
@@ -131,6 +131,6 @@ apriori_result = {
 
 # Inserting the rules into the db
 apriori_results_collection = db['aprioriresults'] 
-apriori_results_collection.delete_many({})
+# apriori_results_collection.delete_many({})
 apriori_results_collection.insert_one(apriori_result)
 client.close()

@@ -30,8 +30,7 @@ const AprioriResults = () => {
       .get("http://localhost:3000/api/apriori") // Update this URL to match your backend endpoint
       .then((response) => {
         console.log(response.data);
-        const data = response.data[0]; 
-        // console.log(data.frequent_itemsets);
+        const data = response.data[0];
         setFrequentItemsets(data.frequent_itemsets);
         setAssociationRules(data.association_rules);
       })
@@ -39,7 +38,7 @@ const AprioriResults = () => {
         console.error("Error fetching Apriori results:", error);
       });
   }, []);
-  // console.log(frequentItemsets);
+
   // Prepare data for Chart.js
   const chartData = {
     labels: frequentItemsets.map((itemset) => itemset.itemset.join(", ")),
@@ -68,50 +67,66 @@ const AprioriResults = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Apriori Analysis</h2>
+    <div className="flex  flex-col  justify-center items-center w-full  ">
+     
 
       {/* Chart for Frequent Itemsets */}
-      <div style={{ width: "80%", margin: "auto" }}>
+      {/* <div className="w-4/5 mx-auto">
         <Bar data={chartData} options={chartOptions} />
-      </div>
+      </div> */}
 
       {/* Table for Association Rules */}
-      <h3 style={{ marginTop: "30px" }}>Association Rules</h3>
-      <table
-        style={{ width: "100%", border: "1px solid black", marginTop: "20px" }}
-      >
-        <thead>
-          <tr>
-            <th>Antecedent</th>
-            <th>Consequent</th>
-            <th>Support</th>
-            <th>Confidence</th>
-            <th>Lift</th>
-            <th>Leverage</th>
-            <th>Conviction</th>
-          </tr>
-        </thead>
-        <tbody>
-          {associationRules.length > 0 ? (
-            associationRules.map((rule, index) => (
-              <tr key={index}>
-                <td>{rule.antecedent.join(", ")}</td>
-                <td>{rule.consequent.join(", ")}</td>
-                <td>{rule.support.toFixed(4)}</td>
-                <td>{rule.confidence.toFixed(4)}</td>
-                <td>{rule.lift.toFixed(4)}</td>
-                <td>{rule.leverage.toFixed(4)}</td>
-                <td>{rule.conviction.toFixed(4)}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="7">No rules found</td>
+      <h3 className="text-2xl font-semibold text-[#12529C] text-center">
+        Association Rules
+      </h3>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border-collapse border border-gray-300 mt-4 text-left">
+          <thead>
+            <tr className="bg-[#12529C] text-white">
+              <th className="py-3 px-4 border">Antecedent</th>
+              <th className="py-3 px-4 border">Consequent</th>
+              <th className="py-3 px-4 border">Support</th>
+              <th className="py-3 px-4 border">Confidence</th>
+              <th className="py-3 px-4 border">Lift</th>
+              <th className="py-3 px-4 border">Leverage</th>
+              <th className="py-3 px-4 border">Conviction</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {associationRules.length > 0 ? (
+              associationRules.map((rule, index) => (
+                <tr key={index} className="hover:bg-gray-100">
+                  <td className="py-2 px-4 border">
+                    {rule.antecedent.join(", ")}
+                  </td>
+                  <td className="py-2 px-4 border">
+                    {rule.consequent.join(", ")}
+                  </td>
+                  <td className="py-2 px-4 border">
+                    {rule.support.toFixed(4)}
+                  </td>
+                  <td className="py-2 px-4 border">
+                    {rule.confidence.toFixed(4)}
+                  </td>
+                  <td className="py-2 px-4 border">{rule.lift.toFixed(4)}</td>
+                  <td className="py-2 px-4 border">
+                    {rule.leverage.toFixed(4)}
+                  </td>
+                  <td className="py-2 px-4 border">
+                    {rule.conviction.toFixed(4)}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="7" className="py-4 text-center border">
+                  No rules found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

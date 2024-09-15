@@ -77,7 +77,18 @@ const AgeGroupChart = () => {
     },
   };
 
-  return <Bar data={data} options={options} />;
+  return (
+    <>
+      <section className="flex justify-center items-center flex-">
+        <div className="max-w-[1440px] w-full flex justify-center items-center flex-col">
+          <h2 className=" font-bold text-[#12529C] mb-6 text-[55px]">
+            Age Group Preference
+          </h2>
+          <Bar data={data} options={options} />;
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default AgeGroupChart;
