@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { isAdminLogState } from "../../recoil/atoms";
 import { useNavigate } from "react-router-dom";
 import CandidateManage from "./CandidateManage";
-import VoteTimeManage from "./voteTimeManage";
+import VoteTimeManage from "./VoteTimeManage.jsx";
 import Analysis from "../Analysis/Analysis";
 import Admin from "./AdminLogin";
 import adminAuth from "../../hook/adminAuth";
