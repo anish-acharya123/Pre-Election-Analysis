@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import {
   isLoggedInState,
@@ -11,6 +11,7 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { backendURL } from "../../constant";
 
 function Otp() {
   const voterId = useRecoilValue(voterIdState);
@@ -31,15 +32,12 @@ function Otp() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/user/verifyotp",
-        {
-          voterId,
-          email,
-          otp,
-          citizenshipNumber,
-        }
-      );
+      const response = await axios.post(`${backendURL}/user/verifyotp`, {
+        voterId,
+        email,
+        otp,
+        citizenshipNumber,
+      });
       console.log(response);
 
       if (response.status === 200) {

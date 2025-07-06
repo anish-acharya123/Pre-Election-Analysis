@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { backendURL } from "../../../constant";
 
 // Register chart components
 ChartJS.register(
@@ -29,7 +30,7 @@ const AgeGroupChart = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/statistics?type=age"
+          `${backendURL}/api/statistics?type=age`
         );
         console.log(response);
         setAgeGroupData(response.data.data);

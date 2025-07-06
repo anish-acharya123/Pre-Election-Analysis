@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { encryptData, generateIv } from "../../utils/aesUtils"; // Import from aesUtils
+import { backendURL } from "../../../constant";
 
 // The secret key is in hex format
 const secretKeyHex = import.meta.env.VITE_APP_SECRET_KEY;
@@ -17,20 +18,20 @@ function VotingPopup({ isSelected, setPopUp }) {
   const voteConfirm = async () => {
     try {
       const iv = generateIv(); // Generate random IV in hex
-      console.log("first",iv)
+      console.log("first", iv);
       const { encryptedData: encryptedCandidateId } = await encryptData(
         isSelected.candidateId,
         secretKeyHex,
         iv
       );
-      console.log("second",iv)
+      console.log("second", iv);
 
-      console.log(encryptedCandidateId, iv)
+      console.log(encryptedCandidateId, iv);
       if (!encryptedCandidateId) {
         throw new Error("Encryption failed.");
       }
 
-      const response = await axios.post("http://localhost:3000/votes", {
+      const response = await axios.post(`${backendURL}/votes`, {
         voterId,
         candidateId: encryptedCandidateId,
         iv, // Send the IV in hex format

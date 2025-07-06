@@ -8,6 +8,7 @@ import {
 import { useRecoilValue, useRecoilState } from "recoil";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { backendURL } from "../../../constant";
 
 function Userguide() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function Userguide() {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/user/profile?voterId=${voterId}&email=${email}`
+          `${backendURL}/user/profile?voterId=${voterId}&email=${email}`
         );
         setUser({
           name: response.data.user.name,

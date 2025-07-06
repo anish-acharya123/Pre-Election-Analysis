@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { backendURL } from "../../../constant";
 // import "../styles/UploadCandidate.scss";
 
 function UploadForm({ setUploadForm }) {
@@ -29,7 +30,7 @@ function UploadForm({ setUploadForm }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/candidate/upload",
+        `${backendURL}/candidate/upload`,
         formData,
         {
           headers: {
@@ -63,7 +64,7 @@ function UploadForm({ setUploadForm }) {
   };
 
   return (
-    <div className="md:w-[25rem] w-[15rem] " >
+    <div className="md:w-[25rem] w-[15rem] ">
       <h2 className="md:text-[26px] text-[20px] text-center">
         Upload Candidate Information
       </h2>

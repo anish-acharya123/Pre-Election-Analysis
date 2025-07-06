@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { backendURL } from "../../../constant";
 // import "../styles/UploadCandidate.scss";
 
 function EditForm({
@@ -61,7 +62,7 @@ function EditForm({
 
     try {
       const response = await axios.put(
-        `http://localhost:3000/candidate/update/${params.id}`,
+        `${backendURL}/candidate/update/${params.id}`,
         formData,
         {
           headers: {

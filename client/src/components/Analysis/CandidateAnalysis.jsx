@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import axios from "axios";
+import { backendURL } from "../../../constant";
 
 const CandidateAnalysis = () => {
   const [chartData, setChartData] = useState([]);
@@ -12,13 +13,13 @@ const CandidateAnalysis = () => {
     const fetchChartData = async () => {
       try {
         const chartResponse = await axios.get(
-          "http://localhost:3000/api/statistics?type=candidate"
+          `${backendURL}/api/statistics?type=candidate`
         );
         setChartData(chartResponse.data.data);
 
         // Fetch candidate details after fetching chart data
         const candidateResponse = await axios.get(
-          "http://localhost:3000/candidate/list"
+          `${backendURL}/candidate/list`
         );
 
         const candidateMap = {};

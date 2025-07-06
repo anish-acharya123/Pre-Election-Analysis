@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { backendURL } from "../../../constant";
 
 ChartJS.register(
   CategoryScale,
@@ -27,7 +28,7 @@ const AprioriResults = () => {
   useEffect(() => {
     // Fetch Apriori results from backend
     axios
-      .get("http://localhost:3000/api/apriori") // Update this URL to match your backend endpoint
+      .get(`${backendURL}/api/apriori`) // Update this URL to match your backend endpoint
       .then((response) => {
         console.log(response.data);
         const data = response.data[0];
@@ -68,8 +69,6 @@ const AprioriResults = () => {
 
   return (
     <div className="flex  flex-col  justify-center items-center w-full  ">
-     
-
       {/* Chart for Frequent Itemsets */}
       {/* <div className="w-4/5 mx-auto">
         <Bar data={chartData} options={chartOptions} />

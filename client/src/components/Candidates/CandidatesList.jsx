@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import { backendURL } from "../../../constant";
 
 const CandidatesList = () => {
   const navigate = useNavigate();
@@ -9,9 +10,7 @@ const CandidatesList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/candidate/list"
-        );
+        const response = await axios.get(`${backendURL}/candidate/list`);
 
         setCandidates(response.data);
         // console.log(response.data);

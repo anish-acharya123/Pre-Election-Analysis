@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { isAdminLogState } from "../../recoil/atoms";
 import adminAuth from "../../hook/adminAuth";
+import { backendURL } from "../../../constant";
 // import "../styles/AdminLogin.scss";
 
 function AdminLogin() {
@@ -19,7 +20,7 @@ function AdminLogin() {
     axios.defaults.withCredentials = true;
 
     try {
-      const response = await axios.post("http://localhost:3000/admin/login", {
+      const response = await axios.post(`${backendURL}/admin/login`, {
         email,
         password,
       });

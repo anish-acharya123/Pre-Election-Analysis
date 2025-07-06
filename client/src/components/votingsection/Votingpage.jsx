@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 // import "../styles/Votingpage.scss";
 import axios from "axios";
 import VotingPopup from "./VotingPopup";
+import { backendURL } from "../../../constant";
 
 function Votingpage() {
   const [data, setData] = useState([]);
@@ -24,9 +25,7 @@ function Votingpage() {
     // console.log(user.name);
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/candidate/list"
-        );
+        const response = await axios.get(`${backendURL}/candidate/list`);
 
         setData(response.data);
       } catch (error) {
@@ -114,7 +113,6 @@ function Votingpage() {
         </div>
 
         <div
-        
           className={`${
             popUp ? "block absolute " : "hidden"
           } md:scale-100 scale-75`}

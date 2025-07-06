@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Scatter } from "react-chartjs-2";
 import axios from "axios";
+import { backendURL } from "../../../constant";
 
 function ClusterScatterPlot() {
   const [chartData, setChartData] = useState({ datasets: [] });
@@ -18,7 +19,7 @@ function ClusterScatterPlot() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/clustered-data")
+      .get(`${backendURL}/api/clustered-data`)
       .then((response) => {
         const data = response.data;
         console.log(data);

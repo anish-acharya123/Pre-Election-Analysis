@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { voteStartTimeState, voteEndTimeState } from "../recoil/atoms";
 import axios from "axios";
+import { backendURL } from "../../constant";
 
 const VotingTime = () => {
   //   const [votingEnabled, setVotingEnabled] = useState(false);
@@ -14,7 +15,7 @@ const VotingTime = () => {
     const fetchVotingConfig = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:3000/admin/get-voting-config"
+          `${backendURL}/admin/get-voting-config`
         );
         // console.log(data);
         if (data) {
@@ -50,7 +51,6 @@ const VotingTime = () => {
   }, [setVotingEndTime, setVotingStartTime]);
   return (
     <div
-      
       // className={`${votingStartTime && votingEndTime ? "block" : "hidden"}`}
       className=""
     >

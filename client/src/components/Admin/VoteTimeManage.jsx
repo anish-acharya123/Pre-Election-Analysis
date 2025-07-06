@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import VotingTime from "../VotingTime";
 import { toast } from "react-toastify";
+import { backendURL } from "../../../constant";
 
 const VoteTimeManage = () => {
   const [votingEnabled, setVotingEnabled] = useState(false);
@@ -11,7 +12,7 @@ const VoteTimeManage = () => {
   const updateVotingTime = async (e) => {
     console.log(votingStartTime, votingEndTime);
     e.preventDefault();
-    await axios.post("http://localhost:3000/admin/toggle-voting", {
+    await axios.post(`${backendURL}/admin/toggle-voting`, {
       votingEnabled,
       votingStartTime,
       votingEndTime,

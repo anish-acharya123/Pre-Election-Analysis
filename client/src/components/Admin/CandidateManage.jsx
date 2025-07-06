@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 // import "../styles/CandidateManage.scss";
 import axios from "axios";
 import UploadCandidate from "./UploadCandidate";
+import { backendURL } from "../../../constant";
 
 function CandidateManage() {
   const [candidates, setCandidates] = useState([]);
@@ -11,9 +12,7 @@ function CandidateManage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/candidate/list"
-        );
+        const response = await axios.get(`${backendURL}/candidate/list`);
 
         setCandidates(response.data);
         // console.log(response.data);

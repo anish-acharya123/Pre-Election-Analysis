@@ -7,7 +7,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import adminAuth from "../../hook/adminAuth";
 // import "../styles/Eachcandidate.scss";
 import EditForm from "./EditForm";
-
+import { backendURL } from "../../../constant";
 
 function EachCandidate() {
   // adminAuth(false);
@@ -20,9 +20,7 @@ function EachCandidate() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(
-        `http://localhost:3000/candidate/${Params.id}`
-      );
+      const response = await axios.get(`${backendURL}/candidate/${Params.id}`);
       setData(response.data);
     };
     fetchData();
@@ -31,7 +29,7 @@ function EachCandidate() {
   const deleteData = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/candidate/${Params.id}`
+        `${backendURL}/candidate/${Params.id}`
       );
       if (response.status === 200) {
         console.log(response.data.msg);

@@ -1,9 +1,10 @@
 import axios from "axios";
+import { backendURL } from "../../constant";
 
 export const adminvalidateToken = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:3000/token/admintoken-validate",
+      `${backendURL}/token/admintoken-validate`,
       {
         withCredentials: true, // Include cookies with the request
       }

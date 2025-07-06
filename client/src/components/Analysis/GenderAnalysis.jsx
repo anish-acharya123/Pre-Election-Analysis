@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import axios from "axios";
+import { backendURL } from "../../../constant";
 
 function GenderAnalysis() {
   const [chartData, setChartData] = useState([]);
@@ -11,7 +12,7 @@ function GenderAnalysis() {
     const fetchChartData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/statistics?type=gender"
+          `${backendURL}/api/statistics?type=gender`
         );
         setChartData(response.data.data);
         console.log(chartData);
@@ -24,16 +25,21 @@ function GenderAnalysis() {
     fetchChartData();
   }, []);
 
-  if (chartData.length === 0) return <div className="text-center text-[28px]">Please wait until the voting period has ended to see the results.</div>;
+  if (chartData.length === 0)
+    return (
+      <div className="text-center text-[28px]">
+        Please wait until the voting period has ended to see the results.
+      </div>
+    );
 
-const votersInfo = chartData
-  .map((chart, index) => (
-    <span key={index}>
-      <strong>{chart.percentage.toFixed(2)}%</strong>{" "}
-      <strong>{chart.gender}</strong>
-    </span>
-  ))
-  .reduce((prev, curr) => [prev, " and ", curr]);
+  const votersInfo = chartData
+    .map((chart, index) => (
+      <span key={index}>
+        <strong>{chart.percentage.toFixed(2)}%</strong>{" "}
+        <strong>{chart.gender}</strong>
+      </span>
+    ))
+    .reduce((prev, curr) => [prev, " and ", curr]);
 
   return (
     <div className=" flex flex-col items-center gap-8 p-4">
