@@ -8,8 +8,8 @@ const connectDb = require("./config/db");
 connectDb();
 app.use(
   cors({
-    origin: "http://localhost:5173", // Replace with your frontend URL
-    credentials: true, // Allow cookies to be sent with requests
+    origin: true,
+    credentials: true,
   })
 );
 app.use(express.json());
